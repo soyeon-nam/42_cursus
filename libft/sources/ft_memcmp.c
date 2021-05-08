@@ -18,8 +18,8 @@ int		memcmp(const void *s1, const void *s2, size_t n)
 	{
 		if (*(unsigned char *)s1 != *(unsigned char *)s2)
 			break ;
-		++s1;
-		++s2;
+		++(unsigned char *)s1;
+		++(unsigned char *)s2;
 	}
 	return (*(unsigned char *)s1 - *(unsigned char *)s2);
 }

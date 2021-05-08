@@ -18,7 +18,7 @@ void	*memchr(const void *s, int c, size_t n)
 	{
 		if (*(unsigned char *)s == c)
 			return (s);
-		++s;
+		++(unsigned char *)s;
 	}
 	return (0);
 }
