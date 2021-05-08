@@ -1,19 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   memccpy.c                                          :+:      :+:    :+:   */
+/*   ft_memccpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: snam <snam@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 15:12:57 by snam              #+#    #+#             */
-/*   Updated: 2021/05/03 15:31:16 by snam             ###   ########seoul.kr  */
+/*   Updated: 2021/05/08 14:59:13 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	*memccpy(void *dest, const void *src, int c, size_t n)
+#include "libft.h"
+
+void	*ft_memccpy(void *restrict dest, \
+const void *restrict src, int c, size_t n)
 {
-
-
+	while (n--)
+	{
+		*(unsigned char *)dest = *(unsigned char *)src;
+		if (*(unsigned char *)dest++ == (unsigned char)c)
+			return (dest);
+		++dest;
+		++src;
+	}
+	return (0);
 }
 
 

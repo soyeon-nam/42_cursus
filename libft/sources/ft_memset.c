@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   memset.c                                           :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: snam <snam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 14:29:03 by snam              #+#    #+#             */
-/*   Updated: 2021/05/03 15:06:29 by snam             ###   ########seoul.kr  */
+/*   Updated: 2021/05/06 22:31:48 by snam             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-void    *memset(void *_Dst, int _Val, size_t _Size)
-{
-	int i;
+#include "libft.h"
 
-	i = 0;
-	while (i < _Size)
-    {
-		*_Dst = _Val;
-		_Dst++;
-		i++;
+void	*ft_memset(void *s, int c, size_t n)
+{
+	unsigned char	*ptr;
+
+	ptr = s;
+	while (n--)
+	{
+		*ptr = c;
+		++ptr;
 	}
-	if ()
-		return (0);
-	return (_Dst - _Size);
+	return (s);
 }
 
 /*
