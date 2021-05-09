@@ -12,21 +12,21 @@
 
 #include "libft.h"
 
-int		count_word(char *s, char c)
+unsigned int	count_word(char *s, char c)
 {
-	int count;
+	unsigned int count;
 
-	count = 1;
+	count = 0;
 	while (*s)
 	{
 		if (*s == c)
 			++count;
 		++s;
 	}
-	return (count);
+	return (count + 1);
 }
 
-char	*slpit_word(char *start, int num)
+char			*slpit_word(char *start, int num)
 {
 	char	*ptr;
 	int		i;
@@ -44,23 +44,22 @@ char	*slpit_word(char *start, int num)
 	return (ptr);
 }
 
-char	**ft_split(char const *s, char c)
+char			**ft_split(char const *s, char c)
 {
-	char	**str;
-	char	*start;
-	int		word_size;
-	int		i;
+	char			**str;
+	char			*start;
+	unsigned int	word_size;
+	unsigned int	i;
 
 	word_size = count_word(s, c);
 	str = (char **)malloc(sizeof(char *) * (word_size + 1));
 	if (!str)
 		return (0);
 	i = 0;
-	str[word_size] = 0;
 	while (i < word_size)
 	{
-		start = s;
-		while (*s != c)
+		start = (char *)s; // (char *) 왜 해줘야 하는가?
+		while (*s != c || *s)
 			++s;
 		str[i] = slpit_word(start, s - start);
 		++i;

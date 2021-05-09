@@ -10,8 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
 int		ft_isspace(char c)
 {
 	if ((9 <= c && c <= 13) || c == 32)
@@ -21,29 +19,23 @@ int		ft_isspace(char c)
 
 int		ft_atoi(const char *str)
 {
-	char		*ptr;
 	int			sign;
-	long long	nb;
+	long long	ret;
 
-	ptr = str;
-	while (ft_isspace(*ptr))
-		++ptr;
+	while (ft_isspace(*str))
+		++str;
 	sign = 1;
-	if (*ptr == '+' || *ptr == '-')
+	if (*str == '+' || *str == '-')
 	{
-		sign = (*ptr == '-') ? -1 : 1;
-		++ptr;
+		if (*str == '-') 
+			sign = -1;
+		++str;
 	}
-	nb = 0;
-	while ('0' <= *ptr && *ptr <= '9')
+	ret = 0;
+	while ('0' <= *str && *str <= '9')
 	{
-		nb = (nb * 10) + (*ptr - '0');
-		++ptr;
+		ret = (ret * 10) + (*str - '0');
+		++str;
 	}
-	return ((int)(nb * sign));
+	return ((int)(ret * sign));
 }
-
-/*
-long vs int
-https://smallpants.tistory.com/10
-*/

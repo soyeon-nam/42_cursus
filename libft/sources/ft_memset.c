@@ -14,19 +14,13 @@
 
 void	*ft_memset(void *s, int c, size_t n)
 {
-	unsigned char	*ptr;
+	unsigned char	*temp;
 
-	ptr = s;
+	temp = s;
 	while (n--)
 	{
-		*ptr = c;
-		++ptr;
+		*temp = c;
+		++temp;
 	}
 	return (s);
 }
-
-/*
-string.h / memory.h
-memset 함수를 사용하면 메모리의 내용을 원하는 크기만큼 특정값으로 설정할 수 있으며 함수 이름은 memory set에서 따옴.
-이때 설정하는 크기는 바이트 단위
-*/

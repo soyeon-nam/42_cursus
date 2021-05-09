@@ -19,11 +19,9 @@ char	*ft_strrchr(const char *str, int c)
 	i = ft_strlen(str);
 	while (i >= 0)
 	{
-		if (*(str + i) == c)
+		if (str[i] == c)
 			return (str + i);
 		--i;
 	}
 	return (0);
 }
-
-/*src에서 특정 문자를 뒤에서부터 검색하는 함수*/

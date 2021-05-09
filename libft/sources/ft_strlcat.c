@@ -14,17 +14,15 @@
 
 size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
-	int		i;
-	int		dst_len;
-	int		src_len;
+	unsigned int	i;
+	unsigned int	dst_len;
+	unsigned int	src_len;
 
-	i = 0;
 	src_len = ft_strlen(src);
 	dst_len = ft_strlen(dst);
-	if (!size)
-		return (src_len);
-	if ((size <= dst_len) || dst_len)
+	if (size <= dst_len)
 		return (src_len + size);
+		i = 0;
 	while ((i < size - dst_len - 1) && src[i])
 	{
 		dst[dst_len + i] = src[i];
@@ -33,9 +31,3 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 	dst[dst_len + i] = '\0';
 	return (src_len + dst_len);
 }
-
-/*
-i < size - dst_len - 1
-여기서 i는 int형이고, 그러면 r-value는 어떤 자료형이 되는 것??
-첫번째의 size 기준으로 만들어지는 것인가?
-*/

@@ -14,27 +14,27 @@
 
 char	*ft_itoa(int n)
 {
-	char	*result;
-	int		len_result;
+	char	*ret;
+	int		len_ret;
 	int		sign;
 	int		num;
 
-	len_result = 1;
+	len_ret = 1;
 	while (num /= 10)
-		++len_result;
+		++len_ret;
 	sign = (n > 0) ? 0 : 1;
-	result = (char *)malloc(sizeof(char) * (len_result + sign + 1));
-	if (!result)
+	ret = (char *)malloc(sizeof(char) * (len_ret + sign + 1));
+	if (!ret)
 		return (0);
 	if (n < 0)
 	{
-		result[0] = '-';
+		ret[0] = '-';
 		n *= -1;
 	}
-	while (--len_result)
+	while (--len_ret)
 	{
-		result[len_result + sign] = n % 10;
+		ret[len_ret + sign] = (n % 10) + '0';
 		n /= 10;
 	}
-	return (result);
+	return (ret);
 }

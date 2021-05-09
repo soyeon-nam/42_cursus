@@ -17,7 +17,7 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 	unsigned int	size_src;
 	unsigned int	i;
 
-	if (!dst)		//!dst 일 경우, NULL 리턴???
+	if (!dst || !src)		//or이 아니라 and?
 		return (0);
 	size_src = ft_strlen(src);
 	i = 0;
@@ -26,12 +26,7 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 		dst[i] = src[i];
 		++i;
 	}
-	if (dstsize > 0)  // 왜 꼭 제한을 걸어주어야 하나?
+	if (dstsize != 0) 
 		dst[i] = 0;
 	return (size_src);
 }
-
-/*
-src에서 dst로 값을 size길이 만큼 복사
-*/
-//배열과 문자열은 다름

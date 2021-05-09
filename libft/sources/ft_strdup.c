@@ -14,22 +14,20 @@
 
 char	*strdup(const char *s)
 {
-	char			*str;
+	char			*ret;
 	unsigned int	len_s;
 	unsigned int	i;
 
-	i = 0;
 	len_s = ft_strlen(s);
-	str = (char *)malloc(sizeof(char) * (len_s + 1));
-	if (!str)
+	ret = (char *)malloc(sizeof(char) * (len_s + 1));
+	if (!ret)
 		return (0);
+	i = 0;
 	while (i < len_s)
 	{
-		str[i] = s[i];
+		ret[i] = s[i];
 		++i;
 	}
-	str[i] = '\0';
-	return (str);
+	ret[i] = 0;
+	return (ret);
 }
-
-//변수 개수를 적게 사용하는 것이 좋은 건가?

@@ -22,11 +22,3 @@ void	*memchr(const void *s, int c, size_t n)
 	}
 	return (0);
 }
-
-
-/* 메모리함수 왜 unsigned char을 사용해야 하는가?
-
-https://rcode.tistory.com/14
-https://kldp.org/node/102514
-https://blog.naver.com/morpheuz82/130015717491
-*/

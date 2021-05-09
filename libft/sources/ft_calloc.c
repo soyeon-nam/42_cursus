@@ -14,38 +14,13 @@
 
 void	*ft_calloc(size_t count, size_t size)
 {
-	unsigned int	*str;
-	unsigned int	i;
+	unsigned int	*ret;
 	unsigned int	len_mal;
 
 	len_mal = size * count;
-	str = (void*)malloc(len_mal);
-	if (!str)
+	ret = (void*)malloc(len_mal);
+	if (!ret)
 		return (0);
-	i = 0;
-	while (i < len_mal)
-	{
-		*str = 0;
-		str++;
-		++i;
-	}
-	str -= len_mal;
-	return (str);
+	ft_bzero(ret, len_mal);
+	return (ret);
 }
-
-/*
-count : malloc할 개체의 수
-size : malloc 할 개체의 크기
-
-void * : 0을 초기화한 주소반환
-*/
-
-
-/*
-위 에러는 '식이 완전한 개체 형식의 포인터여야 합니다'라고 컴파일 오류를 낸다. '타입체크 에러'로 분류되는 것 같다
-https://noel-embedded.tistory.com/1227?category=791177
-
-
-리턴형이 void*(void 포인터) ??
-https://dsnight.tistory.com/51
- */
