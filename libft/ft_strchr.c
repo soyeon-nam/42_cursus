@@ -6,7 +6,7 @@
 /*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 15:00:13 by snam              #+#    #+#             */
-/*   Updated: 2021/05/08 15:00:33 by snam             ###   ########.fr       */
+/*   Updated: 2021/05/10 21:34:31 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ char	*ft_strchr(const char *s, int c)
 	while (*s)
 	{
 		if (*s == c)
-			return (s);
+			return ((char *)s);
 		s++;
 	}
 	if (c == 0)
-		return (s);
+		return ((char *)s);
 	return (0);
 }

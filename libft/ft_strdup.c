@@ -6,11 +6,11 @@
 /*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 15:00:42 by snam              #+#    #+#             */
-/*   Updated: 2021/05/08 15:00:43 by snam             ###   ########.fr       */
+/*   Updated: 2021/05/10 21:52:04 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
 char	*strdup(const char *s)
 {
@@ -31,3 +31,4 @@ char	*strdup(const char *s)
 	ret[i] = 0;
 	return (ret);
 }
+
