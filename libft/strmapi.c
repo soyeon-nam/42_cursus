@@ -1,25 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcmp.c                                        :+:      :+:    :+:   */
+/*   strmapi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/06 23:27:35 by snam              #+#    #+#             */
-/*   Updated: 2021/05/08 14:59:45 by snam             ###   ########.fr       */
+/*   Created: 2021/05/08 15:24:05 by snam              #+#    #+#             */
+/*   Updated: 2021/05/10 13:07:30 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-int		ft_memcmp(const void *s1, const void *s2, size_t n)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	while (*(unsigned char *)s1 && --n)
-	{
-		if (*(unsigned char *)s1 != *(unsigned char *)s2)
-			break ;
-		++(unsigned char *)s1;
-		++(unsigned char *)s2;
-	}
-	return (*(unsigned char *)s1 - *(unsigned char *)s2);
+	
+	
 }

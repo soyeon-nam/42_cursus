@@ -6,7 +6,7 @@
 /*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 15:23:25 by snam              #+#    #+#             */
-/*   Updated: 2021/05/08 17:21:01 by snam             ###   ########.fr       */
+/*   Updated: 2021/05/10 16:29:30 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,15 @@ unsigned int	count_word(char *s, char c)
 	count = 0;
 	while (*s)
 	{
-		if (*s == c)
-			++count;
-		++s;
+		while (*s == c)
+			++s;
+		if (!*s)
+			break ;
+		while (*s && *s != c)
+			++s;
+		++count;
 	}
-	return (count + 1);
+	return (count);
 }
 
 char			*slpit_word(char *start, int num)
@@ -58,8 +62,10 @@ char			**ft_split(char const *s, char c)
 	i = 0;
 	while (i < word_size)
 	{
+		while (*s == c)
+			++s;
 		start = (char *)s; // (char *) 왜 해줘야 하는가?
-		while (*s != c || *s)
+		while (*s != c && *s)
 			++s;
 		str[i] = slpit_word(start, s - start);
 		++i;

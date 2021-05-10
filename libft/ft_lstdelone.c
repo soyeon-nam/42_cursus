@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/06 18:28:24 by snam              #+#    #+#             */
-/*   Updated: 2021/05/08 14:54:43 by snam             ###   ########.fr       */
+/*   Created: 2021/05/10 14:31:02 by snam              #+#    #+#             */
+/*   Updated: 2021/05/10 14:55:39 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_bzero(void *s, size_t n)
+void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
-	while (n--)
+	if (lst)
 	{
-		*(unsigned char *)s = 0;
-		++(unsigned char *)s;
+		del(lst->content);
+		free(lst);
 	}
 }
+//연결리스트는 앞으로 되돌아가지 못함? 아마

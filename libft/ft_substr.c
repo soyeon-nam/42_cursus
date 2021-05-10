@@ -6,7 +6,7 @@
 /*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 14:03:25 by snam              #+#    #+#             */
-/*   Updated: 2021/05/08 15:14:15 by snam             ###   ########.fr       */
+/*   Updated: 2021/05/10 13:07:08 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	int		i;
 
 	//man substr 대로 해줘야 하는건가
-	/*
-	if (!s)
-		return (0);
-	*/
+	/*if (!s)
+		return (0);*/
 	if (len == 0 || (start + 1 >= ft_strlen(s)))
 	{
 		str = (char *)malloc(1);

@@ -1,24 +1,3 @@
-NAME = bsq
-
-SRC = srcs/main.c 
-
-all: $(NAME)
-
-$(NAME):
-		gcc -Wall -Wextra -Werror -O3 -o $(NAME) $(SRC)
-
-clean:
-		/bin/rm -f
-
-fclean: clean
-		/bin/rm -f $(NAME)
-
-re: fclean all
-
-
-
-
-
 NAME = libft.a
 HEADER = libft.h
 CFLAGS = -Wall -Wextra -Werror
