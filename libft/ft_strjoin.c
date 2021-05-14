@@ -12,25 +12,14 @@
 
 #include "libft.h"
 
-int		count_temp(char *s1, char *s2)
-{
-	int		count;
-
-	count = 0;
-	count = ft_strlen(s1);
-}
-
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*temp;
-	int		temp_len;
+	char	*ret;
 
-	temp_len = count_temp(s1, s2);
-	temp = (char *)malloc(sizeof(char) * (temp_len + 1));
-
-
-
-
-
-	//ing
+	ret = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if(!ret)
+		return (0);
+	ft_strlcpy(ret, s1, ft_strlen(s1) + 1);
+	ft_strlcat(ret, s2, ft_strlen(s1) + 1);
+	return(ret);
 }
