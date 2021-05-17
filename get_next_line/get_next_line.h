@@ -10,7 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
- #define BUFFER_SIZE ??
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 5000
+# endif
 
+
+#include <unistd.h>
 
 int		get_next_line(int fd, char **line);
+void	*ft_calloc(size_t count, size_t size)
