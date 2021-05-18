@@ -6,7 +6,7 @@
 /*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 14:28:07 by snam              #+#    #+#             */
-/*   Updated: 2021/05/10 14:39:30 by snam             ###   ########.fr       */
+/*   Updated: 2021/05/18 21:43:18 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 		*lst = new;
 		return ;
 	}
-	last = ft_lstlast(lst);
+	last = ft_lstlast(*lst);
 	last->next = new;
 }

@@ -6,7 +6,7 @@
 /*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 15:00:55 by snam              #+#    #+#             */
-/*   Updated: 2021/05/08 15:01:18 by snam             ###   ########.fr       */
+/*   Updated: 2021/05/18 16:05:10 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 	unsigned int	size_src;
 	unsigned int	i;
 
-	if (!dst || !src)		//or이 아니라 and?
+	if (!dst || !src)
 		return (0);
 	size_src = ft_strlen(src);
 	i = 0;
@@ -26,7 +26,7 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 		dst[i] = src[i];
 		++i;
 	}
-	if (dstsize != 0) 
+	if (dstsize != 0)
 		dst[i] = 0;
 	return (size_src);
 }

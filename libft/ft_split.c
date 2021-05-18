@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split..c                                        :+:      :+:    :+:   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 15:23:25 by snam              #+#    #+#             */
-/*   Updated: 2021/05/10 16:29:30 by snam             ###   ########.fr       */
+/*   Updated: 2021/05/18 15:51:37 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char			**ft_split(char const *s, char c)
 	unsigned int	word_size;
 	unsigned int	i;
 
-	word_size = count_word(s, c);
+	word_size = count_word((char *)s, c);
 	str = (char **)malloc(sizeof(char *) * (word_size + 1));
 	if (!str)
 		return (0);
@@ -64,7 +64,7 @@ char			**ft_split(char const *s, char c)
 	{
 		while (*s == c)
 			++s;
-		start = (char *)s; // (char *) 왜 해줘야 하는가?
+		start = (char *)s;
 		while (*s != c && *s)
 			++s;
 		str[i] = slpit_word(start, s - start);

@@ -6,7 +6,7 @@
 /*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 14:03:25 by snam              #+#    #+#             */
-/*   Updated: 2021/05/10 13:07:08 by snam             ###   ########.fr       */
+/*   Updated: 2021/05/18 22:57:34 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,11 @@
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char	*str;
-	int		i;
+	char			*str;
+	unsigned int	i;
 
-	//man substr 대로 해줘야 하는건가
-	/*if (!s)
-		return (0);*/
+	if (!s)
+		return (0);
 	if (len == 0 || (start + 1 >= ft_strlen(s)))
 	{
 		str = (char *)malloc(1);
@@ -31,7 +30,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	if (start > 0)
 		start -= 1;
 	else if (start == 0)
-		0;
+		(void)0;
+	i = 0;
 	while (s[start + i] && (i < len))
 	{
 		str[i] = s[start + i];
@@ -40,3 +40,5 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	str[i] = 0;
 	return (str);
 }
+
+//하다 만 거

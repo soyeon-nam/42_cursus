@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/10 15:32:45 by snam              #+#    #+#             */
-/*   Updated: 2021/05/10 15:33:38 by snam             ###   ########.fr       */
+/*   Created: 2021/05/18 19:59:18 by snam              #+#    #+#             */
+/*   Updated: 2021/05/18 19:59:24 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,20 @@ void	ft_bzero(void *s, size_t n)
 		*(unsigned char *)s = 0;
 		++s;
 	}
+}
+
+
+char	*ft_strchr(const char *s, int c)
+{
+	while (*s)
+	{
+		if (*s == c)
+			return ((char *)s);
+		s++;
+	}
+	if (c == 0)
+		return ((char *)s);
+	return (0);
 }
 
 char	*ft_calloc(size_t size)
@@ -69,22 +83,37 @@ int		get_next_line(int fd, char **line)
 			return (-1);
 		*tmp = 0;
 		*buf = 0;
-		i = 0;
 		buf_size = 0;
-		while ((read_size = read(fd, tmp, BUFFER_SIZE)) > 0)
+		while ((read_size = read(fd, tmp, BUFFER_SIZE)) > 0 && ft_strchr(,tmp)/*뉴라인 없음*/)
 		{
+			
+			buf_size += read_size;
 			newline_idx = cut_line(tmp);
+			buf = ft_calloc(buf_size + 1);
+
 			if (newline_idx == -1)
 			{
 
 			}
-			buf_tmp = ft_strjoin(buf, tmp);
+			buf = ft_strjoin(buf, tmp);
 			free(buf);
 			free(tmp);
-			tmp = ft_calloc(BUFFER_SIZE + 1);
+			tmp = ft_calloc(buf_size + 1);
 		}
 	}
-	line = buf;
+	*line = buf;
 	free(tmp);
 	return ();
+}
+
+
+int	main()
+{
+	i = 0;
+	while (get_next_line(3, &str))
+	{
+		printf("%i : %s", str);
+		i++;
+	}
+	
 }

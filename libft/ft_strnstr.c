@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 02:21:22 by marvin            #+#    #+#             */
-/*   Updated: 2021/05/10 02:21:22 by marvin           ###   ########.fr       */
+/*   Updated: 2021/05/18 23:15:50 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,21 @@
 
 char	*ft_strnstr(const char *str, const char *to_find, size_t n)
 {
-	int		to_find_len;
-	int		to_find_idx;
-	int		str_idx;
+	size_t		to_find_len;
 
 	if (!*to_find)
 		return ((char *)str);
-	to_find_len =  ft_strlen(to_find);
-	if (ft_strlen(str) < to_find_len || n < to_find_len)
+	if (!*str && !*to_find && !n)
 		return (0);
-	while ((str_idx <= n - to_find_len) && str[str_idx])
+	to_find_len = ft_strlen(to_find);
+	if (ft_strlen((char *)str) < to_find_len || n < to_find_len)
+		return (0);
+	while ((n - to_find_len) && *str)
 	{
-		to_find_idx = 0;
-		while (str[str_idx++] == to_find[to_find_idx++] && str[str_idx])
-		{
-			if (to_find_idx == to_find_len)
-				return (str[str_idx - to_find_len]);
-		}
+		if (ft_strncmp(str, to_find, to_find_len) == 0)
+			return ((char *)str);
+		--n;
+		++str;
 	}
 	return (0);
 }

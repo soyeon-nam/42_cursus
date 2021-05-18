@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
+#    By: snam <snam@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/14 20:25:46 by marvin            #+#    #+#              #
-#    Updated: 2021/05/14 20:25:46 by marvin           ###   ########.fr        #
+#    Updated: 2021/05/18 21:42:32 by snam             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	$(AR) $(NAME) $(OBJS)
 
-bonus: $(BOBJS)
+bonus: $(BOBJS) $(OBJS)
 	$(AR) $(NAME) $(BOBJS)
 
 %.o: %.c $(HEADER)

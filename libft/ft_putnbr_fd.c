@@ -6,7 +6,7 @@
 /*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 15:25:44 by snam              #+#    #+#             */
-/*   Updated: 2021/05/10 13:06:05 by snam             ###   ########.fr       */
+/*   Updated: 2021/05/18 16:15:47 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	print(int nb, int fd)
 {
 	char a;
+
 	a = nb % 10 + 48;
 	nb = nb / 10;
 	if (nb > 0)
@@ -22,7 +23,7 @@ void	print(int nb, int fd)
 	write(fd, &a, 1);
 }
 
-void	ft_putnbr(int nb, int fd)
+void	ft_putnbr_fd(int nb, int fd)
 {
 	if (nb == -2147483648)
 		write(fd, "-2147483648", 11);
