@@ -27,10 +27,6 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	str = (char *)malloc(sizeof(char) * (len + 1));
 	if (!str)
 		return (0);
-	if (start > 0)
-		start -= 1;
-	else if (start == 0)
-		(void)0;
 	i = 0;
 	while (s[start + i] && (i < len))
 	{
@@ -40,5 +36,3 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	str[i] = 0;
 	return (str);
 }
-
-//하다 만 거

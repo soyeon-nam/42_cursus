@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-int		is_set(char *set, char c)
+static int		is_set(char *set, char c)
 {
 	while (*set)
 	{
@@ -23,14 +23,14 @@ int		is_set(char *set, char c)
 	return (0);
 }
 
-char	*trim_front(char *s1, char *set)
+static char		*trim_front(char *s1, char *set)
 {
 	while (is_set(set, *s1))
 		++s1;
 	return (s1);
 }
 
-void	trim_back(char *s1, char *set)
+static char		*trim_back(char *s1, char *set)
 {
 	unsigned int	i;
 
@@ -39,14 +39,24 @@ void	trim_back(char *s1, char *set)
 		++i;
 	while (is_set(set, s1[i] && i >= 0))
 		--i;
-	s1[i + 1] = 0;
+	return (&s1[i]);
 }
 
-char	*ft_strtrim(char const *s1, char const *set)
+char		*ft_strtrim(char const *s1, char const *set)
 {
-	s1 = trim_front((char *)s1, (char *)set);
-	trim_back((char *)s1, (char *)set);
-	return ((char *)s1);
-}
+	char	*ret;
+	char	*start;
+	char	*end;
+	int		size;
 
-//ㅅㅐ 거
+	start = trim_front((char *)s1, (char *)set);
+	end = trim_back(start, (char *)set);
+	size = start - end + 1;
+	ret = (char *)malloc(sizeof(char) * (size + 1));
+	if (!ret)
+		return (0);
+	ret[size] = 0;
+	while (size--)
+		ret[size] = start[size]; 
+	return ((char *)ret);
+}

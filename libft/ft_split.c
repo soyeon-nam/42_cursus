@@ -12,7 +12,21 @@
 
 #include "libft.h"
 
-unsigned int	count_word(char *s, char c)
+static	void			free_malloc(char **str)
+{
+	int		i;
+
+	i = 0;
+	while (str[i])
+	{
+		free(str[i]);
+		++i;
+	}
+	free(str);
+	return (0);
+}
+
+static unsigned int		count_word(char *s, char c)
 {
 	unsigned int count;
 
@@ -30,7 +44,7 @@ unsigned int	count_word(char *s, char c)
 	return (count);
 }
 
-char			*slpit_word(char *start, int num)
+static char				*slpit_word(char *start, int num)
 {
 	char	*ptr;
 	int		i;
@@ -48,7 +62,7 @@ char			*slpit_word(char *start, int num)
 	return (ptr);
 }
 
-char			**ft_split(char const *s, char c)
+char					**ft_split(char const *s, char c)
 {
 	char			**str;
 	char			*start;
@@ -67,7 +81,8 @@ char			**ft_split(char const *s, char c)
 		start = (char *)s;
 		while (*s != c && *s)
 			++s;
-		str[i] = slpit_word(start, s - start);
+		if (!(str[i] = slpit_word(start, s - start))
+			return(free_malloc(str));
 		++i;
 	}
 	str[i] = 0;
