@@ -6,7 +6,7 @@
 /*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 18:16:45 by snam              #+#    #+#             */
-/*   Updated: 2021/05/10 21:30:08 by snam             ###   ########.fr       */
+/*   Updated: 2021/05/20 15:54:13 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ static int		ft_isspace(char c)
 
 int				ft_atoi(const char *str)
 {
-	int			sign;
-	long long	ret;
+	int				sign;
+	unsigned long	ret;
 
 	while (ft_isspace(*str))
 		++str;
@@ -37,5 +37,9 @@ int				ft_atoi(const char *str)
 		ret = (ret * 10) + (*str - '0');
 		++str;
 	}
-	return ((int)(ret * sign));
+	if (ret > (unsigned long)__LONG_MAX__ && sign == 1)
+		return (-1);
+	else if (ret > (unsigned long)__LONG_MAX__ + 1 && sign == -1)
+		return (0);
+	return ((int)ret * sign);
 }

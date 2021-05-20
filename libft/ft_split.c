@@ -6,13 +6,13 @@
 /*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 15:23:25 by snam              #+#    #+#             */
-/*   Updated: 2021/05/18 15:51:37 by snam             ###   ########.fr       */
+/*   Updated: 2021/05/20 21:36:53 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static	void			free_malloc(char **str)
+static	char			**free_malloc(char **str)
 {
 	int		i;
 
@@ -23,7 +23,7 @@ static	void			free_malloc(char **str)
 		++i;
 	}
 	free(str);
-	return (0);
+	return (str);
 }
 
 static unsigned int		count_word(char *s, char c)
@@ -69,6 +69,8 @@ char					**ft_split(char const *s, char c)
 	unsigned int	word_size;
 	unsigned int	i;
 
+	if (!s)
+		return (0);
 	word_size = count_word((char *)s, c);
 	str = (char **)malloc(sizeof(char *) * (word_size + 1));
 	if (!str)
@@ -81,8 +83,8 @@ char					**ft_split(char const *s, char c)
 		start = (char *)s;
 		while (*s != c && *s)
 			++s;
-		if (!(str[i] = slpit_word(start, s - start))
-			return(free_malloc(str));
+		if (!(str[i] = slpit_word(start, s - start)))
+			return (free_malloc(str));
 		++i;
 	}
 	str[i] = 0;

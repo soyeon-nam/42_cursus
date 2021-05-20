@@ -6,7 +6,7 @@
 /*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 15:22:51 by snam              #+#    #+#             */
-/*   Updated: 2021/05/18 22:47:57 by snam             ###   ########.fr       */
+/*   Updated: 2021/05/20 21:36:18 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,30 +33,35 @@ static char		*trim_front(char *s1, char *set)
 static char		*trim_back(char *s1, char *set)
 {
 	unsigned int	i;
+	char			*ret;
 
 	i = 0;
-	while (s1[i])
-		++i;
-	while (is_set(set, s1[i] && i >= 0))
-		--i;
-	return (&s1[i]);
+	ret = s1;
+	while (*ret)
+		++ret;
+	--ret;
+	while (is_set(set, *ret) && s1 < ret)
+		--ret;
+	return (ret);
 }
 
-char		*ft_strtrim(char const *s1, char const *set)
+char			*ft_strtrim(char const *s1, char const *set)
 {
 	char	*ret;
 	char	*start;
 	char	*end;
 	int		size;
 
+	if (!s1 || !set)
+		return (0);
 	start = trim_front((char *)s1, (char *)set);
 	end = trim_back(start, (char *)set);
-	size = start - end + 1;
+	size = end - start + 1;
 	ret = (char *)malloc(sizeof(char) * (size + 1));
 	if (!ret)
 		return (0);
 	ret[size] = 0;
 	while (size--)
-		ret[size] = start[size]; 
+		ret[size] = start[size];
 	return ((char *)ret);
 }

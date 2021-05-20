@@ -6,7 +6,7 @@
 /*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 19:59:29 by snam              #+#    #+#             */
-/*   Updated: 2021/05/18 21:45:03 by snam             ###   ########.fr       */
+/*   Updated: 2021/05/20 19:01:37 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,8 @@ typedef struct	s_list
 
 void			*ft_memset(void *s, int c, size_t n);
 void			ft_bzero(void *s, size_t n);
-void			*ft_memcpy(void *restrict dest, \
-const void *restrict src, size_t n);
-void			*ft_memccpy(void *restrict dest, const void *restrict src, \
+void			*ft_memcpy(void *dest, const void *src, size_t n);
+void			*ft_memccpy(void *dest, const void *src, \
 int c, size_t n);
 void			*ft_memmove(void *dest, const void *src, size_t n);
 void			*ft_memchr(const void *s, int c, size_t n);

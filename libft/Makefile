@@ -6,7 +6,7 @@
 #    By: snam <snam@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/14 20:25:46 by marvin            #+#    #+#              #
-#    Updated: 2021/05/18 21:42:32 by snam             ###   ########.fr        #
+#    Updated: 2021/05/20 23:19:02 by snam             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,13 +29,19 @@ ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c
 OBJS = $(SRCS:.c=.o)
 BOBJS = $(BSRCS:.c=.o)
 
+ifdef FLAG_BONUS
+OBJECT_FILES = $(OBJS) $(BOBJS)
+else
+OBJECT_FILES = $(OBJS)
+endif
+
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	$(AR) $(NAME) $(OBJS)
+$(NAME): $(OBJECT_FILES)
+	$(AR) $(NAME) $(OBJECT_FILES)
 
-bonus: $(BOBJS) $(OBJS)
-	$(AR) $(NAME) $(BOBJS)
+bonus: 
+	FLAG_BONUS=1 make all
 
 %.o: %.c $(HEADER)
 	$(CC) $(CFLAGS) -c  $< -o $@

@@ -6,7 +6,7 @@
 /*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 15:00:55 by snam              #+#    #+#             */
-/*   Updated: 2021/05/18 16:05:10 by snam             ###   ########.fr       */
+/*   Updated: 2021/05/20 21:00:33 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 	unsigned int	size_src;
 	unsigned int	i;
 
-	if (!dst || !src)
-		return (0);
 	size_src = ft_strlen(src);
 	i = 0;
 	while ((i + 1 < dstsize) && src[i])

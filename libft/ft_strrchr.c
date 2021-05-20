@@ -6,7 +6,7 @@
 /*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 15:01:59 by snam              #+#    #+#             */
-/*   Updated: 2021/05/18 14:49:02 by snam             ###   ########.fr       */
+/*   Updated: 2021/05/20 22:19:14 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*ft_strrchr(const char *str, int c)
 	i = ft_strlen(str);
 	while (i >= 0)
 	{
-		if (str[i] == c)
+		if ((str[i]) == (char)c)
 			return ((char *)str + i);
 		--i;
 	}

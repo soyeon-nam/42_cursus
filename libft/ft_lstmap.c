@@ -6,7 +6,7 @@
 /*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 14:32:35 by snam              #+#    #+#             */
-/*   Updated: 2021/05/18 22:56:18 by snam             ###   ########.fr       */
+/*   Updated: 2021/05/20 21:26:46 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ void (*del)(void *))
 	new_lst_ret = 0;
 	while (lst)
 	{
-		new_lst = ft_lstnew(lst->content);
-		f(new_lst->content);
+		new_lst = ft_lstnew(f(lst->content));
 		if (!new_lst)
 		{
 			ft_lstclear(&new_lst_ret, del);
