@@ -19,4 +19,10 @@
 #include <stdlib.h>
 
 int		get_next_line(int fd, char **line);
+int		affix_buf(char *buf, char **sep, char **line, int *size);
+char	*read_line(int fd, char *buf, int *size, char **line);
 
+size_t	ft_strlen(const char *s);
+char	*ft_strchr(const char *s, int c);
+char	*ft_strncpy_until_nl(char *dest, char *src, unsigned int n);
+size_t	ft_strcat_until_nl(char *dst, const char *src, size_t size);

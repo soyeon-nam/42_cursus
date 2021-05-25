@@ -23,7 +23,7 @@ static	char			**free_malloc(char **str)
 		++i;
 	}
 	free(str);
-	return (str);
+	return (0);
 }
 
 static unsigned int		count_word(char *s, char c)
