@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/27 00:51:45 by snam              #+#    #+#             */
-/*   Updated: 2021/05/27 01:17:51 by snam             ###   ########.fr       */
+/*   Created: 2021/05/27 06:43:00 by snam              #+#    #+#             */
+/*   Updated: 2021/05/27 08:05:34 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *s)
+size_t		ft_strlen(const char *s)
 {
 	size_t	ret;
 
@@ -22,57 +22,75 @@ size_t	ft_strlen(const char *s)
 	return (ret);
 }
 
-char	*ft_strchr(const char *s, int c)
+void		ft_strncpy(char *dst, const char *src, size_t size)
 {
-	while (*s)
-	{
-		if (*s == (char)c)
-			return ((char *)s);
-		s++;
-	}
-	if ((unsigned char)c == 0)
-		return ((char *)s);
-	return (0);
-}
-//similar with strncpy but +chr \n
-char	*ft_strncpy_until_nl(char *dst, char *src, unsigned int n)
-{
-	unsigned int i;
+	unsigned int	i;
 
 	i = 0;
-	while (src[i] && i < n && src[i] != '\n')
+	while ((i + 1 < size) && src[i])
 	{
 		dst[i] = src[i];
-		i++;
+		++i;
 	}
-	if (src[i] == '\n')
-	{
-		dst[i++] = '\n';
-		dst[i++] = 0;
-		return (&dst[i]);
-	}
-	dst[i] = 0;
-	return (0);
+	if (size != 0)
+		dst[i] = 0;
 }
 
-char	*ft_strcat_until_nl(char *dst, const char *src, size_t size)
+void		ft_strlcat(char *dst, const char *src, size_t size)
 {
 	unsigned int	i;
 	unsigned int	dst_len;
 
 	dst_len = ft_strlen(dst);
+	if (size <= dst_len)
+		return ;
 	i = 0;
-	while (src[i] && (i + 1 < size) && src[i] != '\n')
+	while ((i < size - dst_len - 1) && src[i])
 	{
 		dst[dst_len + i] = src[i];
 		++i;
 	}
-	if (src[i] == '\n')
+	dst[dst_len + i] = '\0';
+}
+
+char		*ft_strjoin(char const *s1, char const *s2)
+{
+	char	*ret;
+
+	if (!s1 || !s2)
+		return (0);
+	ret = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (!ret)
+		return (0);
+	ft_strncpy(ret, s1, ft_strlen(s1) + 1);
+	ft_strlcat(ret, s2, ft_strlen(s1) + ft_strlen(s2) + 1);
+	return (ret);
+}
+
+int			split_nl(char **dst, char **src)
+{
+	unsigned char	size_src;
+	unsigned char	size_dst;
+	char			*src_ptr;
+	
+	src_ptr = *src;
+	while (*src_ptr && *src_ptr != '\n')
+		++src_ptr;
+	if (*src_ptr == '\n')
 	{
-		dst[dst_len + i++] = '\n';
-		dst[dst_len + i] = 0;
-		return (&src[i]);
+		size_dst = src_ptr - *src;
+		size_src = ft_strlen(*src) - size_dst - 1;
+		if (!(*dst = (char *)malloc(size_dst + 1)))
+			return (-1);
+		ft_strncpy(*dst, *src, size_dst + 1);
+		src_ptr = *src;
+		if (!(*src = (char *)malloc(size_src + 1)))
+			return (-1);
+		ft_strncpy(*src, &src_ptr[size_dst + 1], size_src + 1);
+		free(src_ptr);
+		return (1);
 	}
-	dst[dst_len + i] = 0;
+	*dst = *src;  //*src_ptr == '\0'
+	*src = 0;
 	return (0);
 }

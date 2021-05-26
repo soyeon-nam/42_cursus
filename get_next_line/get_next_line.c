@@ -5,104 +5,82 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/26 21:10:57 by snam              #+#    #+#             */
-/*   Updated: 2021/05/27 02:14:38 by snam             ###   ########.fr       */
+/*   Created: 2021/05/27 06:42:38 by snam              #+#    #+#             */
+/*   Updated: 2021/05/27 08:07:25 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int		free_alloc(char **temp, char **line)
+int		free_alloc(char **backup, char **line)
 {
-	if (*temp)
-		free(*temp);
+	if (*backup)
+		free(*backup);
 	if (*line)
 		free(*line);
 	return (-1);
 }
 
-
-
-int		affix_buf(char **sep, char **line, int *size)
+int		concat_backup(char **fd_backup, char **line)
 {
-	int		size_temp;
-	char	*end;
+	int				flag;
 
-	size_temp = 0;
-	if (!sep)
+	if (*fd_backup != 0)
 	{
-		end = ft_strchr(*sep, '\n');
-		size_temp = *sep - end + 1;
-		if (!(*line = (char *)malloc(sizeof(char) * (size_temp + 1))))
-			return (0);
-		ft_strncpy_until_nl(*line, *sep, size_temp + 1);
-		if (!(*sep = end + 1))
-			*sep = 0;
+		flag = split_nl(line, fd_backup);
+		if (flag == 1)
+			return (1);
+		else if (flag == -1)
+			return (free_alloc(fd_backup, line));
 	}
 	else
-		if (!(*line = (char *)malloc(sizeof(char) * 1)))
-			return (0);
-	*size = size_temp;
-	return (1);
-}
-
-char	*concat_line(char *buf, int *size, char **line, char *temp)
-{
-	char	*check;
-
-	check = 0;
-	ft_strncpy_until_nl(temp, *line, *size);
-	free(*line);
-	if (!(*line = (char *)malloc(sizeof(char) * (*size + 1))))
-	{
-		free(temp);
-		return (-1);
+	{	
+		if (!(*line = (char *)malloc(1)))
+			return (-1);
+		**line = 0;
 	}
-	ft_strncpy_until_nl(*line, temp, *size);
-	free(temp);
-	check = ft_strcat_until_nl(*line, buf, *size);
-	if (check)
-		return (check);
-	if (!(temp = (char *)malloc(sizeof(char) * (*size + 1))))
-		return (-1);
 	return (0);
 }
 
-read_line()
+int		read_line(char **line, char **fd_backup, char *buf, int fd)
 {
-	while ((read_size = read(fd, buf, BUFFER_SIZE)) > 0)
-			printf(buf)
-			
+	int flag_nl;
+
+	flag_nl = split_nl(&fd_backup[fd], &buf);
+	if (flag_nl == -1)
+		return (free_alloc(&fd_backup[fd], line));
+	if (!ft_strjoin(*line, *fd_backup))
+		return (-1);
+	if (flag_nl == 0)
+		return (0);
+	return (1);
 }
 
 int		get_next_line(int fd, char **line) 
 {
-	static char		buf[BUFFER_SIZE + 1];
-	static char		*sep;
-	char			*temp;
-	size_t			size;
-	size_t			read_size;
+	static char		*fd_backup[OPEN_MAX];
+	char			buf[BUFFER_SIZE];
+	unsigned int	read_size;
+	int				ret;
 
-	size = 0;
-	temp = (char *)malloc(sizeof(char) * (size + 1));
-	if (!line || !temp || affix_buf(&sep, line, &size))
+	ret = -1;
+	if (fd < 0 || !line)
+		return (-1);
+	if (ret == concat_backup(&fd_backup[fd], line))
+		return (ret);
+	while ((read_size = read(fd, buf, BUFFER_SIZE)) > 0)
 	{
-		return (free_alloc(&temp, line));
+		ret = read_line(line, fd_backup, buf, fd);
+		if (ret == 1) //\n을 만남
+			return (1);
+		else if (ret == -1)  //중간에 error
+			return (-1);
 	}
-	*temp = 0;
-	if (!sep) //affix_buf에서 \n 안만났으면 더 읽어라
-		while ((read_size = read(fd, buf, BUFFER_SIZE)) > 0)
-		{
-			size += read_size;
-			if ((sep = concat_line(buf, size, line, temp)) > 0) // \n 만나서 끝남
-				return (0);
-			else if (sep == -1)
-				return (free_alloc(&temp, line));
-		}
-	free(temp);
-	return (0);
+	if (read_size == 0)
+	{
+		fd_backup[fd] = 0;
+		return (0);
+	}
+	free_alloc(fd_backup, line);  //if (ret = -1)
+	return (-1);
 }
-
-//stdin 으로 들어오는 경우는 어떤 경우?
-//split 처럼 free 함수 만들어줘야 하나
-// double-free X
