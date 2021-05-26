@@ -6,7 +6,7 @@
 /*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 15:23:25 by snam              #+#    #+#             */
-/*   Updated: 2021/05/20 21:36:53 by snam             ###   ########.fr       */
+/*   Updated: 2021/05/26 23:58:07 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static	char			**free_malloc(char **str)
 	free(str);
 	return (0);
 }
+//고칠거
 
 static unsigned int		count_word(char *s, char c)
 {

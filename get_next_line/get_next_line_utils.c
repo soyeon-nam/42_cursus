@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/27 00:51:45 by snam              #+#    #+#             */
+/*   Updated: 2021/05/27 01:17:51 by snam             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
 size_t	ft_strlen(const char *s)
@@ -22,29 +34,28 @@ char	*ft_strchr(const char *s, int c)
 		return ((char *)s);
 	return (0);
 }
-
 //similar with strncpy but +chr \n
-char	*ft_strncpy_until_nl(char *dest, char *src, unsigned int n)
+char	*ft_strncpy_until_nl(char *dst, char *src, unsigned int n)
 {
 	unsigned int i;
 
 	i = 0;
 	while (src[i] && i < n && src[i] != '\n')
 	{
-		dest[i] = src[i];
+		dst[i] = src[i];
 		i++;
 	}
 	if (src[i] == '\n')
 	{
-		dest[i++] = '\n';
-		dest[i++] = 0;
-		return (&dest[i]);
+		dst[i++] = '\n';
+		dst[i++] = 0;
+		return (&dst[i]);
 	}
-	dest[i] = 0;
+	dst[i] = 0;
 	return (0);
 }
 
-size_t	ft_strcat_until_nl(char *dst, const char *src, size_t size)
+char	*ft_strcat_until_nl(char *dst, const char *src, size_t size)
 {
 	unsigned int	i;
 	unsigned int	dst_len;
@@ -58,10 +69,10 @@ size_t	ft_strcat_until_nl(char *dst, const char *src, size_t size)
 	}
 	if (src[i] == '\n')
 	{
-		dest[dst_len + i++] = '\n';
-		dest[dst_len + i] = 0;
+		dst[dst_len + i++] = '\n';
+		dst[dst_len + i] = 0;
 		return (&src[i]);
 	}
-	dest[dst_len + i] = 0;
+	dst[dst_len + i] = 0;
 	return (0);
 }
