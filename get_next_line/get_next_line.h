@@ -6,7 +6,7 @@
 /*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 06:43:05 by snam              #+#    #+#             */
-/*   Updated: 2021/05/27 08:04:21 by snam             ###   ########.fr       */
+/*   Updated: 2021/05/27 08:53:15 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,8 @@
 
 
 int		get_next_line(int fd, char **line);
-int		read_line(char **line, char **fd_backup, char *buf, int fd);
-int		concat_backup(char **fd_backup, char **line);
-int		free_alloc(char **backup, char **line);
+int		read_line(char **line, char **fd_backup, char *buf);
+int		concat_backup(char **fd_backup, char **line, char *buf);
 
 int				split_nl(char **dst, char **src);
 char			*ft_strjoin(char const *s1, char const *s2);

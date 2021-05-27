@@ -6,7 +6,7 @@
 /*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 06:43:00 by snam              #+#    #+#             */
-/*   Updated: 2021/05/27 08:05:34 by snam             ###   ########.fr       */
+/*   Updated: 2021/05/27 10:06:32 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ char		*ft_strjoin(char const *s1, char const *s2)
 		return (0);
 	ft_strncpy(ret, s1, ft_strlen(s1) + 1);
 	ft_strlcat(ret, s2, ft_strlen(s1) + ft_strlen(s2) + 1);
+	free((char *)s1);
 	return (ret);
 }
 
@@ -85,7 +86,11 @@ int			split_nl(char **dst, char **src)
 		ft_strncpy(*dst, *src, size_dst + 1);
 		src_ptr = *src;
 		if (!(*src = (char *)malloc(size_src + 1)))
+		{
+			free(*dst);
+			*dst = 0;
 			return (-1);
+		}
 		ft_strncpy(*src, &src_ptr[size_dst + 1], size_src + 1);
 		free(src_ptr);
 		return (1);
