@@ -6,7 +6,7 @@
 /*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 06:43:00 by snam              #+#    #+#             */
-/*   Updated: 2021/05/27 10:06:32 by snam             ###   ########.fr       */
+/*   Updated: 2021/05/29 22:55:14 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ char		*ft_strjoin(char const *s1, char const *s2)
 
 int			split_nl(char **dst, char **src)
 {
-	unsigned char	size_src;
-	unsigned char	size_dst;
+	unsigned int	size_src;
+	unsigned int	size_dst;
 	char			*src_ptr;
 	
 	src_ptr = *src;

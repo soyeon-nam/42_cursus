@@ -8,7 +8,7 @@ int		main(void)
 	char	*line;
 	int		res;
 
-	fd = open("test_file21", O_RDONLY);
+	fd = open("test_file20", O_RDONLY);
 	while (1)
 	{
 		res = get_next_line(fd, &line);
@@ -22,7 +22,7 @@ int		main(void)
 			break;
 	}
 	close(fd);
-	fd = open("test_file21", O_RDONLY);
+	fd = open("test_file20", O_RDONLY);
 	printf("\n\n");
 	while (1)
 	{

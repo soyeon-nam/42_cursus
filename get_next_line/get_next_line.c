@@ -6,7 +6,7 @@
 /*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 06:42:38 by snam              #+#    #+#             */
-/*   Updated: 2021/05/29 16:47:55 by snam             ###   ########.fr       */
+/*   Updated: 2021/05/29 23:18:30 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,15 @@ int		read_line(char **line, char **fd_backup, char *buf)
 
 int		get_next_line(int fd, char **line) 
 {
-	static char		*fd_backup[OPEN_MAX];
+	static char		*fd_backup[256];
 	char			*buf;
-	unsigned int	read_size;
+	long			read_size;
 	int				ret;
 	
 	if (!(buf = (char *)malloc(BUFFER_SIZE + 1)))
 		return (-1);
 	ret = -1;
-	if (fd < 0 || !line || BUFFER_SIZE <= 0)
+	if (fd > 256 || fd < 0 || !line || BUFFER_SIZE <= 0)
 		return (-1);
 	if ((ret = concat_backup(&fd_backup[fd], line, buf)))
 		return (ret);
@@ -79,6 +79,11 @@ int		get_next_line(int fd, char **line)
 			free(buf);
 			return (-1);
 		}
+	}
+	if (read_size == -1)
+	{
+		free(buf);
+		return (-1);
 	}
 	fd_backup[fd] = 0;//read_size == 0
 	free(buf);
