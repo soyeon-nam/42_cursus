@@ -6,7 +6,7 @@
 /*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 06:42:38 by snam              #+#    #+#             */
-/*   Updated: 2021/05/27 10:49:14 by snam             ###   ########.fr       */
+/*   Updated: 2021/05/29 16:47:55 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int		get_next_line(int fd, char **line)
 	ret = -1;
 	if (fd < 0 || !line || BUFFER_SIZE <= 0)
 		return (-1);
-	if (ret == concat_backup(&fd_backup[fd], line, buf))
+	if ((ret = concat_backup(&fd_backup[fd], line, buf)))
 		return (ret);
 	while ((read_size = read(fd, buf, BUFFER_SIZE)) > 0)
 	{
