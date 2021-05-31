@@ -6,7 +6,7 @@
 /*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 06:42:38 by snam              #+#    #+#             */
-/*   Updated: 2021/05/29 23:18:30 by snam             ###   ########.fr       */
+/*   Updated: 2021/05/31 21:34:36 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,14 @@ int		read_line(char **line, char **fd_backup, char *buf)
 
 int		get_next_line(int fd, char **line) 
 {
-	static char		*fd_backup[256];
+	static char		*fd_backup[OPEN_MAX];
 	char			*buf;
 	long			read_size;
 	int				ret;
-	
-	if (!(buf = (char *)malloc(BUFFER_SIZE + 1)))
+
+	if ((read(fd, "", 0) == -1) || !line || BUFFER_SIZE <= 0)
 		return (-1);
-	ret = -1;
-	if (fd > 256 || fd < 0 || !line || BUFFER_SIZE <= 0)
+	if (!(buf = (char *)malloc(BUFFER_SIZE + 1)))
 		return (-1);
 	if ((ret = concat_backup(&fd_backup[fd], line, buf)))
 		return (ret);
@@ -71,7 +70,8 @@ int		get_next_line(int fd, char **line)
 		ret = read_line(line, &fd_backup[fd], buf);
 		if (ret == 1)//\n을 만남
 		{ 
-			//free(buf);
+			free(fd_backup[fd]);
+			fd_backup[fd] = 0;
 			return (1);
 		}
 		else if (ret == -1)  //중간에 error
