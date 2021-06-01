@@ -6,7 +6,7 @@
 /*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 06:43:05 by snam              #+#    #+#             */
-/*   Updated: 2021/05/29 22:55:20 by snam             ###   ########.fr       */
+/*   Updated: 2021/06/01 17:43:00 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int		read_line(char **line, char **fd_backup, char *buf);
 int		concat_backup(char **fd_backup, char **line, char *buf);
 
 int				split_nl(char **dst, char **src);
-char			*ft_strjoin(char const *s1, char const *s2);
+char		*ft_strjoin(char **s1, char **s2);
 void		ft_strlcat(char *dst, const char *src, size_t size);
 void		ft_strncpy(char *dst, const char *src, size_t size);
 size_t			ft_strlen(const char *s);

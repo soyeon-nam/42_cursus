@@ -6,7 +6,7 @@
 /*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 06:42:38 by snam              #+#    #+#             */
-/*   Updated: 2021/06/01 17:05:35 by snam             ###   ########.fr       */
+/*   Updated: 2021/06/01 17:36:12 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int		read_line(char **line, char **fd_backup, char *buf)
 	flag_nl = split_nl(fd_backup, &buf);
 	if (flag_nl == -1)
 		return (-1);
-	if (!(*line = ft_strjoin(*line, *fd_backup)))
+	if (!(*line = ft_strjoin(line, fd_backup)))
 		return (-1);
 	*fd_backup = buf;
 	if (flag_nl == 0)
