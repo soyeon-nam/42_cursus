@@ -6,7 +6,7 @@
 /*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 06:42:38 by snam              #+#    #+#             */
-/*   Updated: 2021/05/31 21:38:42 by snam             ###   ########.fr       */
+/*   Updated: 2021/06/01 17:05:35 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,8 @@ int		get_next_line(int fd, char **line)
 	{
 		buf[read_size] = 0;
 		ret = read_line(line, &fd_backup[fd], buf);
-		if (ret == 1)//\n을 만남
-		{ 
-			//free(fd_backup[fd]);
-			//fd_backup[fd] = 0;
+		if (ret == 1)		//\n을 만남
 			return (1);
-		}
 		else if (ret == -1)  //중간에 error
 		{
 			free(buf);
@@ -89,6 +85,3 @@ int		get_next_line(int fd, char **line)
 	free(buf);
 	return (0);
 }
-
-//한 줄에 한 가지만 있는 경우,줄이 더 이상 나오지 않음
-//마지막 줄이 나오지 않음

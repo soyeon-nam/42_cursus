@@ -6,7 +6,7 @@
 /*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 06:43:00 by snam              #+#    #+#             */
-/*   Updated: 2021/05/29 22:55:14 by snam             ###   ########.fr       */
+/*   Updated: 2021/06/01 17:03:47 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ char		*ft_strjoin(char const *s1, char const *s2)
 	ft_strncpy(ret, s1, ft_strlen(s1) + 1);
 	ft_strlcat(ret, s2, ft_strlen(s1) + ft_strlen(s2) + 1);
 	free((char *)s1);
+	free((char *)s2);
+	*(char *)s2 = 0;
 	return (ret);
 }
 
@@ -95,6 +97,7 @@ int			split_nl(char **dst, char **src)
 		free(src_ptr);
 		return (1);
 	}
+	//free
 	*dst = *src;  //*src_ptr == '\0'
 	*src = 0;
 	return (0);
