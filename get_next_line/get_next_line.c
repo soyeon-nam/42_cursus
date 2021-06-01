@@ -6,47 +6,67 @@
 /*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 06:42:38 by snam              #+#    #+#             */
-/*   Updated: 2021/06/01 21:22:53 by snam             ###   ########.fr       */
+/*   Updated: 2021/06/01 23:03:19 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int		concat_backup(char **fd_backup, char **line, char *buf)
+/* concatenate fd_backup to line */
+int		concat_old_backup(char **fd_backup, char **line, char *buf)
 {
 	int				flag;
 
-	if (*fd_backup != 0)
+	if (*fd_backup != 0)  /* somethings remain in fd_backup */
 	{
 		flag = split_nl(line, fd_backup);
-		if (flag == 1)
+		if (flag != 0)  /* read all fd_backup */
 		{
 			free(buf);
-			return (1);
-		}
-		else if (flag == -1)
-		{
-			free(buf);
-			return (-1);
+			if (flag == 1)
+				return (1);
+			else if (flag == -1)
+				return (-1);
 		}
 	}
-	else
-	{	
-		if (!(*line = (char *)malloc(1)))
+	else /* nothing left */
+	{
+		if (!(*line = (char *)malloc(1)))/* malloc null-terminated string to use make_ret_line */
+		{
+			free(buf);
 			return (-1);
+		}
 		**line = 0;
 	}
 	return (0);
 }
 
-int		read_line(char **line, char **fd_backup, char **buf)
+char		*make_ret_line(char **s1, char **s2)  /* similar to strjoin */
+{
+	char	*ret;
+
+	if (!*s1 || !*s2)
+		return (0);
+	ret = (char *)malloc(sizeof(char) * (ft_strlen(*s1) + ft_strlen(*s2) + 1));
+	if (!ret)
+		return (0);
+	ft_strncpy(ret, *s1, ft_strlen(*s1) + 1);
+	ft_strlcat(ret, *s2, ft_strlen(*s1) + ft_strlen(*s2) + 1);
+	free(*s1);
+	free(*s2);
+	*s2 = 0;
+	return (ret);
+}
+
+/* divide string before \n or \0 to and concatenate fd_backup to line */
+int		concat_new_buf(char **line, char **fd_backup, char **buf)
 {
 	int flag_nl;
 
 	flag_nl = split_nl(fd_backup, buf);
 	if (flag_nl == -1)
 		return (-1);
-	if (!(*line = ft_strjoin(line, fd_backup)))
+	if (!(*line = make_ret_line(line, fd_backup)))
 		return (-1);
 	*fd_backup = *buf;
 	*buf = 0;
@@ -66,28 +86,23 @@ int		get_next_line(int fd, char **line)
 		return (-1);
 	if (!(buf = (char *)malloc(BUFFER_SIZE + 1)))
 		return (-1);
-	if ((ret = concat_backup(&fd_backup[fd], line, buf)))
+	if ((ret = concat_old_backup(&fd_backup[fd], line, buf)))
 		return (ret);
 	while ((read_size = read(fd, buf, BUFFER_SIZE)) > 0)
 	{
 		buf[read_size] = 0;
-		ret = read_line(line, &fd_backup[fd], &buf);
-		if (ret == 1)		//\n을 만남
+		ret = concat_new_buf(line, &fd_backup[fd], &buf);
+		if (ret == 1)		// meet \n
 			return (1);
-		else if (ret == -1)  //중간에 error
+		else if (ret == -1)  // error
 		{
 			free(buf);
 			return (-1);
 		}
 		buf = (char*)malloc(read_size + 1);
 	}
-	if (read_size == -1)
-	{
-		free(buf);
-		return (-1);
-	}
-	free(fd_backup[fd]);
+	free(fd_backup[fd]); /* EOF */
 	free(buf);
-	fd_backup[fd] = 0;//read_size == 0
+	fd_backup[fd] = 0;  
 	return (0);
 }

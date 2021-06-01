@@ -6,7 +6,7 @@
 /*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 06:43:00 by snam              #+#    #+#             */
-/*   Updated: 2021/06/01 21:14:27 by snam             ###   ########.fr       */
+/*   Updated: 2021/06/01 22:55:51 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,23 +53,7 @@ void		ft_strlcat(char *dst, const char *src, size_t size)
 	dst[dst_len + i] = '\0';
 }
 
-char		*ft_strjoin(char **s1, char **s2)
-{
-	char	*ret;
-
-	if (!*s1 || !*s2)
-		return (0);
-	ret = (char *)malloc(sizeof(char) * (ft_strlen(*s1) + ft_strlen(*s2) + 1));
-	if (!ret)
-		return (0);
-	ft_strncpy(ret, *s1, ft_strlen(*s1) + 1);
-	ft_strlcat(ret, *s2, ft_strlen(*s1) + ft_strlen(*s2) + 1);
-	free(*s1);
-	free(*s2);
-	*s2 = 0;
-	return (ret);
-}
-
+/* move src-string before \n or \0 to dst and leave others in src */
 int			split_nl(char **dst, char **src)
 {
 	unsigned int	size_src;
