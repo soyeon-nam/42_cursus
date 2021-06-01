@@ -6,7 +6,7 @@
 /*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 06:43:05 by snam              #+#    #+#             */
-/*   Updated: 2021/06/01 23:00:11 by snam             ###   ########.fr       */
+/*   Updated: 2021/06/01 23:33:15 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int		get_next_line(int fd, char **line);
 int		concat_new_buf(char **line, char **fd_backup, char **buf);
 char	*make_ret_line(char **s1, char **s2);
 int		concat_old_backup(char **fd_backup, char **line, char *buf);
+int		read_file(char **line, char **fd_backup, char **buf, int fd);
+
 
 int				split_nl(char **dst, char **src);
 void		ft_strlcat(char *dst, const char *src, size_t size);

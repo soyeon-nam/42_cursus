@@ -6,7 +6,7 @@
 /*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 06:43:00 by snam              #+#    #+#             */
-/*   Updated: 2021/06/01 22:55:51 by snam             ###   ########.fr       */
+/*   Updated: 2021/06/01 23:34:53 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,12 @@ void		ft_strlcat(char *dst, const char *src, size_t size)
 	dst[dst_len + i] = '\0';
 }
 
-/* move src-string before \n or \0 to dst and leave others in src */
-int			split_nl(char **dst, char **src)
+int			split_nl(char **dst, char **src)/* move src-string before \n or \0 to dst and leave others in src */
 {
 	unsigned int	size_src;
 	unsigned int	size_dst;
 	char			*src_ptr;
-	
+
 	src_ptr = *src;
 	while (*src_ptr && *src_ptr != '\n')
 		++src_ptr;
@@ -81,7 +80,7 @@ int			split_nl(char **dst, char **src)
 		free(src_ptr);
 		return (1);
 	}
-	*dst = *src;  //*src_ptr == '\0'
+	*dst = *src;  /* *src_ptr == '\0' */
 	*src = 0;
 	return (0);
 }

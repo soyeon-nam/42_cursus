@@ -6,7 +6,7 @@
 /*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 06:42:38 by snam              #+#    #+#             */
-/*   Updated: 2021/06/01 23:03:19 by snam             ###   ########.fr       */
+/*   Updated: 2021/06/01 23:37:50 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,33 @@ int		concat_new_buf(char **line, char **fd_backup, char **buf)
 	return (1);
 }
 
+int		read_file(char **line, char **fd_backup, char **buf, int fd)
+{
+	long			read_size;
+	int				ret;
+
+	while ((read_size = read(fd, *buf, BUFFER_SIZE)) > 0)
+	{
+		(*buf)[read_size] = 0;
+		ret = concat_new_buf(line, &fd_backup[fd], buf);
+		if (ret == 1)		// meet \n
+			return (1);
+		else if (ret == -1)  // error
+		{
+			free(*buf);
+			return (-1);
+		}
+		*buf = (char*)malloc(read_size + 1);
+	}
+		return (0);
+}
+
+
 int		get_next_line(int fd, char **line) 
 {
 	static char		*fd_backup[OPEN_MAX];
 	char			*buf;
-	long			read_size;
+	//long			read_size;
 	int				ret;
 
 	if ((read(fd, "", 0) == -1) || !line || BUFFER_SIZE <= 0)
@@ -88,19 +110,21 @@ int		get_next_line(int fd, char **line)
 		return (-1);
 	if ((ret = concat_old_backup(&fd_backup[fd], line, buf)))
 		return (ret);
-	while ((read_size = read(fd, buf, BUFFER_SIZE)) > 0)
-	{
-		buf[read_size] = 0;
-		ret = concat_new_buf(line, &fd_backup[fd], &buf);
-		if (ret == 1)		// meet \n
-			return (1);
-		else if (ret == -1)  // error
-		{
-			free(buf);
-			return (-1);
-		}
-		buf = (char*)malloc(read_size + 1);
-	}
+	if ((ret = read_file(line, fd_backup, &buf, fd)))
+		return (ret);
+	// while ((read_size = read(fd, buf, BUFFER_SIZE)) > 0)
+	// {
+	// 	buf[read_size] = 0;
+	// 	ret = concat_new_buf(line, &fd_backup[fd], &buf);
+	// 	if (ret == 1)		// meet \n
+	// 		return (1);
+	// 	else if (ret == -1)  // error
+	// 	{
+	// 		free(buf);
+	// 		return (-1);
+	// 	}
+	// 	buf = (char*)malloc(read_size + 1);
+	// }
 	free(fd_backup[fd]); /* EOF */
 	free(buf);
 	fd_backup[fd] = 0;  
