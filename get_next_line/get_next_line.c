@@ -6,7 +6,7 @@
 /*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 06:42:38 by snam              #+#    #+#             */
-/*   Updated: 2021/05/31 21:34:36 by snam             ###   ########.fr       */
+/*   Updated: 2021/05/31 21:38:42 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ int		get_next_line(int fd, char **line)
 		ret = read_line(line, &fd_backup[fd], buf);
 		if (ret == 1)//\n을 만남
 		{ 
-			free(fd_backup[fd]);
-			fd_backup[fd] = 0;
+			//free(fd_backup[fd]);
+			//fd_backup[fd] = 0;
 			return (1);
 		}
 		else if (ret == -1)  //중간에 error
