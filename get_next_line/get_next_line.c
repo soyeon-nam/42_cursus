@@ -6,7 +6,7 @@
 /*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 06:42:38 by snam              #+#    #+#             */
-/*   Updated: 2021/06/03 22:20:25 by snam             ###   ########.fr       */
+/*   Updated: 2021/06/03 22:30:35 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ char		*generate_ret_line(char **line, char **fd_backup)
 
 	if (!*line || !*fd_backup)
 		return (0);
-	if (!(ret = (char *)malloc(sizeof(char) * (ft_strlen(*line) + ft_strlen(*fd_backup) + 1))));
+	if (!(ret = (char *)malloc(sizeof(char) * (ft_strlen(*line) + ft_strlen(*fd_backup) + 1))))
 		return (0);
 	ft_strncpy(ret, *line, ft_strlen(*line) + 1);
 	ft_strlcat(ret, *fd_backup, ft_strlen(*line) + ft_strlen(*fd_backup) + 1);
