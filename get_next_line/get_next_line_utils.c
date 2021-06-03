@@ -6,7 +6,7 @@
 /*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 06:43:00 by snam              #+#    #+#             */
-/*   Updated: 2021/06/03 14:37:29 by snam             ###   ########.fr       */
+/*   Updated: 2021/06/03 22:22:35 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void		ft_strlcat(char *dst, const char *src, size_t size)
 	dst[dst_len + i] = '\0';
 }
 
-int			sep_nl(char **dst, char **src, size_t size_src, size_t size_dst)
+int			sep_nl(char **dst, char **src, size_t size_dst, size_t size_src)
 {
 	char	*temp;
 
@@ -85,7 +85,7 @@ int			split_str(char **dst, char **src)
 	{
 		size_dst = src_ptr - *src;
 		size_src = ft_strlen(*src) - size_dst - 1;
-		if ((sep_nl(dst, src, size_src, size_dst) == -1))
+		if ((sep_nl(dst, src, size_dst, size_src) == -1))
 			return (-1);
 		return (1);
 	}
