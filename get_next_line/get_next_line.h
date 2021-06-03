@@ -32,4 +32,5 @@ int				sep_nl(char **dst, char **src, size_t size_src, size_t size_dst);
 void			ft_strlcat(char *dst, const char *src, size_t size);
 void			ft_strncpy(char *dst, const char *src, size_t size);
 size_t			ft_strlen(const char *s);
+
 #endif
