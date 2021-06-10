@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/05/19 12:50:42 by marvin            #+#    #+#              #
-#    Updated: 2021/05/19 12:50:42 by marvin           ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 NAME = libftprintf.a
 HEADER = ft_printf.h
 CC = gcc
@@ -17,27 +5,25 @@ CFLAGS = -Wall -Wextra -Werror
 AR = ar rc
 RM = rm -f
 
-SRCS = 
-BSRCS = 
+SRCS = ft_printf.c utils.c process_tocken.c\
+		create_string_others.c create_string_num.c
 
 OBJS = $(SRCS:.c=.o)
-BOBJS = $(BSRCS:.c=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(AR) $@ $^
-
-bonus: $(BOBJS) $(OBJS)
-	$(AR) $(NAME) $^
+	$(AR) $(NAME) $(OBJS)
 
 %.o: %.c $(HEADER)
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c  $< -o $@
 
-clean: 
-	$(RM) $(OBJS) $(BOBJS)
+clean:
+	$(RM) $(OBJS)
 
 fclean: clean
 	$(RM) $(NAME)
 
 re: fclean all
+
+.PHONY: all bonus clean fclean re
