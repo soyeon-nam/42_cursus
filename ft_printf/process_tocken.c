@@ -6,7 +6,7 @@
 /*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 12:33:26 by snam              #+#    #+#             */
-/*   Updated: 2021/06/10 15:51:05 by snam             ###   ########.fr       */
+/*   Updated: 2021/06/11 12:40:07 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,10 @@ void	process_asterisk(int state, va_list ap)
 {
 	int		num;
 
-	num = va_arg(ap, int);
+	
 	if (state == 2)
 	{
+		num = va_arg(ap, int);
 		if (num < 0) 
 		{
 			++g_tag.flag_bar;
@@ -47,6 +48,7 @@ void	process_asterisk(int state, va_list ap)
 	}
 	else if (state == 5)
 	{
+		num = va_arg(ap, int);
 		if (num < 0) //num <=0
 			g_tag.precision = -1;
 		else
