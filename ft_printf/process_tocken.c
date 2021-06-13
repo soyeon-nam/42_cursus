@@ -6,39 +6,38 @@
 /*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 12:33:26 by snam              #+#    #+#             */
-/*   Updated: 2021/06/11 12:40:07 by snam             ###   ########.fr       */
+/*   Updated: 2021/06/13 10:53:12 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-extern type_ft		g_tag;
+extern t_ft		g_tag;
 
-void	process_bar(int state)
+void		process_bar(int state)
 {
 	if (state == 2)
 		++g_tag.flag_bar;
 }
 
-void	process_zero(int state, char input)
+void		process_zero(int state, char input)
 {
 	if (state == 2)
 		++g_tag.flag_zero;
 	else if (state == 3)
-		update_num(input, 0);
+		update_width(input);
 	else if (state == 6)
-		update_num(input, 1);
+		update_precision(input);
 }
 
-void	process_asterisk(int state, va_list ap)
+void		process_asterisk(int state, va_list ap)
 {
 	int		num;
 
-	
 	if (state == 2)
 	{
 		num = va_arg(ap, int);
-		if (num < 0) 
+		if (num < 0)
 		{
 			++g_tag.flag_bar;
 			g_tag.check_minus_width = 1;
@@ -49,7 +48,7 @@ void	process_asterisk(int state, va_list ap)
 	else if (state == 5)
 	{
 		num = va_arg(ap, int);
-		if (num < 0) //num <=0
+		if (num < 0)
 			g_tag.precision = -1;
 		else
 			g_tag.precision = num;
@@ -59,9 +58,9 @@ void	process_asterisk(int state, va_list ap)
 void		process_one_to_nine(int state, char input)
 {
 	if (state == 2 || state == 3)
-		update_num(input, 0);
+		update_width(input);
 	else if (state == 5 || state == 6)
-		update_num(input, 1);
+		update_precision(input);
 }
 
 void		process_dot(int state)

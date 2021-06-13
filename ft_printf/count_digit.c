@@ -1,40 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils3.c                                           :+:      :+:    :+:   */
+/*   count_digit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 08:37:37 by snam              #+#    #+#             */
-/*   Updated: 2021/06/11 10:36:35 by snam             ###   ########.fr       */
+/*   Updated: 2021/06/13 10:53:12 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-extern type_ft		g_tag;
-extern int			ret_print;
+extern t_ft		g_tag;
+extern int			g_ret_print;
 
-void	ft_put_affix(int *num, char c)
-{
-	
-	while ((*num)-- > 0)
-	{
-		ret_print++;
-		write(1, &c, 1);
-	}
-}
-
-void	ft_put_affix_p(long long *num, char c)
-{
-	while ((*num)-- > 0)
-	{
-		ret_print++;
-		write(1, &c, 1);
-	}
-}
-
-int		count_digit(int num)
+int			count_digit(int num)
 {
 	int		ret;
 
@@ -49,7 +30,7 @@ int		count_digit(int num)
 	return (ret);
 }
 
-int		count_digit_u(unsigned int num) 
+int			count_digit_u(unsigned int num)
 {
 	int		ret;
 
@@ -64,7 +45,7 @@ int		count_digit_u(unsigned int num)
 	return (ret);
 }
 
-int		count_digit_hex(long long num)
+int			count_digit_hex(long long num)
 {
 	int		ret;
 
@@ -74,7 +55,7 @@ int		count_digit_hex(long long num)
 	return (ret);
 }
 
-int		count_digit_xX(unsigned int num) 
+int			count_digit_x(unsigned int num)
 {
 	int		ret;
 

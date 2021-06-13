@@ -6,7 +6,7 @@
 #    By: snam <snam@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/10 23:03:28 by snam              #+#    #+#              #
-#    Updated: 2021/06/11 08:37:58 by snam             ###   ########.fr        #
+#    Updated: 2021/06/13 10:25:11 by snam             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,14 +20,15 @@ RM = rm -f
 SRCS = ft_printf.c \
 utils.c \
 utils2.c \
-utils3.c \
 state_machine.c \
 process_tocken.c\
-create_xX.c \
+create_x.c \
 create_u.c \
 create_s.c \
 create_di.c \
-create_cppc.c
+create_cppc.c \
+count_digit.c \
+print_base.c
 
 OBJS = $(SRCS:.c=.o)
 

@@ -6,57 +6,32 @@
 /*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 12:50:04 by snam              #+#    #+#             */
-/*   Updated: 2021/06/11 08:46:24 by snam             ###   ########.fr       */
+/*   Updated: 2021/06/13 11:05:31 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-extern type_ft		g_tag;
-extern int			ret_print;
-
-int			create_string(char spec, va_list ap)
-{
-	int		ret;
-
-	ret = -1;
-	if (spec == 'c')
-		ret = create_c(ap);
-	else if (spec == 's')
-		ret = create_s(ap);
-	else if (spec == 'p')
-		ret = create_p(ap);
-	else if (spec == '%')
-		ret = create_percent();
-	else if (spec == 'd' || spec == 'i')
-		ret = create_di(ap);
-	else if (spec == 'u')
-		ret = create_u(ap);
-	else if (spec == 'x')
-		ret = create_xX('x', ap);
-	else if (spec == 'X')
-		ret = create_xX('X', ap);
-	reset_tag();
-	return (ret);
-}
+extern t_ft		g_tag;
+extern int			g_ret_print;
 
 int			create_c(va_list ap)
 {
-	char 	c;
-	int		size;
+	char			c;
+	int				size;
 
 	size = g_tag.width - 1;
 	if (g_tag.width > 0 && g_tag.flag_bar == 0)
 		ft_put_affix(&size, ' ');
 	c = va_arg(ap, int);
 	write(1, &c, 1);
-	ret_print++;
+	g_ret_print++;
 	if (size > 0)
 		ft_put_affix(&size, ' ');
 	return (0);
 }
 
-int		create_percent()
+int			create_percent(void)
 {
 	int		size;
 
@@ -68,32 +43,30 @@ int		create_percent()
 		else
 			ft_put_affix(&size, ' ');
 	}
-	write(1, "%%", 1);
-	ret_print++;
+	ft_putchar('%');
 	if (size > 0)
 		ft_put_affix(&size, ' ');
 	return (0);
 }
 
-int		create_p(va_list ap)
+int			create_p(va_list ap)
 {
 	size_t				pointer;
-	long long		size;
-	long long		size_width;
+	long long			size;
+	long long			size_width;
 
 	pointer = (size_t)va_arg(ap, char *);
-
 	if (pointer == 0 && g_tag.precision == 0)
 		size = 0;
 	else
 		size = count_digit_hex(pointer);
 	size_width = (long long)g_tag.width - size - 2;
-	if (g_tag.flag_bar == 0 && size_width >=0)
+	if (g_tag.flag_bar == 0 && (size_width >= 0))
 		ft_put_affix_p(&size_width, ' ');
 	write(1, "0x", 2);
-	ret_print += 2;
+	g_ret_print += 2;
 	print_base_lower(pointer, 16);
-	if (g_tag.flag_bar != 0 && size_width >=0)
+	if (g_tag.flag_bar != 0 && (size_width >= 0))
 		ft_put_affix_p(&size_width, ' ');
 	return (0);
 }

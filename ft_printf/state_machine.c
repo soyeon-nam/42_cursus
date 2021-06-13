@@ -6,15 +6,13 @@
 /*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 23:03:00 by snam              #+#    #+#             */
-/*   Updated: 2021/06/10 23:03:01 by snam             ###   ########.fr       */
+/*   Updated: 2021/06/13 10:53:12 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
- #include "ft_printf.h"
+#include "ft_printf.h"
 
-extern type_ft		g_tag;
-extern int			ret_print;
-
+extern t_ft		g_tag;
 
 int			get_token(int prev_state, char input, va_list ap)
 {

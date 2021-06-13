@@ -6,16 +6,16 @@
 /*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 12:33:32 by snam              #+#    #+#             */
-/*   Updated: 2021/06/11 12:08:49 by snam             ###   ########.fr       */
+/*   Updated: 2021/06/13 10:53:12 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-extern type_ft		g_tag;
-extern int			ret_print;
+extern t_ft		g_tag;
+extern int			g_ret_print;
 
-size_t		ft_strlen(const char* s)
+size_t			ft_strlen(const char *s)
 {
 	size_t	ret;
 
@@ -27,37 +27,33 @@ size_t		ft_strlen(const char* s)
 	return (ret);
 }
 
-static void		print(long long nb)
+static void		ft_putnbr_print(long long nb)
 {
 	char a;
 
 	a = nb % 10 + 48;
 	nb = nb / 10;
 	if (nb > 0)
-		print(nb);
+		ft_putnbr_print(nb);
 	write(1, &a, 1);
-	ret_print++;
+	g_ret_print++;
 }
 
 void			ft_putnbr(long long nb)
 {
-	if (nb == 0 && g_tag.precision == 0) //&& g_tag.width != 0
+	if (nb == 0 && g_tag.precision == 0)
 	{
 		if (g_tag.width <= 0)
-			return;
+			return ;
 		write(1, " ", 1);
-		ret_print++;
+		g_ret_print++;
 		return ;
 	}
-	// if (nb == -2147483648)
-	// 	write(1, "-2147483648", 11);
-	// else if (nb < 0)
-	// {
-	// 	nb *= -1;
-	// 	write(1, "-", 1);
-	// 	print(nb);
-	// }
-	//else
-	print(nb);
+	ft_putnbr_print(nb);
 }
 
+void			ft_putchar(char c)
+{
+	write(1, &c, 1);
+	g_ret_print++;
+}
