@@ -6,7 +6,7 @@
 /*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 08:37:37 by snam              #+#    #+#             */
-/*   Updated: 2021/06/13 10:53:12 by snam             ###   ########.fr       */
+/*   Updated: 2021/06/14 19:34:11 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int			count_digit_u(unsigned int num)
 	return (ret);
 }
 
-int			count_digit_hex(long long num)
+int			count_digit_hex(size_t num)
 {
 	int		ret;
 

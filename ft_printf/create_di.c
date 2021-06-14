@@ -6,16 +6,16 @@
 /*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 23:03:04 by snam              #+#    #+#             */
-/*   Updated: 2021/06/13 10:53:12 by snam             ###   ########.fr       */
+/*   Updated: 2021/06/14 20:45:24 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-extern t_ft		g_tag;
+extern t_ft			g_tag;
 extern int			g_ret_print;
 
-int			create_di(va_list ap)
+void			create_di(va_list ap)
 {
 	long long		num;
 	int				size_width;
@@ -34,7 +34,6 @@ int			create_di(va_list ap)
 	ft_putnbr(num);
 	if (g_tag.flag_bar > 0)
 		ft_put_affix(&size_width, ' ');
-	return (0);
 }
 
 void		set_print_numbers_di(int *size_width,
@@ -67,6 +66,10 @@ void		set_print_numbers_negative(int *size_width,
 		*size_precision = 0;
 	}
 }
+
+// void	set_width_prec(int *size_width, int *size_precision, int size_num)
+// {}
+
 
 void		set_print_numbers_positive(int *size_width,
 									int *size_precision, int size_num)

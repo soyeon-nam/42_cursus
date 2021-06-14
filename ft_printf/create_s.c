@@ -6,16 +6,16 @@
 /*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 23:03:14 by snam              #+#    #+#             */
-/*   Updated: 2021/06/13 10:53:12 by snam             ###   ########.fr       */
+/*   Updated: 2021/06/14 21:09:13 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-extern t_ft		g_tag;
+extern t_ft			g_tag;
 extern int			g_ret_print;
 
-int			create_s(va_list ap)
+void			create_s(va_list ap)
 {
 	char	*str;
 	int		size_width;
@@ -38,7 +38,6 @@ int			create_s(va_list ap)
 	print_arg_string(str, size_precision);
 	if (g_tag.flag_bar > 0)
 		ft_put_affix(&size_width, ' ');
-	return (0);
 }
 
 void		set_print_numbers_s(int *size_width,

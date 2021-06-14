@@ -6,7 +6,7 @@
 /*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/13 10:22:57 by snam              #+#    #+#             */
-/*   Updated: 2021/06/13 10:53:12 by snam             ###   ########.fr       */
+/*   Updated: 2021/06/14 19:51:06 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,6 @@ extern t_ft		g_tag;
 extern int			g_ret_print;
 
 void		ft_put_affix(int *num, char c)
-{
-	while ((*num)-- > 0)
-	{
-		g_ret_print++;
-		write(1, &c, 1);
-	}
-}
-
-void		ft_put_affix_p(long long *num, char c)
 {
 	while ((*num)-- > 0)
 	{
