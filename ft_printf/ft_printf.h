@@ -29,6 +29,7 @@ typedef struct		s_format_tag
 
 
 int					ft_printf(const char *str, ...);
+
 void				create_spec(char spec, va_list ap);
 
 void				process_bar(int state);

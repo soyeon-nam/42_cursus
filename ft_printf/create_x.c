@@ -20,13 +20,13 @@ void			create_x(char mode, va_list ap)
 	unsigned int		num;
 	int					size_width;
 	int					size_precision;
-	int					size_num;
+	// int					size_num;
 	int					minus_flag;
 
 	num = va_arg(ap, unsigned int);
-	size_num = count_digit_x(num);
+	// size_num = count_digit_x(num);
 	// minus_flag = (num < 0 ? 1 : 0);
-	set_print_numbers_x(&size_width, &size_precision, size_num, num);
+	set_print_numbers_x(&size_width, &size_precision, count_digit_x(num), num);
 	create__x_prefix(size_precision, &size_width, minus_flag);
 	if (g_tag.precision >= 0)
 		ft_put_affix(&size_precision, '0');

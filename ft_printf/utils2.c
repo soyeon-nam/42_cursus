@@ -36,6 +36,12 @@ void		update_precision(char c)
 	g_tag.precision += (c - '0');
 }
 
+// void		update_nbr(int *num, char c)
+// {
+// 	*num *= 10;
+// 	*num += (c - '0');
+// }
+
 void		reset_tag(void)
 {
 	g_tag.flag_bar = 0;

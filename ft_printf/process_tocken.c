@@ -12,8 +12,7 @@
 
 #include "ft_printf.h"
 
-t_ft		g_tag = {0, 0, 0, -1, 0};
-extern t_ft		g_tag;
+t_ft			g_tag = {0, 0, 0, -1, 0};
 
 void		process_bar(int state)
 {
