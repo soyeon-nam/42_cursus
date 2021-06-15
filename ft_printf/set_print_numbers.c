@@ -14,8 +14,7 @@
 
 extern t_ft			g_tag;
 
-void		set_print_numbers_negative(int *size_width,
-									int *size_precision, int size_num)
+void		set_print_numbers_negative(int *size_width, int *size_precision, int size_num)
 {
 	if (g_tag.precision > size_num)
 	{
@@ -34,8 +33,7 @@ void		set_print_numbers_negative(int *size_width,
 	}
 }
 
-void		set_print_numbers_positive(int *size_width,
-									int *size_precision, int size_num)
+void		set_print_numbers_positive(int *size_width, int *size_precision, int size_num)
 {
 	if (g_tag.precision > size_num)
 	{
@@ -54,5 +52,8 @@ void		set_print_numbers_positive(int *size_width,
 	}
 }
 
-// void	set_width_prec(int *size_width, int *size_precision, int size_num)
-// {}
+// void	set_width_prec(int *size_width, int *size_precision, int sub_width, int sub_pre)
+// {
+// 		*size_width -= sub_width;
+// 		*size_precision -= sub_pre;
+// }

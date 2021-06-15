@@ -12,8 +12,6 @@
 
 #include "ft_printf.h"
 
-extern t_ft		g_tag;
-
 int			get_token(int prev_state, char input, va_list ap)
 {
 	if (input == '%')
@@ -38,28 +36,49 @@ int			get_token(int prev_state, char input, va_list ap)
 
 int			get_token_format_tag(int prev_state, char input, va_list ap)
 {
-	if (input == '.')
+	switch (input)
 	{
+	case '.':
 		process_dot(prev_state);
 		return (3);
-	}
-	else if (input == '*')
-	{
+	case '*':
 		process_asterisk(prev_state, ap);
 		return (4);
-	}
-	else if (input == '-')
-	{
+	case '-':
 		process_bar(prev_state);
 		return (5);
-	}
-	else if (input == '0')
-	{
+	case '0':
 		process_zero(prev_state, input);
 		return (6);
+	default:
+		return (-1);
 	}
-	return (-1);
+
 }
+
+
+// 	if (input == '.')
+// 	{
+// 		process_dot(prev_state);
+// 		return (3);
+// 	}
+// 	else if (input == '*')
+// 	{
+// 		process_asterisk(prev_state, ap);
+// 		return (4);
+// 	}
+// 	else if (input == '-')
+// 	{
+// 		process_bar(prev_state);
+// 		return (5);
+// 	}
+// 	else if (input == '0')
+// 	{
+// 		process_zero(prev_state, input);
+// 		return (6);
+// 	}
+// 	return (-1);
+// }
 
 int			get_state(int state, int input)
 {

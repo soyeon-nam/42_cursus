@@ -18,8 +18,8 @@ AR = ar rc
 RM = rm -f
 
 SRCS = ft_printf.c \
-utils.c \
-utils2.c \
+print_functions.c \
+update_nbr.c \
 state_machine.c \
 process_tocken.c\
 create_spec.c\
@@ -30,7 +30,8 @@ create_di.c \
 create_cppc.c \
 set_print_numbers.c\
 count_digit.c \
-print_base.c
+print_base.c\
+reset_tag.c
 
 OBJS = $(SRCS:.c=.o)
 

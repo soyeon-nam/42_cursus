@@ -66,3 +66,15 @@ int			count_digit_x(unsigned int num)
 		++ret;
 	return (ret);
 }
+
+size_t			ft_strlen(const char *s)
+{
+	size_t	ret;
+
+	if (!s)
+		return (0);
+	ret = 0;
+	while (*s++)
+		++ret;
+	return (ret);
+}

@@ -47,7 +47,7 @@ void		set_print_numbers_u(int *size_width, int *size_precision, size_t num)
 	// size_num = count_digit_u(num);
 
 	if (num < 0)
-		set_print_numbers_negative(size_width, size_precision, count_digit_u(num));
+		set_print_numbers_negative(size_width, size_precision, count_digit_u(num)); //유효한가??
 	else
 		set_print_numbers_positive(size_width, size_precision, count_digit_u(num));
 }

@@ -13,7 +13,6 @@
 #include "ft_printf.h"
 
 extern t_ft			g_tag;
-extern int			g_ret_print;
 
 void			create_x(char mode, va_list ap)
 {
@@ -27,7 +26,7 @@ void			create_x(char mode, va_list ap)
 	// size_num = count_digit_x(num);
 	// minus_flag = (num < 0 ? 1 : 0);
 	set_print_numbers_x(&size_width, &size_precision, count_digit_x(num), num);
-	create__x_prefix(size_precision, &size_width, minus_flag);
+	create__x_prefix(size_precision, &size_width/*, minus_flag*/);
 	if (g_tag.precision >= 0)
 		ft_put_affix(&size_precision, '0');
 	print_x(mode, num);
@@ -41,7 +40,7 @@ void		set_print_numbers_x(int *size_width, int *size_precision, int size_num, un
 	*size_precision = g_tag.precision;
 	set_print_numbers_positive(size_width, size_precision, size_num);
 	if ((0 <= g_tag.precision && g_tag.precision <= size_num) && num == 0 && g_tag.precision != 1)
-			(*size_width)++;
+		(*size_width)++;
 	
 	// if (g_tag.precision > size_num)
 	// {
@@ -64,25 +63,25 @@ void		set_print_numbers_x(int *size_width, int *size_precision, int size_num, un
 
 
 void		create__x_prefix(int size_precision,
-						int *size_width, int minus_flag)
+						int *size_width/*, int minus_flag*/)
 {
 	if (g_tag.flag_bar == 0)
 	{
 		if (g_tag.flag_zero > 0 && size_precision < 0)
 		{
-			if (minus_flag)
-				ft_putchar('-');
+			// if (minus_flag)
+			// 	ft_putchar('-');
 			ft_put_affix(size_width, '0');
 		}
 		else
 		{
 			ft_put_affix(size_width, ' ');
-			if (minus_flag)
-				ft_putchar('-');
+			// if (minus_flag)
+			// 	ft_putchar('-');
 		}
 	}
-	if (g_tag.flag_bar != 0 && minus_flag)
-		ft_putchar('-');
+	// if (g_tag.flag_bar != 0&& minus_flag)
+	// 	ft_putchar('-');
 }
 
 void		print_x(char mode, unsigned int nb)

@@ -35,7 +35,7 @@ void			create_s(va_list ap)
 	if (g_tag.flag_bar == 0)
 		ft_put_affix(&size_width, ' ');
 	// size_num = size_precision;
-	print_arg_string(str, size_precision);
+	print_s(str, size_precision);
 	if (g_tag.flag_bar > 0)
 		ft_put_affix(&size_width, ' ');
 }
@@ -53,7 +53,7 @@ void		set_print_numbers_s(int *size_width,
 		*size_width -= size_num;
 }
 
-void		print_arg_string(char *str, int size_precision)
+void		print_s(char *str, int size_precision)
 {
 	if (str)
 	{

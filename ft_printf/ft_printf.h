@@ -54,7 +54,7 @@ void				create_di_prefix(int size_precision, int *size_width, int minus_flag);
 
 void				create_s(va_list ap);
 void				set_print_numbers_s(int *size_width, int *size_precision, int size_num);
-void				print_arg_string(char *str, int size_precision);
+void				print_s(char *str, int size_precision);
 
 void				create_u(va_list ap);
 void				set_print_numbers_u(int *size_width, int *size_precision, size_t num);
@@ -62,7 +62,7 @@ void				set_print_numbers_u(int *size_width, int *size_precision, size_t num);
 void				create_x(char mode, va_list ap);
 void				set_print_numbers_x(int *size_width, int *size_precision, int size_num, unsigned int num);
 
-void				create__x_prefix(int size_precision, int *size_width, int minus_flag);
+void				create__x_prefix(int size_precision, int *size_width/*, int minus_flag*/);
 void				print_x(char mode, unsigned int nb);
 
 int					count_digit(int num);

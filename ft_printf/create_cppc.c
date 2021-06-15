@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-extern t_ft		g_tag;
+extern t_ft			g_tag;
 extern int			g_ret_print;
 
 void			create_c(va_list ap)
