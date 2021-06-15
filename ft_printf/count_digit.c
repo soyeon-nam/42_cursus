@@ -12,9 +12,6 @@
 
 #include "ft_printf.h"
 
-extern t_ft		g_tag;
-extern int			g_ret_print;
-
 int			count_digit(int num)
 {
 	int		ret;

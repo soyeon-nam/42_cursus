@@ -20,11 +20,11 @@ void			create_s(va_list ap)
 	char	*str;
 	int		size_width;
 	int		size_precision;
-	int		size_num;
+	// int		size_num;
 
 	str = va_arg(ap, char *);
-	size_num = ft_strlen(str);
-	set_print_numbers_s(&size_width, &size_precision, size_num);
+	// size_num = ft_strlen(str);
+	set_print_numbers_s(&size_width, &size_precision, ft_strlen(str)); //size_num
 	if (!str)
 	{
 		if (size_precision >= 6 || size_precision < 0)
@@ -34,7 +34,7 @@ void			create_s(va_list ap)
 	}
 	if (g_tag.flag_bar == 0)
 		ft_put_affix(&size_width, ' ');
-	size_num = size_precision;
+	// size_num = size_precision;
 	print_arg_string(str, size_precision);
 	if (g_tag.flag_bar > 0)
 		ft_put_affix(&size_width, ' ');

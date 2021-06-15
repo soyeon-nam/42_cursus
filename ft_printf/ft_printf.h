@@ -25,8 +25,11 @@ typedef struct		s_format_tag
 	int				check_minus_width;
 }					t_ft;
 
+// t_ft		g_tag = {0, 0, 0, -1, 0};
+
+
 int					ft_printf(const char *str, ...);
-void				create_string(char spec, va_list ap);
+void				create_spec(char spec, va_list ap);
 
 void				process_bar(int state);
 void				process_zero(int state, char input);

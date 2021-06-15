@@ -22,11 +22,13 @@ utils.c \
 utils2.c \
 state_machine.c \
 process_tocken.c\
+create_spec.c\
 create_x.c \
 create_u.c \
 create_s.c \
 create_di.c \
 create_cppc.c \
+set_print_numbers.c\
 count_digit.c \
 print_base.c
 

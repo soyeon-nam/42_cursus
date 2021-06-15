@@ -13,7 +13,6 @@
 #include "ft_printf.h"
 
 extern t_ft			g_tag;
-extern int			g_ret_print;
 
 void			create_u(va_list ap)
 {
@@ -23,7 +22,7 @@ void			create_u(va_list ap)
 
 	num = va_arg(ap, unsigned int);
 	set_print_numbers_u(&size_width, &size_precision, num);
-	if (g_tag.flag_bar == 0)
+	if (g_tag.flag_bar == 0 && size_width > 0)
 	{
 		if (g_tag.flag_zero > 0 && g_tag.precision < 0)
 			ft_put_affix(&size_width, '0');
@@ -41,14 +40,14 @@ void			create_u(va_list ap)
 
 void		set_print_numbers_u(int *size_width, int *size_precision, size_t num)
 {
-	int					size_num;
+	// int					size_num;
 
-	size_num = count_digit_u(num);
 	*size_width = g_tag.width;
 	*size_precision = g_tag.precision;
+	// size_num = count_digit_u(num);
 
 	if (num < 0)
-		set_print_numbers_negative(size_width, size_precision, size_num);
+		set_print_numbers_negative(size_width, size_precision, count_digit_u(num));
 	else
-		set_print_numbers_positive(size_width, size_precision, size_num);
+		set_print_numbers_positive(size_width, size_precision, count_digit_u(num));
 }

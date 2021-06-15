@@ -47,50 +47,6 @@ void		set_print_numbers_di(int *size_width,
 		set_print_numbers_positive(size_width, size_precision, size_num);
 }
 
-void		set_print_numbers_negative(int *size_width,
-									int *size_precision, int size_num)
-{
-	if (g_tag.precision > size_num)
-	{
-		*size_width -= (g_tag.precision + 1);
-		*size_precision -= size_num;
-	}
-	else if (g_tag.precision < 0)
-	{
-		*size_width -= (size_num + 1);
-		*size_precision = -1;
-	}
-	else
-	{
-		*size_width -= (size_num + 1);
-		*size_precision = 0;
-	}
-}
-
-// void	set_width_prec(int *size_width, int *size_precision, int size_num)
-// {}
-
-
-void		set_print_numbers_positive(int *size_width,
-									int *size_precision, int size_num)
-{
-	if (g_tag.precision > size_num)
-	{
-		*size_width -= g_tag.precision;
-		*size_precision -= size_num;
-	}
-	else if (g_tag.precision < 0)
-	{
-		*size_width -= size_num;
-		*size_precision = -1;
-	}
-	else
-	{
-		*size_width -= size_num;
-		*size_precision = 0;
-	}
-}
-
 void		create_di_prefix(int size_precision,
 							int *size_width, int minus_flag)
 {

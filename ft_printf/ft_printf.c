@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-t_ft		g_tag = {0, 0, 0, -1, 0};
+// t_ft		g_tag = {0, 0, 0, -1, 0};
 int			g_ret_print;
 
 int			ft_printf(const char *str, ...)
@@ -35,7 +35,7 @@ int			ft_printf(const char *str, ...)
 			ft_putchar(*str);
 			break;
 		case 8:
-			create_string(*str, ap);
+			create_spec(*str, ap);
 			state = 0;
 			break;
 		case 10:
@@ -52,38 +52,3 @@ int			ft_printf(const char *str, ...)
 	return (g_ret_print);
 }
 
-void			create_string(char spec, va_list ap)
-{
-	switch (spec){
-	case 'c':
-		create_c(ap);
-		break ;
-	case 's':
-		create_s(ap);
-		break ;
-	case 'p':
-		create_p(ap);
-		break ;
-	case '%':
-		create_percent();
-		break ;
-	case 'd':
-		create_di(ap);
-		break ;
-	case 'i':
-		create_di(ap);
-		break ;
-	case 'u':
-		create_u(ap);
-		break ;
-	case 'x':
-		create_x('x', ap);
-		break ;
-	case 'X':
-		create_x('X', ap);
-		break ;
-	default:
-		break ;
-	}
-	reset_tag();
-}
