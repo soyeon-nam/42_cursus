@@ -6,7 +6,7 @@
 /*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 23:03:00 by snam              #+#    #+#             */
-/*   Updated: 2021/06/13 10:53:12 by snam             ###   ########.fr       */
+/*   Updated: 2021/06/16 10:51:30 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,32 +53,7 @@ int			get_token_format_tag(int prev_state, char input, va_list ap)
 	default:
 		return (-1);
 	}
-
 }
-
-
-// 	if (input == '.')
-// 	{
-// 		process_dot(prev_state);
-// 		return (3);
-// 	}
-// 	else if (input == '*')
-// 	{
-// 		process_asterisk(prev_state, ap);
-// 		return (4);
-// 	}
-// 	else if (input == '-')
-// 	{
-// 		process_bar(prev_state);
-// 		return (5);
-// 	}
-// 	else if (input == '0')
-// 	{
-// 		process_zero(prev_state, input);
-// 		return (6);
-// 	}
-// 	return (-1);
-// }
 
 int			get_state(int state, int input)
 {

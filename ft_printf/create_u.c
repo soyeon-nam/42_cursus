@@ -6,13 +6,15 @@
 /*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 22:50:43 by snam              #+#    #+#             */
-/*   Updated: 2021/06/14 20:02:12 by snam             ###   ########.fr       */
+/*   Updated: 2021/06/16 10:57:49 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
 extern t_ft			g_tag;
+
+static void		set_print_numbers_u(int *size_width, int *size_precision, size_t num);
 
 void			create_u(va_list ap)
 {
@@ -38,13 +40,10 @@ void			create_u(va_list ap)
 		ft_put_affix(&size_width, ' ');
 }
 
-void		set_print_numbers_u(int *size_width, int *size_precision, size_t num)
+static void		set_print_numbers_u(int *size_width, int *size_precision, size_t num)
 {
-	// int					size_num;
-
 	*size_width = g_tag.width;
 	*size_precision = g_tag.precision;
-	// size_num = count_digit_u(num);
 
 	if (num < 0)
 		set_print_numbers_negative(size_width, size_precision, count_digit_u(num)); //유효한가??

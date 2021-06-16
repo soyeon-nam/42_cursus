@@ -6,7 +6,7 @@
 /*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 23:03:14 by snam              #+#    #+#             */
-/*   Updated: 2021/06/14 21:09:13 by snam             ###   ########.fr       */
+/*   Updated: 2021/06/16 10:56:50 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 extern t_ft			g_tag;
 extern int			g_ret_print;
+
+static void		set_print_numbers_s(int *size_width, int *size_precision, int size_num);
+static void		print_s(char *str, int size_precision);
 
 void			create_s(va_list ap)
 {
@@ -40,7 +43,7 @@ void			create_s(va_list ap)
 		ft_put_affix(&size_width, ' ');
 }
 
-void		set_print_numbers_s(int *size_width,
+static void		set_print_numbers_s(int *size_width,
 							int *size_precision, int size_num)
 {
 	*size_width = g_tag.width;
@@ -53,7 +56,7 @@ void		set_print_numbers_s(int *size_width,
 		*size_width -= size_num;
 }
 
-void		print_s(char *str, int size_precision)
+static void		print_s(char *str, int size_precision)
 {
 	if (str)
 	{

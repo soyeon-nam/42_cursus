@@ -6,7 +6,7 @@
 /*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 23:03:04 by snam              #+#    #+#             */
-/*   Updated: 2021/06/14 20:45:24 by snam             ###   ########.fr       */
+/*   Updated: 2021/06/16 10:59:28 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,21 @@
 
 extern t_ft			g_tag;
 
+static void		set_print_numbers_di(int *size_width, int *size_precision, int num);
+static void		create_di_prefix(int size_precision, int *size_width, int minus_flag);
+
 void			create_di(va_list ap)
 {
 	long long		num;
 	int				size_width;
 	int				size_precision;
-	int				size_num;
 	int				minus_flag;
 
 	num = va_arg(ap, int);
-	size_num = count_digit(num);
 	minus_flag = (num < 0 ? 1 : 0);
-	set_print_numbers_di(&size_width, &size_precision, size_num, num);
+	set_print_numbers_di(&size_width, &size_precision, num);
 	num = (num < 0 ? -num : num);
+
 	create_di_prefix(size_precision, &size_width, minus_flag);
 	if (g_tag.precision >= 0)
 		ft_put_affix(&size_precision, '0');
@@ -35,18 +37,18 @@ void			create_di(va_list ap)
 		ft_put_affix(&size_width, ' ');
 }
 
-void		set_print_numbers_di(int *size_width,
-								int *size_precision, int size_num, int num)
+static void		set_print_numbers_di(int *size_width, int *size_precision, int num)
 {
 	*size_width = g_tag.width;
 	*size_precision = g_tag.precision;
+
 	if (num < 0)
-		set_print_numbers_negative(size_width, size_precision, size_num);
+		set_print_numbers_negative(size_width, size_precision, count_digit(num));
 	else
-		set_print_numbers_positive(size_width, size_precision, size_num);
+		set_print_numbers_positive(size_width, size_precision, count_digit(num));
 }
 
-void		create_di_prefix(int size_precision,
+static void		create_di_prefix(int size_precision,
 							int *size_width, int minus_flag)
 {
 	if (g_tag.flag_bar == 0)
