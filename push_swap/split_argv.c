@@ -59,7 +59,7 @@ static char				*slpit_word(char *start, int num)
 	return (ptr);
 }
 
-char					**split_argv(char ***argv)
+int					split_argv(char ***argv)
 {
 	char			*s;
 	char			**str;

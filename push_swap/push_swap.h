@@ -27,6 +27,5 @@ void		free_stack(t_node *stack);
 
 
 int			ft_atoi_ps(const char *str, bool *is_int);
-int			split_argv(char ***str);
-
+int			split_argv(char ***argv);
 

@@ -13,7 +13,7 @@ int				ft_atoi_ps(const char *str, bool *is_null)
 	unsigned long	ret;
 
 	sign = 1;
-	is_null = 1;
+	*is_null = 1;
 	if (*str == '+' || *str == '-')
 	{
 		if (*str == '-')
@@ -32,6 +32,6 @@ int				ft_atoi_ps(const char *str, bool *is_null)
 		return (0);
 	else if (ret > (unsigned long)__LONG_MAX__ + 1 && sign == -1)
 		return (0);
-	is_null = 0;
+	*is_null = 0;
 	return ((int)ret * sign);  //(ret * sign)
 }
