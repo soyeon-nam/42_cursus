@@ -29,8 +29,8 @@ int		add_node(t_node **stack, int item)
 	else
 	{
 		new->next = *stack;
-		new->prev = *stack->prev;
-		*stack->prev = new;
+		new->prev = (*stack)->prev;
+		(*stack)->prev = new;
 		new->prev->next = new;
 	}
 	return (0);
