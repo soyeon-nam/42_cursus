@@ -10,9 +10,6 @@ typedef struct		s_node
 	struct s_node	*next;	
 }					t_node;
 
-
-
-
 void		push_swap(int argc, char **argv);
 
 

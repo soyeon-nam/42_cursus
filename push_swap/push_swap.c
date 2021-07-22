@@ -25,4 +25,3 @@ void		push_swap(int argc, char **argv)
 	quick_sort(stack_a);
 	free_stack(stack_a);
 }
-

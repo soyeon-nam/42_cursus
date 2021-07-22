@@ -12,8 +12,6 @@
 
 #include "push_swap.h"
 
-
-
 int		add_node(t_node **stack, int item)
 {
 	t_node		*new;
@@ -36,5 +34,4 @@ int		add_node(t_node **stack, int item)
 		new->prev->next = new;
 	}
 	return (0);
-
 }
