@@ -2,10 +2,11 @@
 #include <stdarg.h>
 #include <limits.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 typedef struct		s_node
 {
-	int				num;
+	int				item;
 	struct s_node	*prev;
 	struct s_node	*next;	
 }					t_node;
@@ -14,7 +15,8 @@ void		push_swap(int argc, char **argv);
 
 
 
-t_node		*arrange_stack(int argc, char **argv);
+t_node		*arrange_stack(char **argv, int argc);
+
 
 int			add_node(t_node **stack, int item);
 

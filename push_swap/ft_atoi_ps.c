@@ -7,13 +7,13 @@ static int		ft_isspace(char c)
 	return (0);
 }
 
-int				ft_atoi_ps(const char *str, bool *is_int)
+int				ft_atoi_ps(const char *str, bool *is_null)
 {
 	int				sign;
 	unsigned long	ret;
 
 	sign = 1;
-	is_int = 0;
+	is_null = 1;
 	if (*str == '+' || *str == '-')
 	{
 		if (*str == '-')
@@ -27,11 +27,11 @@ int				ft_atoi_ps(const char *str, bool *is_int)
 		++str;
 	}
 	if (*str != 0)
-		return (NULL);
+		return (0);
 	if (ret > (unsigned long)__LONG_MAX__ && sign == 1)
-		return (NULL);
+		return (0);
 	else if (ret > (unsigned long)__LONG_MAX__ + 1 && sign == -1)
-		return (NULL);
-	is_int = 1;
+		return (0);
+	is_null = 0;
 	return ((int)ret * sign);  //(ret * sign)
 }

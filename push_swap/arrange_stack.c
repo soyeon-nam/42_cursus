@@ -28,16 +28,17 @@ static bool		check_dup(t_node *stack, int item)
 	return (0);
 }
 
-t_node			*arrange_stack(int argc, char **argv)
+t_node			*arrange_stack(char **argv, int argc)
 {
 	t_node		*stack;
 	int			item;
 	bool		is_null;
 
+	stack = NULL;
 	while (--argc)
 	{
 		item = atoi(argv[argc]);
-		if (item == NULL && is_null == 0)
+		if (item == 0 && is_null == 1)
 		{
 			free_stack(stack);
 			return (NULL);

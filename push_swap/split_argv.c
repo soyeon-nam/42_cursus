@@ -61,14 +61,14 @@ static char				*slpit_word(char *start, int num)
 
 char					**split_argv(char ***argv)
 {
+	char			*s;
 	char			**str;
 	char			*start;
-	int				argc
+	int				argc;
 	int				i;
 
-	if (!s)
-		return (0);
-	argc = count_word((char *)s, c);
+	s = *argv[1];
+	argc = count_word((char *)s);
 	str = (char **)malloc(sizeof(char *) * (argc + 1));
 	if (!str)
 		return (0);
