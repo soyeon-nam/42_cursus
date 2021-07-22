@@ -67,7 +67,7 @@ int					split_argv(char ***argv)
 	int				argc;
 	int				i;
 
-	s = *argv[1];
+	s = (*argv)[1];
 	argc = count_word((char *)s);
 	str = (char **)malloc(sizeof(char *) * (argc + 1));
 	if (!str)

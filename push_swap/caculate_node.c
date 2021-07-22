@@ -15,6 +15,7 @@
 int		add_node(t_node **stack, int item)
 {
 	t_node		*new;
+	t_node		*rear;
 
 	new = (t_node *)malloc(sizeof(t_node));
 	if (!new)
@@ -28,9 +29,10 @@ int		add_node(t_node **stack, int item)
 	}
 	else
 	{
-		new->next = *stack;
-		new->prev = (*stack)->prev;
-		(*stack)->prev = new;
+		rear = *stack;
+		new->next = rear;
+		new->prev = rear->prev;
+		rear->prev = new;
 		new->prev->next = new;
 	}
 	return (0);
