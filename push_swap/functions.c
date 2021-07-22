@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   functions.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: snam <snam@student.42seoul.kr>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/07/22 20:19:38 by snam              #+#    #+#             */
+/*   Updated: 2021/07/22 23:32:21 by snam             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 static int		ft_isspace(char c)
@@ -7,14 +19,13 @@ static int		ft_isspace(char c)
 	return (0);
 }
 
-int				ft_atoi(const char *str)
+int				ft_atoi_ps(const char *str, bool *is_int)
 {
 	int				sign;
 	unsigned long	ret;
 
-	while (ft_isspace(*str))
-		++str;
 	sign = 1;
+	is_int = 0;
 	if (*str == '+' || *str == '-')
 	{
 		if (*str == '-')
@@ -27,34 +38,28 @@ int				ft_atoi(const char *str)
 		ret = (ret * 10) + (*str - '0');
 		++str;
 	}
+	if (*str != 0)
+		return (NULL);
 	if (ret > (unsigned long)__LONG_MAX__ && sign == 1)
 		return (NULL);
 	else if (ret > (unsigned long)__LONG_MAX__ + 1 && sign == -1)
 		return (NULL);
-	if 
+	is_int = 1;
 	return ((int)ret * sign);  //(ret * sign)
 }
-//인티져범위 넘는다면 return null;
 
-
-
-
-static	char			**free_malloc(char **str)
+static	void			**free_malloc(char **str, int i)
 {
-	int		i;
-
-	i = 0;
-	while (str[i])
+	while (i < 0)
 	{
 		free(str[i]);
-		++i;
+		--i;
 	}
 	free(str);
 	return (0);
 }
-//고칠거
 
-static unsigned int		count_word(char *s, char c)
+static int				count_word(char *s)
 {
 	unsigned int count;
 
@@ -90,21 +95,21 @@ static char				*slpit_word(char *start, int num)
 	return (ptr);
 }
 
-char					**ft_split(char const *s)
+char					**split_argv(char ***argv)
 {
 	char			**str;
 	char			*start;
-	unsigned int	word_size;
-	unsigned int	i;
+	int				argc
+	int				i;
 
 	if (!s)
 		return (0);
-	word_size = count_word((char *)s, c);
-	str = (char **)malloc(sizeof(char *) * (word_size + 1));
+	argc = count_word((char *)s, c);
+	str = (char **)malloc(sizeof(char *) * (argc + 1));
 	if (!str)
-		return (NULL);
+		return (0);
 	i = 0;
-	while (i < word_size)
+	while (i < argc)
 	{
 		while (*s == ' ')
 			++s;
@@ -112,11 +117,18 @@ char					**ft_split(char const *s)
 		while (0 <= *s && *s <= 9)
 			++s;
 		if (*s != ' ')
-			return (free_malloc(str));
+		{
+			free_malloc(str, i - 1);
+			return (0);
+		}
 		if (!(str[i] = slpit_word(start, s - start)))
-			return (free_malloc(str));
+		{
+			free_malloc(str, i);
+			return (0);
+		}
 		++i;
 	}
 	str[i] = 0;
-	return (str);
+	*argv = str;
+	return (argc);
 }
