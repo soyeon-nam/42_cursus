@@ -15,10 +15,12 @@
 int		main(int argc, char **argv)
 {
 	if (argc == 2)
-		argc = split_argv(&argv);//number of items
-	if (argc >= 2 && argv)
+		argc = split_argv(&argv); //number of items
+	if (argc >= 3 && argv)
 		push_swap(argc, argv);
+	else if (argc == 2)
+		return (0);
 	else
-		write(2, "Error", 5);
+		write(2, "Error\n", 6);
 	return (0);
 }

@@ -94,5 +94,5 @@ int					split_argv(char ***argv)
 	}
 	str[i] = 0;
 	*argv = str;
-	return (argc);
+	return (argc + 1);
 }
