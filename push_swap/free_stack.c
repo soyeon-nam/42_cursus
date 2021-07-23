@@ -15,11 +15,24 @@
 void		free_stack(t_node *stack)
 {
 	t_node		*curr;
+	t_node		*next;
 
-	while (stack)
+	curr = stack;
+	while (curr)
 	{
-		curr = stack->next;
-		free(stack);
-		stack = curr;
+		next = curr->next;
+		free(curr);
+		curr = NULL;
+		curr = next;
 	}
+
+	// curr = stack;
+	// while (curr->next != stack)
+	// {
+	// 	next = curr->next;
+	// 	free(curr);
+	// 	curr = NULL;
+	// 	curr = next;
+	// }
+	// free(curr);
 }
