@@ -20,23 +20,25 @@ int		add_node(t_node **stack, int item)
 	if (!new)
 		return (1);
 	new->item = item;
+	new->prev = new;
+	new->next = new;
 	if (!stack)
 	{
 		*stack = new;
-		new->prev = new;
-		new->next = new;
+		// new->prev = new;
+		// new->next = new;
 	}
 	else
 	{
-		new->prev->next = new;
-		new->prev = (*stack)->prev;
-		(*stack)->prev = new;
-		new->next = *stack;
-
-		// new->next = *stack;
+		// new->prev->next = new;
 		// new->prev = (*stack)->prev;
 		// (*stack)->prev = new;
-		// new->prev->next = new;
+		// new->next = *stack;
+
+		new->next = *stack;
+		new->prev = (*stack)->prev;
+		(*stack)->prev = new;
+		new->prev->next = new;
 	}
 	return (0);
 }
