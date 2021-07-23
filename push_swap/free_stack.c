@@ -6,7 +6,7 @@
 /*   By: snam <snam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 23:34:20 by snam              #+#    #+#             */
-/*   Updated: 2021/07/22 23:37:17 by snam             ###   ########.fr       */
+/*   Updated: 2021/07/23 18:17:47 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,18 @@ void		free_stack(t_node *stack)
 	t_node		*curr;
 	t_node		*prev;
 
+	printf("FREE");
 	curr = stack->prev;
 	while (curr->prev == stack)
 	{
+		printf("in");
 		prev = curr->prev;
 		free(curr);
 		curr = NULL;
 		curr = prev;
 	}
-	free(curr->prev);
+	printf("out");
+	free(stack);
 	free(curr);
 
 

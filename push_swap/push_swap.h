@@ -4,6 +4,10 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
+
+#include <stdio.h>
+
+
 typedef struct		s_node
 {
 	int				item;
@@ -26,6 +30,7 @@ void		free_stack(t_node *stack);
 
 
 
-int			ft_atoi_ps(const char *str, bool *is_int);
-int			split_argv(char ***argv);
+int			ft_atoi_ps(const char *str, int *is_int);
 
+int			split_argv(char ***argv);
+void		**free_malloc(char **str, int i);

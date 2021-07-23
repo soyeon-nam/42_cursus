@@ -6,7 +6,7 @@
 /*   By: snam <snam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 14:53:13 by snam              #+#    #+#             */
-/*   Updated: 2021/07/22 20:41:44 by snam             ###   ########.fr       */
+/*   Updated: 2021/07/23 18:18:04 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,6 @@ void		push_swap(int argc, char **argv)
 		exit(0);
 	}
 	quick_sort(stack_a);
+	printf("\n\n--BEFORE FREE STACK--\n\n");
 	free_stack(stack_a);
 }

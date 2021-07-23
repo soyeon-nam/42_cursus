@@ -6,7 +6,7 @@
 /*   By: snam <snam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 15:03:00 by snam              #+#    #+#             */
-/*   Updated: 2021/07/22 20:39:30 by snam             ###   ########.fr       */
+/*   Updated: 2021/07/23 18:06:42 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static int		check_dup(t_node *stack, int item, int argc)
 			stack_curr = stack_curr->next;
 		}
 	else
+	{
 		while (stack_curr)
 		{
 			if (stack_curr->item == item)
@@ -39,8 +40,12 @@ static int		check_dup(t_node *stack, int item, int argc)
 				sign = 0;
 			stack_curr = stack_curr->next;
 		}
-	if (sign == 1)
-		return (2);
+		if (sign == 1)
+		{
+			printf("SORTED\n");
+			return (2);
+		}
+	}
 	return (0);
 }
 
@@ -53,14 +58,17 @@ t_node			*arrange_stack(char **argv, int argc)
 	stack = NULL;
 	while (--argc)
 	{
-		item = atoi(argv[argc]);
+		printf("[arrange_stack]\n\n");
+		item = ft_atoi_ps(argv[argc], &is_null);
+		printf("1.%d\n", is_null);
 		if (item == 0 && is_null == 1)
 		{
 			free_stack(stack);
 			return (NULL);
 		}
-		is_null = check_dup(stack, item, argc);//이 과정에서 소팅 확인
-		if (is_null == 0)
+		is_null = check_dup(stack, item, argc); // check sorted
+		printf("2.%d\n", is_null);
+		if (is_null == 1)
 		{
 			free_stack(stack);
 			if (is_null == 0)
@@ -69,6 +77,7 @@ t_node			*arrange_stack(char **argv, int argc)
 				exit(0);		
 		}
 		is_null = add_node(&stack, item);
+		printf("3.%d\n", is_null);
 		if (is_null)
 		{
 			free_stack(stack);

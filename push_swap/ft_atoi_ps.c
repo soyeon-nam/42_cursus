@@ -7,7 +7,7 @@ static int		ft_isspace(char c)
 	return (0);
 }
 
-int				ft_atoi_ps(const char *str, bool *is_null)
+int				ft_atoi_ps(const char *str, int *is_null)
 {
 	int				sign;
 	unsigned long	ret;
