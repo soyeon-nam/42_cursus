@@ -6,7 +6,7 @@
 /*   By: snam <snam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/23 20:35:57 by snam              #+#    #+#             */
-/*   Updated: 2021/07/24 14:49:17 by snam             ###   ########.fr       */
+/*   Updated: 2021/07/24 19:56:19 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,29 @@ void		pop(t_node **stack)
 
 void		top(t_node **stack, t_node **node)
 {
-	(*node)->next = *stack;
-	(*node)->prev = (*stack)->prev;
-	(*stack)->prev = *node;
-	(*node)->prev->next = (*node);
+	if (!*stack)
+	{
+		*stack = *node;
+		*node->prev = *node;
+		*node->next = *node;
+	}
+	else
+	{
+		(*node)->next = *stack;
+		(*node)->prev = (*stack)->prev;
+		(*stack)->prev = *node;
+		(*node)->prev->next = (*node);
+	}
 }
 
-void		push(t_node **stack1, t_node **stack2)
+static void		push(t_node **stack1, t_node **stack2)
 {
-
 	t_node	*node;
 
 	node = (*stack2)->prev;
 	pop(stack2);
 	top(stack1, &node);
+
 }
 
 /*pa : push a - take the first element at the top of b and put it at the top of a. Do

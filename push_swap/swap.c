@@ -6,7 +6,7 @@
 /*   By: snam <snam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/23 20:56:33 by snam              #+#    #+#             */
-/*   Updated: 2021/07/23 21:21:12 by snam             ###   ########.fr       */
+/*   Updated: 2021/07/24 21:25:26 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void		sa(t_node **stack)
 
 /*ss : sa and sb at the same time.*/
 
-void		sa(t_node **stack_a, t_node **stack_b)
+void		ss(t_node **stack_a, t_node **stack_b)
 {
 	swap(stack_a);
 	swap(stack_b);

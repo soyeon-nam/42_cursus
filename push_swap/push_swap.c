@@ -6,7 +6,7 @@
 /*   By: snam <snam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 14:53:13 by snam              #+#    #+#             */
-/*   Updated: 2021/07/23 18:18:04 by snam             ###   ########.fr       */
+/*   Updated: 2021/07/24 20:58:02 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,20 @@
 
 void		push_swap(int argc, char **argv)
 {
-	t_node	*stack_a;
-	
-	stack_a = arrange_stack(argv, argc); //if fail to allocate, return
-	if (!stack_a)
+	t_info		info;
+	t_stack		stack;
+
+	stack->a = arrange_stack(argv, argc); //if fail to allocate, return
+	if (!stack->a)
 	{
 		write(2, "Error", 5);
 		exit(0);
 	}
-	quick_sort(stack_a);
-	printf("\n\n--BEFORE FREE STACK--\n\n");
-	free_stack(stack_a);
+	stack->b = NULL;
+	info->a_sorted = 0;
+	info->b_sorted = 0;
+	info->a_left = argc - 1;
+	info->b_left = 0;
+	quick_sort(&stack, &info);
+	free_stack(stack->a);
 }
