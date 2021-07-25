@@ -10,15 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
+
+
+
+
+
+
 #include <unistd.h>
 #include <stdarg.h>
 #include <limits.h>
 #include <stdlib.h>
 #include <stdbool.h>
-
-
-#include <stdio.h>
-
 
 typedef struct		s_node
 {
@@ -43,20 +46,36 @@ typedef struct		s_stack
 
 void		push_swap(int argc, char **argv);
 
+int			tag_number_three(t_node *stack);
+
+
+int			atoi_ps(const char *str, int *is_int);
 
 
 t_node		*arrange_stack(char **argv, int argc);
+void		arrange_sorting(t_info *info, t_stack *stack, 
+					void (**f)(t_stack *), int argc);
+					
+void		quick_sort(t_stack *stack, t_info *info, 
+					void (**f)(t_stack *));
+
+void		conquer(t_node **stack, int left, 
+				void (**f)(t_stack *), short is_b);
+void		conquer_three(t_node **stack, 
+				void (**f)(t_stack *), short is_b);
 
 
-int			add_node(t_node **stack, int item);
 
-void		quick_sort(t_stack *stack, t_info *info);
+void		pa(t_stack *stack);
+void		pb(t_stack *stack);
+void		rra(t_stack *stack);
+void		rrb(t_stack *stack);
+void		rrr(t_stack *stack);
+void		ra(t_stack *stack);
+void		rb(t_stack *stack);
+void		rr(t_stack *stack);
+void		sa(t_stack *stack);
+void		sb(t_stack *stack);
+void		ss(t_stack *stack);
 
 void		free_stack(t_node *stack);
-
-
-
-int			ft_atoi_ps(const char *str, int *is_int);
-
-int			split_argv(char ***argv);
-void		**free_malloc(char **str, int i);

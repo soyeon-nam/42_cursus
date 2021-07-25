@@ -18,7 +18,7 @@ int		main(int argc, char **argv)
 
 	if (argc == 2)
 	{
-		ft_atoi_ps(argv[1], &is_error);
+		atoi_ps(argv[1], &is_error);
 		if (is_error)
 			write(2, "Error\n", 6);
 	}

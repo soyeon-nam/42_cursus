@@ -49,6 +49,31 @@ static int		check_dup(t_node *stack, int item, int argc)
 	return (0);
 }
 
+static int		add_node(t_node **stack, int item)
+{
+	t_node		*new;
+
+	new = (t_node *)malloc(sizeof(t_node));
+	if (!new)
+		return (1);
+	new->item = item;
+	top(stack, &new);
+//	if (!*stack)
+//	{
+//		*stack = new;
+//		new->prev = new;
+//		new->next = new;
+//	}
+//	else
+//	{
+//		new->next = *stack;
+//		new->prev = (*stack)->prev;
+//		(*stack)->prev = new;
+//		new->prev->next = new;
+//	}
+	return (0);
+}
+
 t_node			*arrange_stack(char **argv, int argc)
 {
 	t_node		*stack;
@@ -58,30 +83,23 @@ t_node			*arrange_stack(char **argv, int argc)
 	stack = NULL;
 	while (--argc)
 	{
-		item = ft_atoi_ps(argv[argc], &is_null);
-		printf("[arrange 1] %d\n", is_null);
+		item = atoi_ps(argv[argc], &is_null);
+		// printf("[arrange 1] %d\n", is_null);
 		if (item == 0 && is_null == 1)
-		{
-			free_stack(stack);
-			return (NULL);
-		}
+			error(stack);
 		is_null = check_dup(stack, item, argc); // check sorted
-		printf("[arrange 2] %d\n", is_null);
+		// printf("[arrange 2] %d\n", is_null);
 		if (is_null == 1)
 		{
-			free_stack(stack);
 			if (is_null == 0)
-				return (NULL);
-			else
-				exit(0);		
+				error(stack);
+			free_stack(stack);
+			exit(0);		
 		}
 		is_null = add_node(&stack, item);
-		printf("[arrange 3] %d\n", is_null);
+		// printf("[arrange 3] %d\n", is_null);
 		if (is_null)
-		{
-			free_stack(stack);
-			return (NULL);
-		}
+			error(stack);
 	}
 	return (stack);
 }

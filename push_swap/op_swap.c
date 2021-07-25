@@ -28,27 +28,27 @@ void		swap(t_node **stack)
 }
 /*sa : swap a - swap the first 2 elements at the top of stack a. Do nothing if there is only one or no elements).*/
 
-void		sa(t_node **stack)
+void		sa(t_stack *stack)
 {
-	swap(stack);
+	swap(&(stack->a));
 	write(1, "sa", 2);
 }
 
 
 /*sb : swap b - swap the first 2 elements at the top of stack b. Do nothing if there is only one or no elements).*/
 
-void		sa(t_node **stack)
+void		sb(t_stack *stack)
 {
-	swap(stack);
+	swap(&(stack->b));
 	write(1, "sb", 2);
 }
 
 
 /*ss : sa and sb at the same time.*/
 
-void		ss(t_node **stack_a, t_node **stack_b)
+void		ss(t_stack *stack)
 {
-	swap(stack_a);
-	swap(stack_b);
+	swap(&(stack->a));
+	swap(&(stack->b));
 	write(1, "ss", 2);
 }

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi_ps.c                                       :+:      :+:    :+:   */
+/*   atoi_ps.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: snam <snam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -19,7 +19,7 @@ static int		ft_isspace(char c)
 	return (0);
 }
 
-int				ft_atoi_ps(const char *str, int *is_null)
+int				atoi_ps(const char *str, int *is_null)
 {
 	int				sign;
 	unsigned long	ret;

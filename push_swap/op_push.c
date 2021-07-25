@@ -49,17 +49,17 @@ static void		push(t_node **stack1, t_node **stack2)
 nothing if b is empty.
 */
 
-void		pa(t_node **stack_a, t_node **stack_b)
+void		pa(t_stack *stack)
 {
-	push(stack_a, stack_b);
+	push(&(stack->a), &(stack->b));
 	write(1, "pa", 2);
 }
 
 /*pb : push b - take the first element at the top of a and put it at the top of b. Do
 naothing if a is empty*/
 
-void		pb(t_node **stack_a, t_node ** stack_b)
+void		pb(t_stack *stack)
 {
-	push(stack_b, stack_a);
+	push(&(stack->b), &(stack->a));
 	write(1, "pb", 2);
 }
