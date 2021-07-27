@@ -1,4 +1,4 @@
-#include "push_swap.h"
+#include "../inc/push_swap.h"
 
 static bool		op_s(t_node *head)
 {

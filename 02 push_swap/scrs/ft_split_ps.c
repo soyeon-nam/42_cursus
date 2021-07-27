@@ -1,4 +1,4 @@
-#include "push_swap.h"
+#include "../inc/push_swap.h"
 //#include "libft.h"
 
 void				**free_malloc_slpit(char **str)

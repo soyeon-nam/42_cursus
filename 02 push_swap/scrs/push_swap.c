@@ -1,4 +1,4 @@
-#include "push_swap.h"
+#include "../inc/push_swap.h"
 
 void			push_swap(char ***arr)
 {
@@ -10,5 +10,5 @@ void			push_swap(char ***arr)
 	while (arr[++i])//split  mallocfree
 		free_malloc_slpit(arr[i]);
 	quick_sort(&stack);
-	terminate(0, stack, 0);
+	terminate(0, &stack, 0);
 }
