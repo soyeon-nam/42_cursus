@@ -1,6 +1,38 @@
 #include "push_swap.h"
 
-void	do_op(char *str, t_stack **stack)
+static bool		op_s(t_node *head)
+{
+	int			tmp;
+​
+	tmp = head->val;
+	head->val = head->nxt->val;
+	head->nxt->val = tmp;
+	return (1);
+}
+​
+static bool		op_r(t_node **head)
+{
+	*head = (*head)->prev;
+	return (1);
+}
+​
+static bool		op_rr(t_node **head)
+{
+	*head = (*head)->next; //check
+	return (1);
+}
+
+static bool		op_p(t_node **stack1, t_node **stack2)
+{
+	t_node		*node;
+
+	node = (*stack2)->prev;
+	pop(stack2);
+	top(stack1, &node);
+	return (1);
+}
+
+void			do_op(char *str, t_node **a, t_node **b)
 {
 	if (!ft_strcmp(str, "sa") && op_s(*a))
 		write(1, "sa\n", 3);
@@ -8,9 +40,9 @@ void	do_op(char *str, t_stack **stack)
 		write(1, "sb\n", 3);
 	else if (!ft_strcmp(str, "ss") && op_s(*a) && op_s(*b))
 		write(1, "ss\n", 3);
-	else if (!ft_strcmp(str, "pa") && push_node(a, pop_node(b)))
+	else if (!ft_strcmp(str, "pa") && op_p(a, b))
 		write(1, "pa\n", 3);
-	else if (!ft_strcmp(str, "pb") && push_node(b, pop_node(a)))
+	else if (!ft_strcmp(str, "pb") && op_p(b, a))
 		write(1, "pb\n", 3);
 	else if (!ft_strcmp(str, "ra") && op_r(a))
 		write(1, "ra\n", 3);
@@ -25,8 +57,4 @@ void	do_op(char *str, t_stack **stack)
 	else if (!ft_strcmp(str, "rrr") && op_rr(a) && op_rr(b))
 		write(1, "rrr\n", 4);
 }
-
-void		reverse(t_node **stack)
-{
-	*stack = (*stack)->next;
-}
+​
