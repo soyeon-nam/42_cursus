@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: snam <snam@student.42seoul.kr>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/07/29 04:00:53 by snam              #+#    #+#             */
+/*   Updated: 2021/07/29 04:00:54 by snam             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/push_swap.h"
 
 static int		check_dup(t_stack *stack, int item, char ***arr)
@@ -37,7 +49,7 @@ static void		create_node(t_stack **stack, int item, char ***arr)
 	if (!new)
 		terminate(arr, stack, 1);
 	new->item = item;
-	top_node(&(stack->a), &new);
+	top_node(&((*stack)->a), &new);
 }
 
 void			parse(char ***arr, t_stack *stack)
@@ -45,7 +57,7 @@ void			parse(char ***arr, t_stack *stack)
 	int			i;
 	int			j;
 	int			is_sorted;
-	int			item
+	int			item;
 
 	i = 0;
 	j = 0;
@@ -60,5 +72,4 @@ void			parse(char ***arr, t_stack *stack)
 		}
 	if (is_sorted == i * j - 1)
 		terminate(arr, stack, 0);
-	return (void);
 }

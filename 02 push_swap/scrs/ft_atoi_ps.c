@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_atoi_ps.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: snam <snam@student.42seoul.kr>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/07/29 04:00:38 by snam              #+#    #+#             */
+/*   Updated: 2021/07/29 04:00:40 by snam             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/push_swap.h"
 
 static int		ft_isspace(char c)
@@ -33,3 +45,4 @@ int				ft_atoi_ps(const char *str, char ***arr, t_stack *stack)
 		terminate(arr, stack, 1);
 	return ((int)ret * sign);  //(ret * sign)
 }
+//그냥 부호만 들어오는 경우에는 0으로 처리해주는가? 에러인가?

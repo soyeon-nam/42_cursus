@@ -1,24 +1,36 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   do_op.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: snam <snam@student.42seoul.kr>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/07/29 04:00:26 by snam              #+#    #+#             */
+/*   Updated: 2021/07/29 04:00:27 by snam             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/push_swap.h"
 
 static bool		op_s(t_node *head)
 {
 	int			tmp;
-​
-	tmp = head->val;
-	head->val = head->nxt->val;
-	head->nxt->val = tmp;
+
+	tmp = head->item;
+	head->item = head->prev->item;
+	head->prev->item = tmp;
 	return (1);
 }
-​
+
 static bool		op_r(t_node **head)
 {
 	*head = (*head)->prev;
 	return (1);
 }
-​
+
 static bool		op_rr(t_node **head)
 {
-	*head = (*head)->next; //check
+	*head = (*head)->next;
 	return (1);
 }
 
