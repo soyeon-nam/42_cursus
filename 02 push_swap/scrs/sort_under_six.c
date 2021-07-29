@@ -34,8 +34,10 @@ static void			conquer_three(t_node **stack)
 	else if (third < top && top < second)
 		do_op("ra", stack, 0);
 	else if (third < second && second < top)
+	{
 		do_op("sa", stack, 0);
 		do_op("rra", stack, 0);
+	}
 }
 
 static int		find_one_pivot(t_node *stack)
