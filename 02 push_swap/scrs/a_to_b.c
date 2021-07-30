@@ -12,7 +12,7 @@
 
 #include "../inc/push_swap.h"
 
-static void		conquer_a_231(t_node **stack)
+static void	conquer_a_231(t_node **stack)
 {
 	do_op("ra", stack, 0);
 	do_op("sa", stack, 0);
@@ -20,7 +20,7 @@ static void		conquer_a_231(t_node **stack)
 	do_op("sa", stack, 0);
 }
 
-static void		conquer_a_312(t_node **stack)
+static void	conquer_a_312(t_node **stack)
 {
 	do_op("sa", stack, 0);
 	do_op("ra", stack, 0);
@@ -28,7 +28,7 @@ static void		conquer_a_312(t_node **stack)
 	do_op("rra", stack, 0);
 }
 
-static void		conquer_a_321(t_node **stack)
+static void	conquer_a_321(t_node **stack)
 {
 	do_op("sa", stack, 0);
 	do_op("ra", stack, 0);
@@ -37,7 +37,7 @@ static void		conquer_a_321(t_node **stack)
 	do_op("sa", stack, 0);
 }
 
-static void		conquer_a(t_node **stack, int cnt)
+static void	conquer_a(t_node **stack, int cnt)
 {
 	t_node		*top;
 	t_node		*second;
@@ -63,18 +63,19 @@ static void		conquer_a(t_node **stack, int cnt)
 		else if (third < second && second < top)
 			conquer_a_321(stack);
 	}
-	// else if (cnt == 2)
-	// else
-	// conquer_a(stack, cnmt);
+	else if (cnt == 2)
+		return ;
+	else
+		conquer_a(stack, cnt);
 }
-
-void			a_to_b(t_stack *stack, int cnt)
+/*fix comquer_a*/
+void	a_to_b(t_stack *stack, int cnt)
 {
 	int			rewind;
 	int			pivot1;
 	int			pivot2;
 
-	if (cnt < 7)  //최적화하는 것은 7이하 일 때도 고민해보기
+	if (cnt < 7)
 		conquer_a(&(stack->a), cnt);
 	rewind = cnt;
 	pivot1 = find_pivot(stack->a, cnt, cnt - cnt * 2 / 3);
