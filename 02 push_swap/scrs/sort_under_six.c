@@ -64,7 +64,7 @@ static int		find_one_pivot(t_node *stack)
 	return (node->item);
 }
 
-void			quick_sort_without_rewind(t_stack *stack, int cnt)
+static void			quick_sort_without_rewind(t_stack *stack, int cnt)
 {
 	int			rewind;
 	int			pivot;

@@ -85,11 +85,11 @@ void            b_to_a(t_stack *stack, int cnt)
 		else
 			do_op("pa", &(stack->a), &(stack->b));
 	}
+	a_to_b(stack, cnt / 3);
 	cnt = rewind;
 	rewind = cnt - (cnt * 2 / 3);
 	while (rewind--)
 		do_op("rrr", &(stack->a), &(stack->b));
-	b_to_a(stack, cnt);
-	b_to_a(stack, cnt);
-	a_to_b(stack, cnt);
+	a_to_b(stack, cnt / 3);
+	b_to_a(stack, cnt - (cnt * 2 / 3));
 }
