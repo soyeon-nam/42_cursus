@@ -16,8 +16,13 @@ void	pop_node(t_node **stack)
 {
 	if (!*stack)
 		return ;
-	(*stack)->next->prev = (*stack)->prev;
-	(*stack)->prev->next = (*stack)->next;
+	if ((*stack)->next == *stack)
+		*stack = 0;
+	else
+	{
+		(*stack)->next->next->prev = *stack;
+		(*stack)->next = (*stack)->next->next;
+	}
 }
 
 void	top_node(t_node **stack, t_node **node)
@@ -30,23 +35,9 @@ void	top_node(t_node **stack, t_node **node)
 	}
 	else
 	{
-		(*node)->next = *stack;
-		(*node)->prev = (*stack)->prev;
-		(*stack)->prev = *node;
-		(*node)->prev->next = (*node);
-		*stack = *node;//check
+		(*node)->next = (*stack)->next;
+		(*node)->prev = *stack;
+		(*stack)->next = *node;
+		(*node)->next->prev = (*node);
 	}
 }
-
-
-
-
-// ​
-// void	rewind_stack(t_node **a, t_node** b, int cnt)
-// {
-// 	while (cnt > 0)
-// 	{
-// 		do_op("rrr", a, b);
-// 		--cnt;
-// 	}
-// }

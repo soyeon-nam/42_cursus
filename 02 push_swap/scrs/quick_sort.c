@@ -18,7 +18,7 @@ int				count_item(t_node *stack)
 	t_node		*curr_stack;
 
 	ret = 1;
-	curr_stack = stack;
+	curr_stack = stack->next;
 	while (curr_stack != stack)
 	{
 		curr_stack = curr_stack->next;

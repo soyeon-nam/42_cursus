@@ -16,13 +16,13 @@ static bool	op_s(t_node *head)
 {
 	int			tmp;
 
-	tmp = head->item;
-	head->item = head->prev->item;
-	head->prev->item = tmp;
+	tmp = head->next->item;
+	head->next->item = head->next->next->item;
+	head->next->next->item = tmp;
 	return (1);
 }
 
-static bool	op_r(t_node **head)
+bool	op_r(t_node **head)
 {
 	*head = (*head)->next;
 	return (1);
@@ -38,7 +38,7 @@ static bool	op_p(t_node **stack1, t_node **stack2)
 {
 	t_node		*node;
 
-	node = *stack2;
+	node = (*stack2)->next;
 	pop_node(stack2);
 	top_node(stack1, &node);
 	return (1);

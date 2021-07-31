@@ -20,40 +20,21 @@ static int	check_dup(t_stack *stack, int item, char ***arr)
 	if (stack->a)
 	{
 		sign = 1;
-		stack_curr = stack->a;
+		stack_curr = stack->a->next;
 		while (1)
 		{
 			if (stack_curr->item == item)
 				terminate(arr, stack, 1);
-			if (stack_curr->next == stack->a)
+			if (stack_curr->next == stack->a->next)
 				break ;
 			if (stack_curr->item > stack_curr->next->item)
 				sign = 0;
 			stack_curr = stack_curr->next;
 		}
 		if (sign == 1 && (stack_curr->item < item))
-		{
-			// printf("SORTED\n");
 			return (1);
-		}
 	}
 	return (0);
-}
-void	add_node(t_node **stack, t_node **node)
-{
-	if (!*stack)
-	{
-		*stack = *node;
-		(*node)->prev = *node;
-		(*node)->next = *node;
-	}
-	else
-	{
-		(*node)->next = *stack;
-		(*node)->prev = (*stack)->prev;
-		(*stack)->prev = *node;
-		(*node)->prev->next = (*node);
-	}
 }
 
 static void	create_node(t_stack *stack, int item, char ***arr)
@@ -64,7 +45,8 @@ static void	create_node(t_stack *stack, int item, char ***arr)
 	if (!new)
 		terminate(arr, stack, 1);
 	new->item = item;
-	add_node(&(stack->a), &new);
+	top_node(&(stack->a), &new);
+	op_r(&(stack->a));
 }
 
 void	parse(char ***arr, t_stack *stack)
@@ -88,6 +70,6 @@ void	parse(char ***arr, t_stack *stack)
 			create_node(stack, item, arr);
 		}
 	}
-	if ((is_sorted == i * j - 1) || (stack->a->next = stack->a))
+	if (is_sorted == i * j - 1)
 		terminate(arr, stack, 0);
 }

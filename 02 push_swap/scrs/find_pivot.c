@@ -10,11 +10,13 @@ int	find_pivot(t_node *stack, int cnt, int order)
 	while (1)
 	{
 		check = cnt;
-		curr = stack;
-		while (curr->next == curr)
+		curr = node;
+		while (1)
 		{
 			if (node->item < curr->item)
 				--check;
+			if (curr->next == node)
+				break;
 			curr = curr->next;
 		}
 		if (check == order)

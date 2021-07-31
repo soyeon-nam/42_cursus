@@ -18,7 +18,6 @@ static void		free_stack(t_node *stack)
 	t_node		*prev;
 
 	curr = stack->prev;
-	// while (curr->prev != stack)
 	while (curr != stack)
 	{
 		prev = curr->prev;
