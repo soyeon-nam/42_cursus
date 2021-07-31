@@ -12,15 +12,15 @@
 
 #include "../inc/push_swap.h"
 
-static void			conquer_three(t_node **stack)
+static void	conquer_three(t_node **stack)
 {
-	t_node		*top;
-	t_node		*second;
-	t_node		*third;
+	int		top;
+	int		second;
+	int		third;
 
 	top = (*stack)->prev->item;
-	second = top->prev->item;
-	third = second->prev->item;
+	second = (*stack)->prev->prev->item;
+	third = (*stack)->prev->prev->prev->item;
 	if (top < third && third < second)
 	{
 		do_op("ra", stack, 0);
@@ -40,67 +40,35 @@ static void			conquer_three(t_node **stack)
 	}
 }
 
-static int		find_one_pivot(t_node *stack)
-{
-	int			upper;
-	t_node		*curr;
-	t_node		*node;
-
-	node = stack;
-	while (1)
-	{
-		curr = stack;
-		upper = 0;
-		while (curr->next == curr)
-		{
-			if (node->item < curr->item)
-				++upper;
-			curr = curr->next;
-		}
-		if (upper == 2)
-			break ;
-		node = node->next;
-	}
-	return (node->item);
-}
-
-static void			quick_sort_without_rewind(t_stack *stack, int cnt)
-{
-	int			rewind;
-	int			pivot;
-	t_node		*top;
-
-	rewind = 0;
-	top = stack->a->prev;
-	pivot = find_one_pivot(stack->a);
-	while (cnt--)
-	{
-		if (top->item < pivot)
-		{
-			do_op("pb", &(stack->a), &(stack->b));
-			++rewind;
-		}
-		else
-			do_op("ra", &(stack->a), 0);
-	}
-	conquer_three(stack);
-	if (rewind == 2)
-		if (top->prev->item > top->item)
-			do_op("sa", &(stack->a), 0);
-	while (rewind--)
-		do_op("pa", &(stack->a), &(stack->b));
-}
-
 void			sort_under_six(t_stack *stack, int cnt)
 {
 	t_node		*stack_a;
+	int			pivot;
+	int			push;
 
-	stack_a = stack->a;
-	if (cnt > 3)
-		quick_sort_without_rewind(stack, cnt);
-	else if (cnt == 3)
-		conquer_three(stack);
-	else if (cnt == 2)
+	push = cnt - 3;
+	if (cnt == 2)
 		if (stack_a->prev->item > stack_a->item)
 			do_op("sa", &stack_a, 0);
+	else if (cnt == 3)
+		conquer_three(&(stack->a));
+	else
+	{
+		pivot = find_pivot(stack_a, cnt, cnt - 3);
+		while (cnt--)
+		{
+			if (stack_a->item < pivot)
+			{
+				do_op("pb", &(stack->a), &(stack->b));
+				do_op("ra", &(stack->a), &(stack->b));
+			}
+			else if (stack_a->item == pivot)
+				do_op("pb", &(stack->a), &(stack->b));
+			else
+				do_op("ra", &(stack->a), 0);
+		}
+		sort_under_six(stack, 3);
+		while (push--)
+			do_op("pa", &(stack->a), &(stack->b));
+	}
 }

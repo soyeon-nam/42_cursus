@@ -33,7 +33,7 @@ void			quick_sort(t_stack *stack)
 
 	cnt = count_item(stack->a);
 	if (cnt >= 6)
-		a_to_b();
-	else if (2 <= cnt && cnt <= 5)
+		a_to_b(stack, cnt);
+	else if (cnt >= 2)
 		sort_under_six(stack, cnt);
 }

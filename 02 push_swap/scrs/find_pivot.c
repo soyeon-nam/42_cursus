@@ -1,6 +1,6 @@
 #include "../inc/push_swap.h"
 
-int				find_pivot(t_node *stack, int cnt, int order)
+int	find_pivot(t_node *stack, int cnt, int order)
 {
 	int				check;
 	t_node			*curr;
@@ -18,7 +18,7 @@ int				find_pivot(t_node *stack, int cnt, int order)
 			curr = curr->next;
 		}
 		if (check == order)
-            break;
+			break ;
 		node = node->next;
 	}
 	return (node->item);

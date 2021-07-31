@@ -39,15 +39,15 @@ static void	conquer_a_321(t_node **stack)
 
 static void	conquer_a(t_node **stack, int cnt)
 {
-	t_node		*top;
-	t_node		*second;
-	t_node		*third;
+	int		top;
+	int		second;
+	int		third;
 
 	if (cnt <= 3)
 	{
 		top = (*stack)->prev->item;
-		second = top->prev->item;
-		third = second->prev->item;
+		second = (*stack)->prev->prev->item;
+		third = (*stack)->prev->prev->prev->item;
 		if (top < third && third < second)
 		{
 			do_op("ra", stack, 0);

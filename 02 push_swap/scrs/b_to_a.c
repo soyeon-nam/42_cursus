@@ -12,7 +12,7 @@
 
 #include "../inc/push_swap.h"
 
-static void		conquer_a_123(t_node **stack)
+static void	conquer_b_123(t_node **stack)
 {
 	do_op("sb", stack, 0);
 	do_op("rb", stack, 0);
@@ -21,7 +21,7 @@ static void		conquer_a_123(t_node **stack)
 	do_op("sb", stack, 0);
 }
 
-static void		conquer_a_132(t_node **stack)
+static void	conquer_b_132(t_node **stack)
 {
 	do_op("sb", stack, 0);
 	do_op("rb", stack, 0);
@@ -29,7 +29,7 @@ static void		conquer_a_132(t_node **stack)
 	do_op("rrb", stack, 0);
 }
 
-static void		conquer_b_213(t_node **stack)
+static void	conquer_b_213(t_node **stack)
 {
 	do_op("rb", stack, 0);
 	do_op("sb", stack, 0);
@@ -37,15 +37,15 @@ static void		conquer_b_213(t_node **stack)
 	do_op("sb", stack, 0);
 }
 
-static void		conquer_b(t_node **stack)
+static void	conquer_b(t_node **stack)
 {
-	t_node		*top;
-	t_node		*second;
-	t_node		*third;
+	int		top;
+	int		second;
+	int		third;
 
 	top = (*stack)->prev->item;
-	second = top->prev->item;
-	third = second->prev->item;
+	second = (*stack)->prev->prev->item;
+	third = (*stack)->prev->prev->prev->item;
 	if (top < second && second < third)
 		conquer_b_123(stack);
 	else if (top < third && third < second)
@@ -58,20 +58,20 @@ static void		conquer_b(t_node **stack)
 	{
 		do_op("rb", stack, 0);
 		do_op("sb", stack, 0);
-		do_op("rrb", stack, 0);	
+		do_op("rrb", stack, 0);
 	}
 }
 
-void            b_to_a(t_stack *stack, int cnt)
+void	b_to_a(t_stack *stack, int cnt)
 {
 	int			rewind;
 	int			pivot1;
 	int			pivot2;
 
-	if (cnt < 3)  //최적화하는 것은 7이하 일 때도 고민해보기
+	if (cnt < 7)
 		conquer_b(&(stack->b));
 	rewind = cnt;
-	pivot1 = find_pivot(stack->a, cnt, cnt/3);
+	pivot1 = find_pivot(stack->a, cnt, cnt / 3);
 	pivot2 = find_pivot(stack->a, cnt, cnt * 2 / 3);
 	while (cnt--)
 	{
