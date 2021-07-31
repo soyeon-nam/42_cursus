@@ -12,23 +12,24 @@
 
 #include "../inc/push_swap.h"
 
-int				main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	char		***arr;
 	int			i;
-	int			j;
 
+	if (argc == 1)
+		terminate(0, 0, 0);
 	arr = (char ***)malloc(sizeof(char **) * argc);
 	if (!arr)
 		terminate(0, 0, 1);
-	i = 0;
-	while (++i < argc)
+	i = -1;
+	while (++i < argc - 1)
 	{
-		arr[j] = ft_split_ps(argv[i]);
-		if (arr[j])
-			++j;
+		arr[i] = ft_split_ps(argv[i + 1], ' ');
+		if (!arr[i])
+			terminate(arr, 0, 1); //동적할당 헷갈림 확인 요망(null)
 	}
-	arr[j] = 0;
+	arr[i] = 0;
 	push_swap(arr);
 	return (0);
 }

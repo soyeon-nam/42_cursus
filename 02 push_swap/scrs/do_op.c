@@ -12,7 +12,7 @@
 
 #include "../inc/push_swap.h"
 
-static bool		op_s(t_node *head)
+static bool	op_s(t_node *head)
 {
 	int			tmp;
 
@@ -22,29 +22,29 @@ static bool		op_s(t_node *head)
 	return (1);
 }
 
-static bool		op_r(t_node **head)
-{
-	*head = (*head)->prev;
-	return (1);
-}
-
-static bool		op_rr(t_node **head)
+static bool	op_r(t_node **head)
 {
 	*head = (*head)->next;
 	return (1);
 }
 
-static bool		op_p(t_node **stack1, t_node **stack2)
+static bool	op_rr(t_node **head)
 {
-	t_node		*node;
-
-	node = (*stack2)->prev;
-	pop(stack2);
-	top(stack1, &node);
+	*head = (*head)->prev;
 	return (1);
 }
 
-void			do_op(char *str, t_node **a, t_node **b)
+static bool	op_p(t_node **stack1, t_node **stack2)
+{
+	t_node		*node;
+
+	node = *stack2;
+	pop_node(stack2);
+	top_node(stack1, &node);
+	return (1);
+}
+
+void	do_op(char *str, t_node **a, t_node **b)
 {
 	if (!ft_strcmp(str, "sa") && op_s(*a))
 		write(1, "sa\n", 3);
@@ -69,4 +69,3 @@ void			do_op(char *str, t_node **a, t_node **b)
 	else if (!ft_strcmp(str, "rrr") && op_rr(a) && op_rr(b))
 		write(1, "rrr\n", 4);
 }
-​

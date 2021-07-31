@@ -1,3 +1,6 @@
+#include <stdio.h>
+
+
 
 #include <unistd.h>
 #include <limits.h>
@@ -42,6 +45,10 @@ void		top_node(t_node **stack, t_node **node);
 
 int				ft_atoi_ps(const char *str, char ***arr, t_stack *stack);
 char					**ft_split_ps(char const *s, char c);
+void	**free_malloc_slpit(char **str);
 
 
 void		terminate(char	***split, t_stack *stack, bool is_error);
+
+
+int		ft_strcmp(char *s1, char *s2);

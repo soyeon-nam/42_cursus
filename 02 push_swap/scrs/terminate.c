@@ -18,7 +18,8 @@ static void		free_stack(t_node *stack)
 	t_node		*prev;
 
 	curr = stack->prev;
-	while (curr->prev != stack)
+	// while (curr->prev != stack)
+	while (curr != stack)
 	{
 		prev = curr->prev;
 		free(curr);
@@ -26,17 +27,16 @@ static void		free_stack(t_node *stack)
 		curr = prev;
 	}
 	free(stack);
-	free(curr);
 }
 
 void		terminate(char	***split, t_stack *stack, bool is_error)
 {
 	int		i;
 
-	i = 0;
+	i = -1;
 	if (split)
-		while (split[i])
-			free_malloc_slpit(split);
+		while (split[++i])
+			free_malloc_slpit(split[i]);
 	if (stack)
 	{
 		if (stack->a)

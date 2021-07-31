@@ -12,14 +12,14 @@
 
 #include "../inc/push_swap.h"
 
-static int		ft_isspace(char c)
+static int	ft_isspace(char c)
 {
 	if ((9 <= c && c <= 13) || c == 32)
 		return (1);
 	return (0);
 }
 
-int				ft_atoi_ps(const char *str, char ***arr, t_stack *stack)
+int	ft_atoi_ps(const char *str, char ***arr, t_stack *stack)
 {
 	int				sign;
 	unsigned long	ret;

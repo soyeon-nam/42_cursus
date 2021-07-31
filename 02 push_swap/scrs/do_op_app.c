@@ -12,15 +12,15 @@
 
 #include "../inc/push_swap.h"
 
-void		pop_node(t_node **stack)
+void	pop_node(t_node **stack)
 {
 	if (!*stack)
 		return ;
-	(*stack)->prev->prev->next = *stack;
-	(*stack)->prev = (*stack)->prev->prev;
+	(*stack)->next->prev = (*stack)->prev;
+	(*stack)->prev->next = (*stack)->next;
 }
 
-void		top_node(t_node **stack, t_node **node)
+void	top_node(t_node **stack, t_node **node)
 {
 	if (!*stack)
 	{
@@ -34,8 +34,10 @@ void		top_node(t_node **stack, t_node **node)
 		(*node)->prev = (*stack)->prev;
 		(*stack)->prev = *node;
 		(*node)->prev->next = (*node);
+		*stack = *node;//check
 	}
 }
+
 
 
 
