@@ -1,39 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   find_pivot.c                                       :+:      :+:    :+:   */
+/*   do_multiple_op.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: snam <snam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/01 04:30:08 by snam              #+#    #+#             */
-/*   Updated: 2021/08/01 04:30:09 by snam             ###   ########.fr       */
+/*   Created: 2021/08/01 04:29:59 by snam              #+#    #+#             */
+/*   Updated: 2021/08/01 04:30:02 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
 
-int	find_pivot(t_node *stack, int cnt, int order)
+void	do_multiple_op(t_stack *stack, int num, ...)
 {
-	int				check;
-	t_node			*curr;
-	t_node			*node;
+	va_list			ap;
+	char			*op;
 
-	node = stack;
-	while (1)
+	va_start(ap, num);
+	while (num--)
 	{
-		check = cnt;
-		curr = node;
-		while (1)
-		{
-			if (node->item < curr->item)
-				--check;
-			if (curr->next == node)
-				break;
-			curr = curr->next;
-		}
-		if (check == order)
-			break ;
-		node = node->next;
+		op = va_arg(ap, char *);
+		do_op(op, &(stack->a), &(stack->b));
 	}
-	return (node->item);
 }

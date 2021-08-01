@@ -38,7 +38,7 @@ void	b_to_a(t_stack *stack, int cnt);
 int		find_pivot(t_node *stack, int cnt, int order);
 
 void	do_op(char *str, t_node **a, t_node **b);
-void	do_many_op(t_stack *stack, int num, ...);
+void	do_multiple_op(t_stack *stack, int num, ...);
 bool	op_r(t_node **head);
 
 void	pop_node(t_node **stack);
@@ -46,11 +46,7 @@ void	top_node(t_node **stack, t_node **node);
 
 
 int		ft_atoi_ps(const char *str, char ***arr, t_stack *stack);
-char	**ft_split_ps(char const *s, char c);
-void	**free_malloc_slpit(char **str);
-
+char	**ft_split(char const *s, char c);
+int		ft_strcmp(char *s1, char *s2);
 
 void	terminate(char	***split, t_stack *stack, bool is_error);
-
-
-int		ft_strcmp(char *s1, char *s2);

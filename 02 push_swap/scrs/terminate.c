@@ -12,6 +12,17 @@
 
 #include "../inc/push_swap.h"
 
+static void	**free_malloc_slpit(char **str)
+{
+	int		i;
+
+	i = -1;
+	while (str[++i])
+		free(str[i]);
+	free(str);
+	return (0);
+}
+
 static void		free_stack(t_node *stack)
 {
 	t_node		*curr;

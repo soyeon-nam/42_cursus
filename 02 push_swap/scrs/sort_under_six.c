@@ -22,7 +22,7 @@ static void	conquer_three(t_stack *stack)
 	second = stack->a->next->next->item;
 	third = stack->a->next->next->next->item;
 	if (top < third && third < second)
-		do_many_op(stack, 3, "ra", "sa", "rra");
+		do_multiple_op(stack, 3, "ra", "sa", "rra");
 	else if (second < top && top < third)
 		do_op("sa", &(stack->a), 0);
 	else if (second < third && third < top)
@@ -30,7 +30,7 @@ static void	conquer_three(t_stack *stack)
 	else if (third < top && top < second)
 		do_op("ra", &(stack->a), 0);
 	else if (third < second && second < top)
-		do_many_op(stack, 2, "sa", "rra");
+		do_multiple_op(stack, 2, "sa", "rra");
 }
 
 static void	conquer_four_five(t_stack *stack, int cnt)
@@ -43,7 +43,7 @@ static void	conquer_four_five(t_stack *stack, int cnt)
 	while (cnt--)
 	{
 		if (stack->a->next->item < pivot)
-			do_many_op(stack, 2, "pb", "ra");
+			do_multiple_op(stack, 2, "pb", "ra");
 		else if (stack->a->next->item == pivot)
 			do_op("pb", &(stack->a), &(stack->b));
 		else

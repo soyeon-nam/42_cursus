@@ -27,7 +27,7 @@ int	main(int argc, char **argv)
 	{
 		arr[i] = ft_split_ps(argv[i + 1], ' ');
 		if (!arr[i])
-			terminate(arr, 0, 1); //동적할당 헷갈림 확인 요망(중간에 null)
+			terminate(0, 0, 1); //동적할당 헷갈림 확인 요망(중간에 null)
 	}
 	arr[i] = 0;
 	push_swap(arr);
