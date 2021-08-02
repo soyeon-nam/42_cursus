@@ -1,6 +1,4 @@
 NAME = push_swap
-INCLUDES = -I$(HEADERS_DIRECTORY)
-HEADERS = $(addprefix $(HEADERS_DIRECTORY), $(HEADERS_LIST))
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
@@ -8,24 +6,35 @@ RM = rm -f
 
 HEADERS_DIRECTORY = ./inc/
 
-SRCS = 
+SRCS = ./scrs/a_to_b.c\
+		./scrs/b_to_a.c\
+		./scrs/do_multiple_op.c\
+		./scrs/do_op_app.c\
+		./scrs/do_op.c\
+		./scrs/find_pivot.c\
+		./scrs/ft_atoi_ps.c\
+		./scrs/ft_split.c\
+		./scrs/ft_strcmp.c\
+		./scrs/main.c\
+		./scrs/parse.c\
+		./scrs/push_swap.c\
+		./scrs/quick_sort.c\
+		./scrs/sort_under_six.c\
+		./scrs/terminate.c\
 
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	$(AR) $(NAME) $(OBJS)
+$(NAME): $(SRCS)
+	$(CC) $(CFLAGS) $^ -o $@
 
-%.o: %.c $(HEADER)
-	$(CC) $(CFLAGS) -c  $< -o $@
-
-clean:
+clean :
 	$(RM) $(OBJS)
 
-fclean: clean
-	$(RM) $(NAME)
+fclean : clean
+	$(RM) $(NAME $(NAME2)
 
-re: fclean all
+re : fclean all
 
-.PHONY: all bonus clean fclean re
+.PHONY : all clean fclean re

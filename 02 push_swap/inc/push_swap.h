@@ -32,7 +32,9 @@ int		count_item(t_node *stack);
 void	sort_under_six(t_stack *stack, int cnt);
 
 void	a_to_b(t_stack *stack, int cnt);
+void	conquer_a(t_stack *stack, int cnt);
 void	b_to_a(t_stack *stack, int cnt);
+void	conquer_b(t_stack *stack, int cnt);
 
 
 int		find_pivot(t_node *stack, int cnt, int order);
@@ -50,3 +52,4 @@ char	**ft_split(char const *s, char c);
 int		ft_strcmp(char *s1, char *s2);
 
 void	terminate(char	***split, t_stack *stack, bool is_error);
+void	**free_malloc_slpit(char **str);

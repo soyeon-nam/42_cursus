@@ -12,7 +12,7 @@
 
 #include "../inc/push_swap.h"
 
-static void	**free_malloc_slpit(char **str)
+void	**free_malloc_slpit(char **str)
 {
 	int		i;
 
@@ -55,6 +55,6 @@ void		terminate(char	***split, t_stack *stack, bool is_error)
 			free_stack(stack->b);
 	}
 	if (is_error)
-		write(1, "Error\n", 6);
+		write(2, "Error\n", 6);
 	exit(0);
 }

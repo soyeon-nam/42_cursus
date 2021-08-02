@@ -38,9 +38,12 @@ static bool	op_p(t_node **stack1, t_node **stack2)
 {
 	t_node		*node;
 
-	node = (*stack2)->next;
-	pop_node(stack2);
-	top_node(stack1, &node);
+	if (*stack2)
+	{
+		node = (*stack2)->next;
+		pop_node(stack2);
+		top_node(stack1, &node);
+	}
 	return (1);
 }
 
@@ -68,4 +71,43 @@ void	do_op(char *str, t_node **a, t_node **b)
 		write(1, "rrb\n", 4);
 	else if (!ft_strcmp(str, "rrr") && op_rr(a) && op_rr(b))
 		write(1, "rrr\n", 4);
+
+
+
+
+						// t_node * stack_a;
+						// t_node * stack_b;
+						// printf("\n   [do_op]\n");
+						// if (*a || *b)
+						// {
+						// 	if (*a)
+						// 		stack_a = (*a)->next;
+						// 	if (*b)
+						// 		stack_b = (*b)->next;
+						// 	while ((*a && stack_a != *a) || (*b && stack_b != *b))
+						// 	{
+						// 		if (*a && stack_a != *a)		
+						// 		{
+						// 			printf("     | %d ", stack_a->item);
+						// 			stack_a = stack_a->next;
+						// 		}
+						// 		else
+						// 			printf("     |   ");
+						// 		if (*b && stack_b != *b)
+						// 		{
+						// 			printf("%d", stack_b->item);
+						// 			stack_b = stack_b->next;
+						// 		}		
+						// 		printf("\n");
+						// 	}
+						// 	if (*a)
+						// 		printf("     | %d ", (*a)->item);
+						// 	else
+						// 		printf("     |   ");
+						// 	if (*b)
+						// 		printf("%d", (*b)->item);
+						// 	printf("\n");
+						// 	printf("       - -\n\n");
+						// }
+
 }

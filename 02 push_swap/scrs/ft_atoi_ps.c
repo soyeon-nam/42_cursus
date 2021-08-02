@@ -12,12 +12,12 @@
 
 #include "../inc/push_swap.h"
 
-static int	ft_isspace(char c)
-{
-	if ((9 <= c && c <= 13) || c == 32)
-		return (1);
-	return (0);
-}
+// static int	ft_isspace(char c)
+// {
+// 	if ((9 <= c && c <= 13) || c == 32)
+// 		return (1);
+// 	return (0);
+// }
 
 int	ft_atoi_ps(const char *str, char ***arr, t_stack *stack)
 {
@@ -43,6 +43,6 @@ int	ft_atoi_ps(const char *str, char ***arr, t_stack *stack)
 		terminate(arr, stack, 1);
 	else if (ret > (unsigned long)__LONG_MAX__ + 1 && sign == -1)
 		terminate(arr, stack, 1);
-	return ((int)ret * sign);  //(ret * sign)
+	return ((int)ret * sign);
 }
 //그냥 부호만 들어오는 경우에는 0으로 처리해주는가? 에러인가?

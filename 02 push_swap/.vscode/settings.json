@@ -4,6 +4,7 @@
 		"__node_handle": "c",
 		"stdarg.h": "c",
 		"sstream": "c",
-		"ratio": "c"
+		"ratio": "c",
+		"algorithm": "c"
 	}
 }

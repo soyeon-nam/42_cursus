@@ -17,12 +17,14 @@ static int	check_dup(t_stack *stack, int item, char ***arr)
 	t_node		*stack_curr;
 	int			sign;
 
+								int check;
 	if (stack->a)
 	{
 		sign = 1;
 		stack_curr = stack->a->next;
 		while (1)
 		{
+																			check = stack_curr->item;
 			if (stack_curr->item == item)
 				terminate(arr, stack, 1);
 			if (stack_curr->next == stack->a->next)

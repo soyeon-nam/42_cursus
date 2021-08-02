@@ -13,7 +13,7 @@
 #include "../inc/push_swap.h"
 //#include "libft.h"
 
-static void	**free_malloc(char **str)
+static char	**free_malloc(char **str)
 {
 	int		i;
 
@@ -56,34 +56,6 @@ static char	*slpit_word(char *start, int num)
 	ptr[i] = 0;
 	return (ptr);
 }
-
-// char	**ft_split_ps(char const *s, char c)
-// {
-// 	char			**str;
-// 	char			*start;
-// 	unsigned int	word_size;
-// 	unsigned int	i;
-
-// 	word_size = count_word((char *)s, c);
-// 	str = (char **)malloc(sizeof(char *) * (word_size + 1));
-// 	if (!str)
-// 		return (0);
-// 	i = -1;
-// 	while (++i < word_size)
-// 	{
-// 		while (*s == c)
-// 			++s;
-// 		start = (char *)s;
-// 		while (*s != c && *s)
-// 			++s;
-// 		str[i] = slpit_word(start, s - start);
-// 		if (!str[i])
-// 			terminate(&str, 0, 1);
-// 	}
-// 	str[i] = 0;
-// 	return (str);
-// }
-
 
 char					**ft_split(char const *s, char c)
 {

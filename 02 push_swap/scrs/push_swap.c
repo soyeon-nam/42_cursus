@@ -22,32 +22,82 @@ void			push_swap(char ***arr)
 	while (arr[++i])
 		free_malloc_slpit(arr[i]);
 
-						// if (stack.a)
+
+
+						// t_node * stack_a;
+						// t_node * stack_b;
+						// printf("\n   [start]\n");
+						// if (stack.a || stack.b)
 						// {
-						// 	t_node * stack_a;
-						// 	stack_a = stack.a->next;
-						// 	printf("--start--\n");
-						// 	while (stack_a != stack.a)
+						// 	if (stack.a)
+						// 		stack_a = stack.a->next;
+						// 	if (stack.b)
+						// 		stack_b = stack.b->next;
+						// 	while ((stack.a && stack_a != stack.a) || (stack.b && stack_b != stack.b))
 						// 	{
-						// 		printf("%d\n", stack_a->item);
-						// 		stack_a = stack_a->next;
+						// 		if (stack.a && stack_a != stack.a)		
+						// 		{
+						// 			printf("     | %d ", stack_a->item);
+						// 			stack_a = stack_a->next;
+						// 		}
+						// 		else
+						// 			printf("     |   ");
+						// 		if (stack.b && stack_b != stack.b)
+						// 		{
+						// 			printf("%d", stack_b->item);
+						// 			stack_b = stack_b->next;
+						// 		}		
+						// 		printf("\n");
 						// 	}
-						// 	printf("%d\n", stack.a->item);
+						// 	if (stack.a)
+						// 		printf("     | %d ", stack.a->item);
+						// 	else
+						// 		printf("     |   ");
+						// 	if (stack.b)
+						// 		printf("%d", stack.b->item);
+						// 	printf("\n");
+						// 	printf("       - -\n\n");
 						// }
-						// printf("----\n");
-						// if (stack.b)
-						// {
-						// 	t_node * stack_b;
-						// 	stack_b = stack.b->next;
-						// 	while (stack_b != stack.b)
-						// 	{
-						// 	printf("%d\n", stack_b->item);
-						// 	stack_b = stack_b->next;
-						// 	}
-						// 	printf("%d\n", stack.b->item);
-						// }
-						// printf("----\n\n");
 
 	quick_sort(&stack);
+
+
+	
+							t_node * stack_a;
+						t_node * stack_b;
+						printf("\n   [result]\n");
+						if (stack.a || stack.b)
+						{
+							if (stack.a)
+								stack_a = stack.a->next;
+							if (stack.b)
+								stack_b = stack.b->next;
+							while ((stack.a && stack_a != stack.a) || (stack.b && stack_b != stack.b))
+							{
+								if (stack.a && stack_a != stack.a)		
+								{
+									printf("     | %d ", stack_a->item);
+									stack_a = stack_a->next;
+								}
+								else
+									printf("     |   ");
+								if (stack.b && stack_b != stack.b)
+								{
+									printf("%d", stack_b->item);
+									stack_b = stack_b->next;
+								}		
+								printf("\n");
+							}
+							if (stack.a)
+								printf("     | %d ", stack.a->item);
+							else
+								printf("     |   ");
+							if (stack.b)
+								printf("%d", stack.b->item);
+							printf("\n");
+							printf("       - -\n\n");
+						}
+
+
 	terminate(0, &stack, 0);
 }
