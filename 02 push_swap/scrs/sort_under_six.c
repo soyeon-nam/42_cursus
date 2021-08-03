@@ -66,6 +66,3 @@ void			sort_under_six(t_stack *stack, int cnt)
 	else
 		conquer_four_five(stack, cnt);
 }
-
-
-//52314

@@ -11,7 +11,7 @@ SRCS = ./scrs/a_to_b.c\
 		./scrs/do_multiple_op.c\
 		./scrs/do_op_app.c\
 		./scrs/do_op.c\
-		./scrs/find_pivot.c\
+		./scrs/set_pivot.c\
 		./scrs/ft_atoi_ps.c\
 		./scrs/ft_split.c\
 		./scrs/ft_strcmp.c\
@@ -33,7 +33,7 @@ clean :
 	$(RM) $(OBJS)
 
 fclean : clean
-	$(RM) $(NAME $(NAME2)
+	$(RM) $(NAME)
 
 re : fclean all
 

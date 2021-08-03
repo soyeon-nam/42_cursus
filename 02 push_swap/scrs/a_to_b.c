@@ -36,21 +36,24 @@ static void	conquer_a_three(t_stack *stack)
 void	conquer_a(t_stack *stack, int cnt)
 {
 	int		pivot;
-	int		push;
-	
+	int		i;
+
 	if (cnt >= 4)
 	{
 		pivot = find_pivot(stack->a , cnt, cnt - 3);
-		push = cnt - 3;
-		while (cnt--)
+		i = cnt;
+		while (i--)
 		{
 			if (stack->a->next->item <= pivot)
 				do_op("pb", &(stack->a), &(stack->b));
 			else
 				do_op("ra", &(stack->a), &(stack->b));
 		}
+		i = 3;
+		while (i--)
+			do_op("rra", &(stack->a), &(stack->b));
 		conquer_a(stack, 3);
-		conquer_b(stack, push);
+		conquer_b(stack, cnt - 3);
 	}
 	else if (cnt == 3)
 		conquer_a_three(stack);
@@ -59,76 +62,31 @@ void	conquer_a(t_stack *stack, int cnt)
 			do_op("sa", &(stack->a), &(stack->b));
 }
 
+
 void	a_to_b(t_stack *stack, int cnt)
 {
-	int			rewind;
-	int			pivot1;
-	int			pivot2;
+	t_sort_info		info;
+	int				rewind;			
 
 	if (cnt < 7)
 		return (conquer_a(stack, cnt));
-	rewind = cnt;
-	pivot1 = find_pivot(stack->a, cnt, cnt - cnt * 2 / 3);
-	pivot2 = find_pivot(stack->a, cnt, cnt - cnt / 3);
-
-	
-							// printf(">>> cnt = %d\n", cnt);
-							printf(">>> pivot = %d %d\n", pivot1, pivot2);
-
-
+	set_pivot(stack->a, &info, cnt);
 	while (cnt--)
 	{
-		if (stack->a->next->item <= pivot1)
+		if (stack->a->next->item <= info.pivot1)
 			do_op("pb", &(stack->a), &(stack->b));
-		else if (stack->a->next->item <= pivot2)
+		else if (stack->a->next->item <= info.pivot2)
 			do_multiple_op(stack, 2, "pb", "rb");
 		else
 			do_op("ra", &(stack->a), &(stack->b));
 	}
-	cnt = rewind;
-	rewind = cnt / 3;
+	rewind = info.large_cnt;
+
+	if (info.large_cnt < info.middle_cnt)
+		do_op("rrb", &(stack->a), &(stack->b));
 	while (rewind--)
 		do_op("rrr", &(stack->a), &(stack->b));
-	a_to_b(stack, cnt / 3);
-	b_to_a(stack, cnt / 3);
-	b_to_a(stack, cnt - (cnt * 2 / 3));
-
-
-
-						// t_node * stack_a;
-						// t_node * stack_b;
-						// t_node **a = &(stack->a);
-						// t_node **b = &(stack->b);
-						// printf("\n   [do_op]\n");
-						// if (*a || *b)
-						// {
-						// 	if (*a)
-						// 		stack_a = (*a)->next;
-						// 	if (*b)
-						// 		stack_b = (*b)->next;
-						// 	while ((*a && stack_a != *a) || (*b && stack_b != *b))
-						// 	{
-						// 		if (*a && stack_a != *a)		
-						// 		{
-						// 			printf("     | %d ", stack_a->item);
-						// 			stack_a = stack_a->next;
-						// 		}
-						// 		else
-						// 			printf("     |   ");
-						// 		if (*b && stack_b != *b)
-						// 		{
-						// 			printf("%d", stack_b->item);
-						// 			stack_b = stack_b->next;
-						// 		}		
-						// 		printf("\n");
-						// 	}
-						// 	if (*a)
-						// 		printf("     | %d ", (*a)->item);
-						// 	else
-						// 		printf("     |   ");
-						// 	if (*b)
-						// 		printf("%d", (*b)->item);
-						// 	printf("\n");
-						// 	printf("       - -\n\n");
-						// }
+	a_to_b(stack, info.large_cnt);
+	b_to_a(stack, info.middle_cnt);
+	b_to_a(stack, info.small_cnt);
 }

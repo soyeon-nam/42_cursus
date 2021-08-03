@@ -21,6 +21,16 @@ typedef struct		s_stack
 	struct s_node	*b;
 }					t_stack;
 
+typedef struct		s_sort_info
+{
+	int			pivot1;
+	int			pivot2;
+	int			small_cnt;
+	int			middle_cnt;
+	int			large_cnt;
+}					t_sort_info;
+
+
 void	push_swap(char ***arr);
 
 
@@ -36,7 +46,7 @@ void	conquer_a(t_stack *stack, int cnt);
 void	b_to_a(t_stack *stack, int cnt);
 void	conquer_b(t_stack *stack, int cnt);
 
-
+void	set_pivot(t_node *stack, t_sort_info *info, int cnt);
 int		find_pivot(t_node *stack, int cnt, int order);
 
 void	do_op(char *str, t_node **a, t_node **b);
