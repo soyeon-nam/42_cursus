@@ -57,7 +57,7 @@ static char	*slpit_word(char *start, int num)
 	return (ptr);
 }
 
-char					**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
 	char			**str;
 	char			*start;

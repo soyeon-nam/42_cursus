@@ -19,7 +19,7 @@ void	conquer_b(t_stack *stack, int cnt)
 
 	if (cnt >= 4)
 	{
-		pivot = find_pivot(stack->b , cnt, cnt - 3);
+		pivot = find_pivot(stack->b, cnt, cnt - 3);
 		i = cnt;
 		while (i--)
 		{
@@ -33,14 +33,12 @@ void	conquer_b(t_stack *stack, int cnt)
 		while (i--)
 			do_op("rrb", stack);
 		conquer_b(stack, cnt - 3);
+		return ;
 	}
-	else
-	{
-		i = cnt;
-		while (i--)
-			do_op("pa", stack);
-		conquer_a(stack, cnt);
-	}
+	i = cnt;
+	while (i--)
+		do_op("pa", stack);
+	conquer_a(stack, cnt);
 }
 
 void	b_to_a(t_stack *stack, int cnt)
@@ -54,8 +52,7 @@ void	b_to_a(t_stack *stack, int cnt)
 	while (cnt--)
 	{
 		if (stack->b->next->item <= info.pivot1)
-				do_op("rb", stack);
-
+			do_op("rb", stack);
 		else if (stack->b->next->item <= info.pivot2)
 			do_multiple_op(stack, 2, "pa", "ra");
 		else

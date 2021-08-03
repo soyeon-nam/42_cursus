@@ -43,7 +43,6 @@ void	set_pivot(t_node *stack, t_sort_info *info, int cnt)
 	info->large_cnt = cnt / 3;
 	info->middle_cnt = (cnt - info->large_cnt) / 2;
 	info->small_cnt = cnt - (info->middle_cnt + info->large_cnt);
-
 	info->pivot1 = find_pivot(stack, cnt, info->small_cnt);
 	info->pivot2 = find_pivot(stack, cnt, info->small_cnt + info->middle_cnt);
 }

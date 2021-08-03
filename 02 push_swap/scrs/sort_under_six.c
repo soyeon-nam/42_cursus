@@ -54,7 +54,7 @@ static void	conquer_four_five(t_stack *stack, int cnt)
 		do_op("pa", stack);
 }
 
-void			sort_under_six(t_stack *stack, int cnt)
+void	sort_under_six(t_stack *stack, int cnt)
 {
 	if (cnt == 2)
 	{

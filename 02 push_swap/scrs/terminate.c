@@ -23,7 +23,7 @@ void	**free_malloc_slpit(char **str)
 	return (0);
 }
 
-static void		free_stack(t_node *stack)
+static void	free_stack(t_node *stack)
 {
 	t_node		*curr;
 	t_node		*prev;
@@ -39,7 +39,7 @@ static void		free_stack(t_node *stack)
 	free(stack);
 }
 
-void		terminate(char	***split, t_stack *stack, bool is_error)
+void	terminate(char	***split, t_stack *stack, bool is_error)
 {
 	int		i;
 

@@ -12,7 +12,7 @@
 
 #include "../inc/push_swap.h"
 
-int				count_item(t_node *stack)
+int	count_item(t_node *stack)
 {
 	int			ret;
 	t_node		*curr_stack;
@@ -27,7 +27,7 @@ int				count_item(t_node *stack)
 	return (ret);
 }
 
-void			quick_sort(t_stack *stack)
+void	quick_sort(t_stack *stack)
 {
 	int			cnt;
 

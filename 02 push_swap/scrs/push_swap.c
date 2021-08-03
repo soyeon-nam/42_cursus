@@ -12,7 +12,7 @@
 
 #include "../inc/push_swap.h"
 
-void			push_swap(char ***arr)
+void	push_swap(char ***arr)
 {
 	t_stack		stack;
 	int			i;
