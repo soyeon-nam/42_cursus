@@ -24,11 +24,11 @@ static void	conquer_three(t_stack *stack)
 	if (top < third && third < second)
 		do_multiple_op(stack, 3, "ra", "sa", "rra");
 	else if (second < top && top < third)
-		do_op("sa", &(stack->a), &(stack->b));
+		do_op("sa", stack);
 	else if (second < third && third < top)
-		do_op("ra", &(stack->a), &(stack->b));
+		do_op("ra", stack);
 	else if (third < top && top < second)
-		do_op("rra", &(stack->a), &(stack->b));
+		do_op("rra", stack);
 	else if (third < second && second < top)
 		do_multiple_op(stack, 2, "sa", "rra");
 }
@@ -45,13 +45,13 @@ static void	conquer_four_five(t_stack *stack, int cnt)
 		if (stack->a->next->item < pivot)
 			do_multiple_op(stack, 2, "pb", "rb");
 		else if (stack->a->next->item == pivot)
-			do_op("pb", &(stack->a), &(stack->b));
+			do_op("pb", stack);
 		else
-			do_op("ra", &(stack->a), &(stack->b));
+			do_op("ra", stack);
 	}
 	conquer_three(stack);
 	while (push--)
-		do_op("pa", &(stack->a), &(stack->b));
+		do_op("pa", stack);
 }
 
 void			sort_under_six(t_stack *stack, int cnt)
@@ -59,7 +59,7 @@ void			sort_under_six(t_stack *stack, int cnt)
 	if (cnt == 2)
 	{
 		if (stack->a->next->item > stack->a->item)
-			do_op("sa", &(stack->a), &(stack->b));
+			do_op("sa", stack);
 	}
 	else if (cnt == 3)
 		conquer_three(stack);

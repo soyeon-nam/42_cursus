@@ -49,7 +49,7 @@ void	conquer_b(t_stack *stack, int cnt);
 void	set_pivot(t_node *stack, t_sort_info *info, int cnt);
 int		find_pivot(t_node *stack, int cnt, int order);
 
-void	do_op(char *str, t_node **a, t_node **b);
+void	do_op(char *str, t_stack *stack);
 void	do_multiple_op(t_stack *stack, int num, ...);
 bool	op_r(t_node **head);
 

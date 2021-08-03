@@ -47,28 +47,28 @@ static bool	op_p(t_node **stack1, t_node **stack2)
 	return (1);
 }
 
-void	do_op(char *str, t_node **a, t_node **b)
+void	do_op(char *str, t_stack *stack)
 {
-	if (!ft_strcmp(str, "sa") && op_s(*a))
+	if (!ft_strcmp(str, "sa") && op_s(stack->a))
 		write(1, "sa\n", 3);
-	else if (!ft_strcmp(str, "sb") && op_s(*b))
+	else if (!ft_strcmp(str, "sb") && op_s(stack->b))
 		write(1, "sb\n", 3);
-	else if (!ft_strcmp(str, "ss") && op_s(*a) && op_s(*b))
+	else if (!ft_strcmp(str, "ss") && op_s(stack->a) && op_s(stack->b))
 		write(1, "ss\n", 3);
-	else if (!ft_strcmp(str, "pa") && op_p(a, b))
+	else if (!ft_strcmp(str, "pa") && op_p(&(stack->a), &(stack->b)))
 		write(1, "pa\n", 3);
-	else if (!ft_strcmp(str, "pb") && op_p(b, a))
+	else if (!ft_strcmp(str, "pb") && op_p(&(stack->b), &(stack->a)))
 		write(1, "pb\n", 3);
-	else if (!ft_strcmp(str, "ra") && op_r(a))
+	else if (!ft_strcmp(str, "ra") && op_r(&(stack->a)))
 		write(1, "ra\n", 3);
-	else if (!ft_strcmp(str, "rb") && op_r(b))
+	else if (!ft_strcmp(str, "rb") && op_r(&(stack->b)))
 		write(1, "rb\n", 3);
-	else if (!ft_strcmp(str, "rr") && op_r(a) && op_r(b))
+	else if (!ft_strcmp(str, "rr") && op_r(&(stack->a)) && op_r(&(stack->b)))
 		write(1, "rr\n", 3);
-	else if (!ft_strcmp(str, "rra") && op_rr(a))
+	else if (!ft_strcmp(str, "rra") && op_rr(&(stack->a)))
 		write(1, "rra\n", 4);
-	else if (!ft_strcmp(str, "rrb") && op_rr(b))
+	else if (!ft_strcmp(str, "rrb") && op_rr(&(stack->b)))
 		write(1, "rrb\n", 4);
-	else if (!ft_strcmp(str, "rrr") && op_rr(a) && op_rr(b))
+	else if (!ft_strcmp(str, "rrr") && op_rr(&(stack->a)) && op_rr(&(stack->b)))
 		write(1, "rrr\n", 4);
 }

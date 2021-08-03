@@ -12,27 +12,6 @@
 
 #include "../inc/push_swap.h"
 
-// static void	conquer_b_three(t_stack *stack)
-// {
-// 	int		top;
-// 	int		second;
-// 	int		third;
-
-// 	top = stack->b->next->item;
-// 	second = stack->b->next->next->item;
-// 	third = stack->b->next->next->next->item;
-// 	if (top < second && second < third)
-// 		do_multiple_op(stack, 5, "sb", "rb", "sb", "rrb", "sb");
-// 	else if (top < third && third < second)
-// 		do_multiple_op(stack, 4, "sb", "rb", "sb", "rrb");
-// 	else if (second < top && top < third)
-// 		do_multiple_op(stack, 4, "rb", "sb", "rrb", "sb");
-// 	else if (second < third && third < top)
-// 		do_multiple_op(stack, 3, "rb", "sb", "rrb");
-// 	else if (third < top && top < second)
-// 		do_op("sb", &(stack->a), &(stack->b));
-// }
-
 void	conquer_b(t_stack *stack, int cnt)
 {
 	int		pivot;
@@ -45,22 +24,22 @@ void	conquer_b(t_stack *stack, int cnt)
 		while (i--)
 		{
 			if (stack->b->next->item > pivot)
-				do_op("pa", &(stack->a), &(stack->b));
+				do_op("pa", stack);
 			else
-				do_op("rb", &(stack->a), &(stack->b));
+				do_op("rb", stack);
 		}
 		conquer_a(stack, 3);
 		i = cnt - 3;
 		while (i--)
-			do_op("rrb", &(stack->a), &(stack->b));
+			do_op("rrb", stack);
 		conquer_b(stack, cnt - 3);
 	}
 	else
 	{
 		i = cnt;
 		while (i--)
-			do_op("pa", &(stack->a), &(stack->b));
-		conquer_a(stack, cnt);		
+			do_op("pa", stack);
+		conquer_a(stack, cnt);
 	}
 }
 
@@ -75,19 +54,19 @@ void	b_to_a(t_stack *stack, int cnt)
 	while (cnt--)
 	{
 		if (stack->b->next->item <= info.pivot1)
-				do_op("rb", &(stack->a), &(stack->b));
+				do_op("rb", stack);
 
 		else if (stack->b->next->item <= info.pivot2)
 			do_multiple_op(stack, 2, "pa", "ra");
 		else
-			do_op("pa", &(stack->a), &(stack->b));
+			do_op("pa", stack);
 	}
 	a_to_b(stack, info.large_cnt);
 	rewind = info.middle_cnt;
 	if (info.middle_cnt < info.small_cnt)
-		do_op("rrb", &(stack->a), &(stack->b));
+		do_op("rrb", stack);
 	while (rewind--)
-		do_op("rrr", &(stack->a), &(stack->b));
+		do_op("rrr", stack);
 	a_to_b(stack, info.middle_cnt);
 	b_to_a(stack, info.small_cnt);
 }

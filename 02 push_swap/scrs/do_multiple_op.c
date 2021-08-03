@@ -21,6 +21,6 @@ void	do_multiple_op(t_stack *stack, int num, ...)
 	while (num--)
 	{
 		op = va_arg(ap, char *);
-		do_op(op, &(stack->a), &(stack->b));
+		do_op(op, stack);
 	}
 }
