@@ -21,6 +21,7 @@ SRCS = ./scrs/a_to_b.c\
 		./scrs/quick_sort.c\
 		./scrs/sort_under_six.c\
 		./scrs/terminate.c\
+		./scrs/is_ft.c\
 
 OBJS = $(SRCS:.c=.o)
 

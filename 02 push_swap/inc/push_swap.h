@@ -1,7 +1,6 @@
 #include <stdio.h>
 
 
-
 #include <unistd.h>
 #include <limits.h>
 #include <stdlib.h>
@@ -30,9 +29,7 @@ typedef struct		s_sort_info
 	int			large_cnt;
 }					t_sort_info;
 
-
 void	push_swap(char ***arr);
-
 
 void	parse(char ***arr, t_stack *stack);
 
@@ -56,10 +53,12 @@ bool	op_r(t_node **head);
 void	pop_node(t_node **stack);
 void	top_node(t_node **stack, t_node **node);
 
-
 int		ft_atoi_ps(const char *str, char ***arr, t_stack *stack);
 char	**ft_split(char const *s, char c);
 int		ft_strcmp(char *s1, char *s2);
 
 void	terminate(char	***split, t_stack *stack, bool is_error);
 void	**free_malloc_slpit(char **str);
+
+int	is_acsend(t_node *stack, int cnt);
+int	is_decsend(t_node *stack, int cnt);
