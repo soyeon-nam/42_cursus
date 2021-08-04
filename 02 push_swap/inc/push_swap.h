@@ -16,20 +16,23 @@
 #include <stdbool.h>
 #include <stdarg.h>
 
-typedef struct		s_node
+#ifndef PUSH_SWAP_H
+#define PUSH_SWAP_H
+
+typedef struct s_node
 {
 	int				item;
 	struct s_node	*prev;
 	struct s_node	*next;	
 }					t_node;
 
-typedef struct		s_stack
+typedef struct s_stack
 {
 	struct s_node	*a;
 	struct s_node	*b;
 }					t_stack;
 
-typedef struct		s_sort_info
+typedef struct s_sort_info
 {
 	int			pivot1;
 	int			pivot2;
@@ -38,7 +41,7 @@ typedef struct		s_sort_info
 	int			large_cnt;
 }					t_sort_info;
 
-typedef struct		s_rewind
+typedef struct s_rewind
 {
 	int		rra;
 	int		rrb;
@@ -96,3 +99,5 @@ int		ft_atoi_ps(const char *str, char ***arr, t_stack *stack);
 char	**ft_split(char const *s, char c);
 /* -------- ft_strcmp.c */
 int		ft_strcmp(char *s1, char *s2);
+
+#endif

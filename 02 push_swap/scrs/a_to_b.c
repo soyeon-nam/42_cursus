@@ -46,8 +46,8 @@ static void	conquer_a_three(t_stack *stack)
 
 static void	conquer_a_four(t_stack *stack)
 {
-	t_node **a;
-	t_node **b;
+	t_node		**a;
+	t_node		**b;
 
 	a = &(stack->a->next);
 	b = &(stack->b->next);
