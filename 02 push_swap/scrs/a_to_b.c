@@ -44,12 +44,37 @@ static void	conquer_a_three(t_stack *stack)
 		do_multiple_op(stack, 5, "sa", "ra", "sa", "rra", "sa");
 }
 
+static void	conquer_a_four(t_stack *stack)
+{
+	t_node **a = &(stack->a->next);
+	t_node **b = &(stack->b->next);
+
+	if ((*a)->item > (*a)->next->item)
+		do_op("sa", stack);
+	do_op("pb", stack);
+	if ((*a)->item > (*a)->next->item)
+		do_op("sa", stack);
+	do_op("pb", stack);
+	if ((*a)->item > (*a)->next->item && (*b)->item < (*b)->next->item)
+		do_op("ss", stack);
+	else if ((*a)->item > (*a)->next->item)
+		do_op("sa", stack);
+	else if ((*b)->item < (*b)->next->item)
+		do_op("sb", stack);
+	do_op("pa", stack);
+	if ((*a)->item > (*a)->next->item)
+		do_op("sa", stack);
+	do_op("pa", stack);
+	if ((*a)->item > (*a)->next->item)
+		do_op("sa", stack);
+}
+
 void	conquer_a(t_stack *stack, int cnt)
 {
 	int		pivot;
 	int		i;
 
-	if (cnt >= 4)
+	if (cnt > 4)
 	{
 		pivot = find_pivot(stack->a, cnt, cnt - 3);
 		i = cnt;
@@ -66,6 +91,8 @@ void	conquer_a(t_stack *stack, int cnt)
 		conquer_a(stack, 3);
 		conquer_b(stack, cnt - 3);
 	}
+	else if (cnt == 4)
+		conquer_a_four(stack);
 	else if (cnt == 3)
 		conquer_a_three(stack);
 	else if (cnt == 2)
@@ -86,44 +113,3 @@ void	a_to_b(t_stack *stack, int cnt)
 	b_to_a(stack, info.middle_cnt);
 	b_to_a(stack, info.small_cnt);
 }
-
-
-
-
-
-// 						// t_node * stack_a;
-// 						// t_node * stack_b;
-// 						// t_node ** a = &(stack->a);
-// 						// t_node ** b = &(stack->b);
-// 						// printf("\n   [a_to_b]\n\n");
-// 						// if (*a || *b)
-// 						// {
-// 						// 	if (*a)
-// 						// 		stack_a = (*a)->next;
-// 						// 	if (*b)
-// 						// 		stack_b = (*b)->next;
-// 						// 	while ((*a && stack_a != *a) || (*b && stack_b != *b))
-// 						// 	{
-// 						// 		if (*a && stack_a != *a)		
-// 						// 		{
-// 						// 			printf("     | %d ", stack_a->item);
-// 						// 			stack_a = stack_a->next;
-// 						// 		}
-// 						// 		else
-// 						// 			printf("     |   ");
-// 						// 		if (*b && stack_b != *b)
-// 						// 		{
-// 						// 			printf("%d", stack_b->item);
-// 						// 			stack_b = stack_b->next;
-// 						// 		}		
-// 						// 		printf("\n");
-// 						// 	}
-// 						// 	if (*a)
-// 						// 		printf("     | %d ", (*a)->item);
-// 						// 	else
-// 						// 		printf("     |   ");
-// 						// 	if (*b)
-// 						// 		printf("%d", (*b)->item);
-// 						// 	printf("\n");
-// 						// 	printf("       -    -\n\n");
-// 						// }

@@ -3,6 +3,7 @@
 		"push_swap.h": "c",
 		"algorithm": "c",
 		"random": "c",
-		"bit": "c"
+		"bit": "c",
+		"__node_handle": "c"
 	}
 }
