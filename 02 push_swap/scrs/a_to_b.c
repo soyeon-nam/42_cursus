@@ -12,6 +12,17 @@
 
 #include "../inc/push_swap.h"
 
+static int	is_acsend(t_node *stack, int cnt)
+{
+	while (cnt--)
+	{
+		if (stack->next->item > stack->next->next->item)
+			return (0);
+		stack = stack->next;
+	}
+	return (1);
+}
+
 static void	conquer_a_three(t_stack *stack)
 {
 	int		top;
@@ -62,93 +73,19 @@ void	conquer_a(t_stack *stack, int cnt)
 			do_op("sa", stack);
 }
 
-// void	a_to_b(t_stack *stack, int cnt)
-// {
-// 	t_sort_info		info;
-// 	int				rewind;			
-
-// 	if (cnt < 7)
-// 		return (conquer_a(stack, cnt));
-// 	set_pivot(stack->a, &info, cnt);
-// 	while (cnt--)
-// 	{
-// 		if (stack->a->next->item <= info.pivot1)
-// 			do_op("pb", stack);
-// 		else if (stack->a->next->item <= info.pivot2)
-// 			do_multiple_op(stack, 2, "pb", "rb");
-// 		else
-// 			do_op("ra", stack);
-// 	}
-// 	rewind = info.large_cnt;
-// 	if (info.large_cnt < info.middle_cnt)
-// 		do_op("rrb", stack);
-// 	while (rewind--)
-// 		do_op("rrr", stack);
-// 	a_to_b(stack, info.large_cnt);
-// 	b_to_a(stack, info.middle_cnt);
-// 	b_to_a(stack, info.small_cnt);
-// }
-
-
-static int	is_divided_a(t_node *stack, int cnt, int pivot)
-{
-	int			ret;
-
-	ret = 0;
-	while (cnt--)
-		stack = stack->next;
-	while (1)
-	{
-		if (stack->item <= pivot)
-			break;
-		stack = stack->prev;
-		++ret;
-	}
-	return (ret);
-}
-
-
-
 void	a_to_b(t_stack *stack, int cnt)
 {
 	t_sort_info		info;
-	int				rewind;			
-	int				divided;
 
+	if (is_acsend(stack->a, cnt))
+		return ;
 	if (cnt < 7)
-	{
-		if (!is_acsend(stack->a, cnt))
-			return (conquer_a(stack, cnt));
-		return ;	
-	}
-	set_pivot(stack->a, &info, cnt);
-	divided = is_divided_a(stack->a, cnt, info.pivot2);
-	while (cnt-- - divided)
-	{
-		if (stack->a->next->item <= info.pivot1)
-			do_op("pb", stack);
-		else if (stack->a->next->item <= info.pivot2)
-			do_multiple_op(stack, 2, "pb", "rb");
-		else
-			do_op("ra", stack);
-	}
-	rewind = info.middle_cnt - info.large_cnt + divided;
-	while (rewind--)
-		do_op("rrb", stack);
-	rewind = info.large_cnt - divided;
-	while (rewind--)
-		do_op("rrr", stack);
+		return (conquer_a(stack, cnt));
+	divide_a(stack, cnt, &info);
 	a_to_b(stack, info.large_cnt);
 	b_to_a(stack, info.middle_cnt);
 	b_to_a(stack, info.small_cnt);
 }
-
-
-
-
-
-
-
 
 
 
@@ -190,47 +127,3 @@ void	a_to_b(t_stack *stack, int cnt)
 // 						// 	printf("\n");
 // 						// 	printf("       -    -\n\n");
 // 						// }
-
-
-// void	a_to_b(t_stack *stack, int cnt)
-// {
-// 	t_sort_info		info;
-// 	int				rewind;			
-// 	int				divided;
-
-// 	if (cnt < 7)
-// 	{
-// 		if (!is_acsend(stack->a, cnt))
-// 			return (conquer_a(stack, cnt));
-// 		return ;	
-// 	}
-// 	set_pivot(stack->a, &info, cnt);
-// 			divided = is_divided(stack->a, cnt, info.pivot2);
-// 	while (cnt-- - divided)
-// 	{
-// 		if ((cnt - divided) == 1 )
-// 			if (stack->a->next->item > info.pivot2)
-// 			{
-// 				divided += 1;
-// 				if (stack->a->next->next->item <= info.pivot1)
-// 					do_multiple_op(stack, 2, "sa", "pb");
-// 				else if (stack->a->next->next->item <= info.pivot2)
-// 					do_multiple_op(stack, 3, "sa", "pb", "rb");
-// 				break ;
-// 			}
-// 		if (stack->a->next->item <= info.pivot1)
-// 			do_op("pb", stack);
-// 		else if (stack->a->next->item <= info.pivot2)
-// 			do_multiple_op(stack, 2, "pb", "rb");
-// 		else
-// 			do_op("ra", stack);
-// 	}
-// 	rewind = info.middle_cnt - info.large_cnt + divided;
-// 	while (rewind--)
-// 		do_op("rrb", stack);
-// 	rewind = info.large_cnt - divided;
-// 	while (rewind--)
-// 		do_op("rrr", stack);
-// 	b_to_a(stack, info.middle_cnt);
-// 	b_to_a(stack, info.small_cnt);
-// }

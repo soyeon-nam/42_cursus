@@ -2,6 +2,7 @@
 	"files.associations": {
 		"push_swap.h": "c",
 		"algorithm": "c",
-		"random": "c"
+		"random": "c",
+		"bit": "c"
 	}
 }

@@ -21,7 +21,8 @@ SRCS = ./scrs/a_to_b.c\
 		./scrs/quick_sort.c\
 		./scrs/sort_under_six.c\
 		./scrs/terminate.c\
-		./scrs/is_ft.c\
+		./scrs/divide_a.c\
+		./scrs/divide_b.c\
 
 OBJS = $(SRCS:.c=.o)
 
@@ -39,3 +40,6 @@ fclean : clean
 re : fclean all
 
 .PHONY : all clean fclean re
+
+
+

@@ -12,7 +12,7 @@
 
 #include "../inc/push_swap.h"
 
-int	count_item(t_node *stack)
+static int	count_item(t_node *stack)
 {
 	int			ret;
 	t_node		*curr_stack;
