@@ -1,23 +1,11 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: snam <snam@student.42seoul.kr>             +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/05 03:06:31 by snam              #+#    #+#             */
-/*   Updated: 2021/08/05 03:06:33 by snam             ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef PUSH_SWAP_H
- #define PUSH_SWAP_H
+# define PUSH_SWAP_H
 
- #include <unistd.h>
- #include <limits.h>
- #include <stdlib.h>
- #include <stdbool.h>
- #include <stdarg.h>
+# include	<unistd.h>
+# include <limits.h>
+# include <stdlib.h>
+# include <stdbool.h>
+# include <stdarg.h>
 
 typedef struct s_node
 {
