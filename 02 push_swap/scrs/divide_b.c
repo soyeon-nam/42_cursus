@@ -10,7 +10,7 @@ static int	is_divided_b(t_node *stack, int cnt, int pivot)
 	while (1)
 	{
 		if (stack->item >= pivot)
-			break;
+			break ;
 		stack = stack->prev;
 		++ret;
 	}

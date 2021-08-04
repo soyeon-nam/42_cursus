@@ -1,16 +1,5 @@
 #include "../inc/push_swap.h"
 
-static void	rewind_a(t_stack *stack, int rra, int rrb)
-{
-	int		i;
-
-	i = rrb - rra;
-	while (i--)
-		do_op("rrb", stack);
-	while (rra--)
-		do_op("rrr", stack);
-}
-
 static int	is_divided_a(t_node *stack, int cnt, int pivot)
 {
 	int			ret;
@@ -21,7 +10,7 @@ static int	is_divided_a(t_node *stack, int cnt, int pivot)
 	while (1)
 	{
 		if (stack->item <= pivot)
-			break;
+			break ;
 		stack = stack->prev;
 		++ret;
 	}
@@ -49,7 +38,7 @@ void	divide_a(t_stack *stack, int cnt, t_sort_info *info)
 		else if ((stack->a->next->item > info->pivot1) && ++rrb)
 			do_multiple_op(stack, 2, "pb", "rb");
 		else
-				do_op("pb", stack);
+			do_op("pb", stack);
 	}
-	rewind_a(stack, rra, rrb);
+	rewind_stack(stack, rra, rrb);
 }

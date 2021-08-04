@@ -1,6 +1,3 @@
-#include <stdio.h>
-
-
 #include <unistd.h>
 #include <limits.h>
 #include <stdlib.h>
@@ -72,6 +69,7 @@ bool	op_r(t_node **head);
 /* -------- do_op_app.c */
 void	pop_node(t_node **stack);
 void	top_node(t_node **stack, t_node **node);
+void	rewind_stack(t_stack *stack, int rra, int rrb);
 
 /* -------- do_multiple_op.c */
 void	do_multiple_op(t_stack *stack, int num, ...);

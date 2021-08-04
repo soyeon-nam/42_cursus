@@ -52,31 +52,6 @@ void	conquer_b(t_stack *stack, int cnt)
 	conquer_a(stack, cnt);
 }
 
-static void	rewind_b(t_stack *stack, t_rewind *rewind)
-{
-	int		rrr;
-	int		rr;
-
-	if (rewind->rrb >= rewind->rra)
-	{
-		rrr = rewind->rra;
-		while (rrr--)
-			do_op("rrr", stack);
-		rr = rewind->rrb - rewind->rra;
-		while (rr--)
-			do_op("rrb", stack);
-	}
-	else
-	{
-		rrr = rewind->rrb;
-		while (rrr--)
-			do_op("rrr", stack);
-		rr = rewind->rra - rewind->rrb;
-		while (rr--)
-			do_op("rra", stack);
-	}
-}
-
 void	b_to_a(t_stack *stack, int cnt)
 {
 	t_sort_info		info;
@@ -92,7 +67,7 @@ void	b_to_a(t_stack *stack, int cnt)
 	}
 	divide_b(stack, cnt, &info, &rewind);
 	a_to_b(stack, info.large_cnt);
-	rewind_b(stack, &rewind);
+	rewind_stack(stack, rewind.rra, rewind.rrb);
 	a_to_b(stack, info.middle_cnt);
 	b_to_a(stack, info.small_cnt);
 }

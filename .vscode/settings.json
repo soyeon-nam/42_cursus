@@ -4,6 +4,7 @@
 		"algorithm": "c",
 		"random": "c",
 		"bit": "c",
-		"__node_handle": "c"
+		"__node_handle": "c",
+		"cstdio": "c"
 	}
 }

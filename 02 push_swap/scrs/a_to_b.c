@@ -85,9 +85,7 @@ void	conquer_a(t_stack *stack, int cnt)
 			else
 				do_op("ra", stack);
 		}
-		i = 3;
-		while (i--)
-			do_op("rra", stack);
+		rewind_stack(stack, 3, 0);
 		conquer_a(stack, 3);
 		conquer_b(stack, cnt - 3);
 	}

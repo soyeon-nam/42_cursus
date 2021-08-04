@@ -41,3 +41,28 @@ void	top_node(t_node **stack, t_node **node)
 		(*node)->next->prev = (*node);
 	}
 }
+
+void	rewind_stack(t_stack *stack, int rra, int rrb)
+{
+	int		rrr;
+	int		rr;
+
+	if (rrb >= rra)
+	{
+		rrr = rra;
+		while (rrr--)
+			do_op("rrr", stack);
+		rr = rrb - rra;
+		while (rr--)
+			do_op("rrb", stack);
+	}
+	else
+	{
+		rrr = rrb;
+		while (rrr--)
+			do_op("rrr", stack);
+		rr = rra - rrb;
+		while (rr--)
+			do_op("rra", stack);
+	}
+}
