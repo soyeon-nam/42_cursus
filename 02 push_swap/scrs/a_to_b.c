@@ -6,7 +6,7 @@
 /*   By: snam <snam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/29 03:58:27 by snam              #+#    #+#             */
-/*   Updated: 2021/07/29 03:58:30 by snam             ###   ########.fr       */
+/*   Updated: 2021/08/05 03:03:39 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,11 @@ static void	conquer_a_three(t_stack *stack)
 
 static void	conquer_a_four(t_stack *stack)
 {
-	t_node **a = &(stack->a->next);
-	t_node **b = &(stack->b->next);
+	t_node **a;
+	t_node **b;
 
+	a = &(stack->a->next);
+	b = &(stack->b->next);
 	if ((*a)->item > (*a)->next->item)
 		do_op("sa", stack);
 	do_op("pb", stack);
