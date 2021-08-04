@@ -10,15 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #ifndef PUSH_SWAP_H
  #define PUSH_SWAP_H
- 
-#include <unistd.h>
-#include <limits.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include <stdarg.h>
+
+ #include <unistd.h>
+ #include <limits.h>
+ #include <stdlib.h>
+ #include <stdbool.h>
+ #include <stdarg.h>
 
 typedef struct s_node
 {
