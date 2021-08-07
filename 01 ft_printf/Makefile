@@ -17,21 +17,25 @@ CFLAGS = -Wall -Wextra -Werror
 AR = ar rc
 RM = rm -f
 
-SRCS = ft_printf.c \
-print_functions.c \
-update_nbr.c \
-state_machine.c \
-process_tocken.c\
-create_spec.c\
-create_x.c \
-create_u.c \
-create_s.c \
-create_di.c \
-create_cppc.c \
-set_print_numbers.c\
-count_digit.c \
-print_base.c\
-reset_tag.c
+INC = ./inc
+
+SRCS_DIR	= ./src/
+SRCS_LST = ft_printf.c \
+			print_functions.c \
+			update_nbr.c \
+			state_machine.c \
+			process_tocken.c\
+			create_spec.c\
+			create_x.c \
+			create_u.c \
+			create_s.c \
+			create_di.c \
+			create_cppc.c \
+			set_print_numbers.c\
+			count_digit.c \
+			print_base.c\
+			reset_tag.c
+SRCS = $(addprefix $(SRCS_DIR), $(SRCS_LST))
 
 OBJS = $(SRCS:.c=.o)
 
@@ -40,8 +44,8 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	$(AR) $(NAME) $(OBJS)
 
-%.o: %.c $(HEADER)
-	$(CC) $(CFLAGS) -c  $< -o $@
+%.o: %.c
+	$(CC) $(CFLAGS) -I $(INC) -c  $< -o $@
 
 clean:
 	$(RM) $(OBJS)
