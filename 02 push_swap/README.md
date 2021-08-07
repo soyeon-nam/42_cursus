@@ -1,4 +1,3 @@
-<br/>
 # Summary
 
 |     | push_swap | 
