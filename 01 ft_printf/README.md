@@ -8,7 +8,7 @@
 | What I learned | **Variadic Arguement, Parsing, State machine** |
 | Description | [Notion Link](https://www.notion.so/ft_printf-411e237c2e2e4ee79e583d5804ab368f) |
 | Code Review | [Github Link]() |
-| Subject | [PDF Link](https://github.com/soyeon-nam/42_cursus/blob/main/02%20push_swap/en.subject.pdf) |
+| Subject | [PDF Link](https://github.com/soyeon-nam/42_cursus/blob/main/01%20ft_printf/en.subject.pdf) |
 
 <br/>
 
