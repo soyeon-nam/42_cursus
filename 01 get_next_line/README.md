@@ -2,7 +2,7 @@
 
 |     | get_next_line | 
 | --- | --------- |
-| Evaluated | 2021-07-22 |
+| Evaluated | 2021-06-03 |
 | Score | [![snam's 42 get_next_line Score](https://badge42.herokuapp.com/api/project/snam/get_next_line)](https://github.com/JaeSeoKim/badge42) |
 | Stack | C |
 | What I learned | **Static Variable, File I/O, RAM, Stack Overflow** |
