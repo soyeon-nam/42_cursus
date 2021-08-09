@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-static int		count_len(char *s, unsigned int start, size_t len)
+static int	count_len(char *s, unsigned int start, size_t len)
 {
 	int		ret;
 
@@ -24,7 +24,7 @@ static int		count_len(char *s, unsigned int start, size_t len)
 	return (ret);
 }
 
-char			*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char			*str;
 	unsigned int	i;

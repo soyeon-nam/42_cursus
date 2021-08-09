@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-static int		is_set(char *set, char c)
+static int	is_set(char *set, char c)
 {
 	while (*set)
 	{
@@ -23,14 +23,14 @@ static int		is_set(char *set, char c)
 	return (0);
 }
 
-static char		*trim_front(char *s1, char *set)
+static char	*trim_front(char *s1, char *set)
 {
 	while (is_set(set, *s1))
 		++s1;
 	return (s1);
 }
 
-static char		*trim_back(char *s1, char *set)
+static char	*trim_back(char *s1, char *set)
 {
 	unsigned int	i;
 	char			*ret;
@@ -45,7 +45,7 @@ static char		*trim_back(char *s1, char *set)
 	return (ret);
 }
 
-char			*ft_strtrim(char const *s1, char const *set)
+char	*ft_strtrim(char const *s1, char const *set)
 {
 	char	*ret;
 	char	*start;

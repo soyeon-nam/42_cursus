@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: snam <snam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/08 15:01:59 by snam              #+#    #+#             */
-/*   Updated: 2021/05/20 22:19:14 by snam             ###   ########.fr       */
+/*   Created: 2021/08/01 04:30:17 by snam              #+#    #+#             */
+/*   Updated: 2021/08/05 03:04:43 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-char	*ft_strrchr(const char *str, int c)
+int	ft_strcmp(char *s1, char *s2)
 {
 	int		i;
 
-	i = ft_strlen(str);
-	while (i >= 0)
-	{
-		if ((str[i]) == (char)c)
-			return ((char *)str + i);
-		--i;
-	}
-	return (0);
+	i = 0;
+	while (s1[i] && (s1[i] == s2[i]))
+		i++;
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }

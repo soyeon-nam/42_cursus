@@ -18,7 +18,7 @@ void	*ft_calloc(size_t count, size_t size)
 	unsigned int	len_mal;
 
 	len_mal = size * count;
-	ret = (void*)malloc(len_mal);
+	ret = (void *)malloc(len_mal);
 	if (!ret)
 		return (0);
 	ft_bzero(ret, len_mal);

@@ -11,33 +11,46 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
-char	*ft_itoa(int n)
+static void	stack_number(char *ret, long num, int len, int sign)
 {
-	char	*ret;
-	int		len_ret;
-	int		sign;
-	long	num;
-
-	len_ret = 1;
-	num = n;
-	n = (n >= 0) ? num : -num;
-	while (n /= 10)
-		++len_ret;
-	sign = (num >= 0) ? 0 : 1;
-	if (!(ret = (char *)malloc(sizeof(char) * (len_ret + sign + 1))))
-		return (0);
 	if (num < 0)
 	{
 		ret[0] = '-';
 		num *= -1;
 	}
-	ret[len_ret + sign] = 0;
-	while (--len_ret >= 0)
+	ret[len + sign] = 0;
+	while (--len >= 0)
 	{
-		ret[len_ret + sign] = (num % 10) + '0';
+		ret[len + sign] = (num % 10) + '0';
 		num /= 10;
 	}
+}
+
+char	*ft_itoa(int n)
+{
+	char	*ret;
+	int		len;
+	int		sign;
+	long	num;
+
+	len = 1;
+	num = n;
+	sign = 0;
+	if (n < 0)
+	{
+		n *= -1;
+		sign = 1;
+	}
+	n /= 10;
+	while (n != 0)
+	{
+		n /= 10;
+		++len;
+	}
+	ret = (char *)malloc(sizeof(char) * (len + sign + 1));
+	if (!ret)
+		return (0);
+	stack_number(ret, num, len, sign);
 	return (ret);
 }
