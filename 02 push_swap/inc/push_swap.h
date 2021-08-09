@@ -6,6 +6,7 @@
 # include <stdlib.h>
 # include <stdbool.h>
 # include <stdarg.h>
+# include "../libft/libft.h"
 
 typedef struct s_node
 {
@@ -83,9 +84,9 @@ void	**free_malloc_slpit(char **str);
 
 /* -------- ft_atoi_ps.c */
 int		ft_atoi_ps(const char *str, char ***arr, t_stack *stack);
-/* -------- ft_split.c */
-char	**ft_split(char const *s, char c);
-/* -------- ft_strcmp.c */
-int		ft_strcmp(char *s1, char *s2);
+// /* -------- ft_split.c */
+// char	**ft_split(char const *s, char c);
+// /* -------- ft_strcmp.c */
+// int		ft_strcmp(char *s1, char *s2);
 
 #endif

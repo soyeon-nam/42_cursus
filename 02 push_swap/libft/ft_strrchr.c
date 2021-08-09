@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: snam <snam@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/01 04:30:17 by snam              #+#    #+#             */
-/*   Updated: 2021/08/05 03:04:43 by snam             ###   ########.fr       */
+/*   Created: 2021/05/08 15:01:59 by snam              #+#    #+#             */
+/*   Updated: 2021/05/20 22:19:14 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/push_swap.h"
+#include "libft.h"
 
-int	ft_strcmp(char *s1, char *s2)
+char	*ft_strrchr(const char *str, int c)
 {
 	int		i;
 
-	i = 0;
-	while (s1[i] && (s1[i] == s2[i]))
-		i++;
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+	i = ft_strlen(str);
+	while (i >= 0)
+	{
+		if ((str[i]) == (char)c)
+			return ((char *)str + i);
+		--i;
+	}
+	return (0);
 }

@@ -17,6 +17,8 @@ static int	count_item(t_node *stack)
 	int			ret;
 	t_node		*curr_stack;
 
+	if (!stack)
+		return (0);
 	ret = 1;
 	curr_stack = stack->next;
 	while (curr_stack != stack)
@@ -36,4 +38,6 @@ void	quick_sort(t_stack *stack)
 		a_to_b(stack, cnt);
 	else if (cnt >= 2)
 		sort_under_six(stack, cnt);
+	else if (cnt == 0)
+		terminate(0, stack, 1);
 }

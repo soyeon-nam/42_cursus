@@ -14,9 +14,15 @@ NAME = push_swap
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
-RM = rm -f
-
 HEADERS_DIRECTORY = ./inc/
+
+AR		=	ar
+ARFLAGS	=	-rcs
+RM		=	rm -rf
+
+LIB_DIR		=	./libft/
+LIB_NAME	=	libft.a
+LIBS		=	$(addprefix $(LIB_DIR), $(LIB_NAME))
 
 SRCS = ./scrs/a_to_b.c\
 		./scrs/b_to_a.c\
@@ -25,8 +31,6 @@ SRCS = ./scrs/a_to_b.c\
 		./scrs/do_op.c\
 		./scrs/set_pivot.c\
 		./scrs/ft_atoi_ps.c\
-		./scrs/ft_split.c\
-		./scrs/ft_strcmp.c\
 		./scrs/main.c\
 		./scrs/parse.c\
 		./scrs/push_swap.c\
@@ -35,23 +39,27 @@ SRCS = ./scrs/a_to_b.c\
 		./scrs/terminate.c\
 		./scrs/divide_a.c\
 		./scrs/divide_b.c\
+		# ./scrs/ft_split.c\
+		# ./scrs/ft_strcmp.c\
 
 OBJS = $(SRCS:.c=.o)
 
-all: $(NAME)
+all: $(LIB_NAME) $(NAME)
 
-$(NAME): $(SRCS)
+$(LIB_NAME) :
+	make -C $(LIB_DIR)
+
+$(NAME): $(SRCS) $(LIBS)
 	$(CC) $(CFLAGS) $^ -o $@
 
 clean :
+	make clean -C $(LIB_DIR)
 	$(RM) $(OBJS)
 
 fclean : clean
+	make fclean -C $(LIB_DIR)
 	$(RM) $(NAME)
 
 re : fclean all
 
 .PHONY : all clean fclean re
-
-
-

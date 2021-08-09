@@ -3,23 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: snam <snam@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/29 04:00:44 by snam              #+#    #+#             */
-/*   Updated: 2021/08/05 03:04:40 by snam             ###   ########.fr       */
+/*   Created: 2021/05/08 15:23:25 by snam              #+#    #+#             */
+/*   Updated: 2021/05/26 23:58:07 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/push_swap.h"
-//#include "libft.h"
+#include "libft.h"
 
-static char	**free_malloc(char **str)
+static	char	**free_malloc(char **str)
 {
 	int		i;
 
-	i = -1;
-	while (str[++i])
+	i = 0;
+	while (str[i])
+	{
 		free(str[i]);
+		++i;
+	}
 	free(str);
 	return (0);
 }
@@ -50,9 +52,12 @@ static char	*slpit_word(char *start, int num)
 	ptr = (char *)malloc(sizeof(char) * (num + 1));
 	if (!ptr)
 		return (0);
-	i = -1;
-	while (++i < num)
+	i = 0;
+	while (i < num)
+	{
 		ptr[i] = start[i];
+		++i;
+	}
 	ptr[i] = 0;
 	return (ptr);
 }
