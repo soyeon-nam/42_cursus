@@ -23,6 +23,29 @@ static int	is_decsend(t_node *stack, int cnt)
 	return (1);
 }
 
+static void	conquer_b_three(t_stack *stack)
+{
+	int		top;
+	int		second;
+	int		third;
+
+	top = stack->a->next->item;
+	second = stack->a->next->next->item;
+	third = stack->a->next->next->next->item;
+	if (top < second && second < third)
+		do_multiple_op(stack, 6, "pa", "ra", "pa", "pa", "sa", "rra");
+	else if (top < third && third < second)
+		do_multiple_op(stack, 5, "sb", "pa", "sb", "pa", "pa");
+	else if (second < top && top < third)
+		do_multiple_op(stack, 5, "pa", "sb", "pa", "sb", "pa");
+	else if (second < third && third < top)
+		do_multiple_op(stack, 4, "pa", "sb", "pa", "pa");
+	else if (third < top && top < second)
+		do_multiple_op(stack, 4, "sb", "pa", "pa", "pa");
+	else if (third < second && second < top)
+		do_multiple_op(stack, 3, "pa", "pa", "pa");
+}
+
 void	conquer_b(t_stack *stack, int cnt)
 {
 	int		pivot;
