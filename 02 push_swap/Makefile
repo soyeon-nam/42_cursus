@@ -13,7 +13,8 @@
 NAME = push_swap
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = 
+# CFLAGS = -Wall -Wextra -Werror 
 HEADERS_DIRECTORY = ./inc/
 
 AR		=	ar
@@ -37,10 +38,8 @@ SRCS = ./scrs/a_to_b.c\
 		./scrs/quick_sort.c\
 		./scrs/sort_under_six.c\
 		./scrs/terminate.c\
-		./scrs/divide_a.c\
-		./scrs/divide_b.c\
-		# ./scrs/ft_split.c\
-		# ./scrs/ft_strcmp.c\
+		./scrs/conquer_a.c\
+		./scrs/conquer_b.c\
 
 OBJS = $(SRCS:.c=.o)
 

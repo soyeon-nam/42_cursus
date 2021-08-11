@@ -50,21 +50,19 @@ void	sort_under_six(t_stack *stack, int cnt);
 
 /* -------- a_to_b.c */
 void	a_to_b(t_stack *stack, int cnt);
-void	conquer_a(t_stack *stack, int cnt);
 
 /* -------- b_to_a.c */
 void	b_to_a(t_stack *stack, int cnt);
-void	conquer_b(t_stack *stack, int cnt);
 
 /* -------- find_pivot.c */
 void	set_pivot(t_node *stack, t_sort_info *info, int cnt);
 int		find_pivot(t_node *stack, int cnt, int order);
 
-/* -------- divide_a.c */
-void	divide_a(t_stack *stack, int cnt, t_sort_info *info);
+/* -------- conquer_a.c */
+void	conquer_a(t_stack *stack, int cnt);
 
 /* -------- divide_b.c */
-void	divide_b(t_stack *stack, int cnt, t_sort_info *info, t_rewind *rewind);
+void	conquer_b(t_stack *stack, int cnt);
 
 /* -------- do_op.c */
 void	do_op(char *str, t_stack *stack);
@@ -84,9 +82,5 @@ void	**free_malloc_slpit(char **str);
 
 /* -------- ft_atoi_ps.c */
 int		ft_atoi_ps(const char *str, char ***arr, t_stack *stack);
-// /* -------- ft_split.c */
-// char	**ft_split(char const *s, char c);
-// /* -------- ft_strcmp.c */
-// int		ft_strcmp(char *s1, char *s2);
 
 #endif

@@ -27,7 +27,7 @@ int	main(int argc, char **argv)
 	{
 		arr[i] = ft_split(argv[i + 1], ' ');
 		if (!arr[i])
-			terminate(0, 0, 1);
+			terminate(arr, 0, 1);
 	}
 	arr[i] = 0;
 	push_swap(arr);

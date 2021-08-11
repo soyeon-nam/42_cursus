@@ -23,81 +23,49 @@ static int	is_acsend(t_node *stack, int cnt)
 	return (1);
 }
 
-static void	conquer_a_three(t_stack *stack)
-{
-	int		top;
-	int		second;
-	int		third;
-
-	top = stack->a->next->item;
-	second = stack->a->next->next->item;
-	third = stack->a->next->next->next->item;
-	if (top < third && third < second)
-		do_multiple_op(stack, 3, "ra", "sa", "rra");
-	else if (second < top && top < third)
-		do_op("sa", stack);
-	else if (second < third && third < top)
-		do_multiple_op(stack, 4, "sa", "ra", "sa", "rra");
-	else if (third < top && top < second)
-		do_multiple_op(stack, 4, "ra", "sa", "rra", "sa");
-	else if (third < second && second < top)
-		do_multiple_op(stack, 5, "sa", "ra", "sa", "rra", "sa");
-}
-
-static void	conquer_a_four(t_stack *stack)
-{
-	t_node		**a;
-	t_node		**b;
-
-	a = &(stack->a->next);
-	b = &(stack->b->next);
-	if ((*a)->item > (*a)->next->item)
-		do_op("sa", stack);
-	do_op("pb", stack);
-	if ((*a)->item > (*a)->next->item)
-		do_op("sa", stack);
-	do_op("pb", stack);
-	if ((*a)->item > (*a)->next->item && (*b)->item < (*b)->next->item)
-		do_op("ss", stack);
-	else if ((*a)->item > (*a)->next->item)
-		do_op("sa", stack);
-	else if ((*b)->item < (*b)->next->item)
-		do_op("sb", stack);
-	do_op("pa", stack);
-	if ((*a)->item > (*a)->next->item)
-		do_op("sa", stack);
-	do_op("pa", stack);
-	if ((*a)->item > (*a)->next->item)
-		do_op("sa", stack);
-}
-
-void	conquer_a(t_stack *stack, int cnt)
+static void	divide_a_56(t_stack *stack, int cnt)
 {
 	int		pivot;
 	int		i;
-
-	if (cnt > 4)
+	
+	pivot = find_pivot(stack->a, cnt, cnt - 3);
+	i = cnt;
+	while (i--)
 	{
-		pivot = find_pivot(stack->a, cnt, cnt - 3);
-		i = cnt;
-		while (i--)
-		{
-			if (stack->a->next->item <= pivot)
-				do_op("pb", stack);
-			else
-				do_op("ra", stack);
-		}
-		rewind_stack(stack, 3, 0);
-		conquer_a(stack, 3);
-		conquer_b(stack, cnt - 3);
+		if (stack->a->next->item <= pivot)
+			do_op("pb", stack);
+		else
+			do_op("ra", stack);
 	}
-	else if (cnt == 4)
-		conquer_a_four(stack);
-	else if (cnt == 3)
-		conquer_a_three(stack);
-	else if (cnt == 2)
-		if (stack->a->next->item > stack->a->next->next->item)
-			do_op("sa", stack);
+	rewind_stack(stack, 3, 0);
+	conquer_a(stack, 3);
+	conquer_b(stack, cnt - 3);
+}
+
+static void	divide_a(t_stack *stack, int cnt, t_sort_info *info)
+{
+	int				rra;
+	int				rrb;
+
+	rra = 0;
+	rrb = 0;
+	set_pivot(stack->a, info, cnt);
+	while (cnt--)
+	{
+		if (cnt == 1 && (stack->a->next->item > info->pivot2))
+			if (stack->a->next->next->item < info->pivot2)
+			{
+				do_multiple_op(stack, 2, "sa", "pb");
+				break ;
+			}
+		if ((stack->a->next->item > info->pivot2) && ++rra)
+			do_op("ra", stack);
+		else if ((stack->a->next->item > info->pivot1) && ++rrb)
+			do_multiple_op(stack, 2, "pb", "rb");
+		else
+			do_op("pb", stack);
+	}
+	rewind_stack(stack, rra, rrb);
 }
 
 void	a_to_b(t_stack *stack, int cnt)
@@ -106,8 +74,10 @@ void	a_to_b(t_stack *stack, int cnt)
 
 	if (is_acsend(stack->a, cnt))
 		return ;
-	if (cnt < 7)
+	if (cnt <= 4)
 		return (conquer_a(stack, cnt));
+	else if (cnt <= 6)
+		return (divide_a_56(stack, cnt));
 	divide_a(stack, cnt, &info);
 	a_to_b(stack, info.large_cnt);
 	b_to_a(stack, info.middle_cnt);
