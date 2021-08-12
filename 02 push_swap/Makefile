@@ -10,38 +10,36 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = push_swap
+NAME		=	push_swap
 
-CC = gcc
-CFLAGS = 
-# CFLAGS = -Wall -Wextra -Werror 
-HEADERS_DIRECTORY = ./inc/
+CC			=	gcc
+CFLAGS		=	CFLAGS = -Wall -Wextra -Werror 
 
-AR		=	ar
-ARFLAGS	=	-rcs
-RM		=	rm -rf
+AR			=	ar
+ARFLAGS		=	-rcs
+RM			=	rm -rf
 
 LIB_DIR		=	./libft/
 LIB_NAME	=	libft.a
 LIBS		=	$(addprefix $(LIB_DIR), $(LIB_NAME))
 
-SRCS = ./scrs/a_to_b.c\
-		./scrs/b_to_a.c\
-		./scrs/do_multiple_op.c\
-		./scrs/do_op_app.c\
-		./scrs/do_op.c\
-		./scrs/set_pivot.c\
-		./scrs/ft_atoi_ps.c\
-		./scrs/main.c\
-		./scrs/parse.c\
-		./scrs/push_swap.c\
-		./scrs/quick_sort.c\
-		./scrs/sort_under_six.c\
-		./scrs/terminate.c\
-		./scrs/conquer_a.c\
-		./scrs/conquer_b.c\
+SRCS 		=	./scrs/a_to_b.c\
+				./scrs/b_to_a.c\
+				./scrs/do_multiple_op.c\
+				./scrs/do_op_app.c\
+				./scrs/do_op.c\
+				./scrs/set_pivot.c\
+				./scrs/ft_atoi_ps.c\
+				./scrs/main.c\
+				./scrs/parse.c\
+				./scrs/push_swap.c\
+				./scrs/quick_sort.c\
+				./scrs/sort_under_six.c\
+				./scrs/terminate.c\
+				./scrs/conquer_a.c\
+				./scrs/conquer_b.c\
 
-OBJS = $(SRCS:.c=.o)
+OBJS 		=	$(SRCS:.c=.o)
 
 all: $(LIB_NAME) $(NAME)
 
