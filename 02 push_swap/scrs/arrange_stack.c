@@ -1,16 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   arrange_stack.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: snam <snam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/29 04:00:53 by snam              #+#    #+#             */
-/*   Updated: 2021/08/05 03:04:49 by snam             ###   ########.fr       */
+/*   Updated: 2021/08/14 20:06:07 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
+
+static char	***split_argv_based_whitespace(int argc, char **argv)
+{
+	char		***arr;
+	int			i;
+	
+	arr = (char ***)malloc(sizeof(char **) * argc);
+	if (!arr)
+		terminate(0, 0, 1);
+	i = -1;
+	while (++i < argc - 1)
+	{
+		arr[i] = ft_split(argv[i + 1], ' ');
+		if (!arr[i])
+			terminate(arr, 0, 1);
+	}
+	arr[i] = 0;
+	return (arr);
+}
 
 static int	check_dup(t_stack *stack, int item, char ***arr)
 {
@@ -53,12 +72,12 @@ static void	parse(char ***arr, t_stack *stack)
 {
 	int			i;
 	int			j;
-	int			is_sorted;
+	int			is_biggest_node_hitherto;
 	int			item;
 
 	stack->a = 0;
 	stack->b = 0;
-	is_sorted = 0;
+	is_biggest_node_hitherto = 0;
 	i = -1;
 	while (arr[++i])
 	{
@@ -66,11 +85,11 @@ static void	parse(char ***arr, t_stack *stack)
 		while (arr[i][++j])
 		{
 			item = ft_atoi_ps(arr[i][j], arr, stack);
-			is_sorted += check_dup(stack, item, arr);
+			is_biggest_node_hitherto += check_dup(stack, item, arr);
 			create_node(stack, item, arr);
 		}
 	}
-	if (is_sorted == i * j - 1)
+	if (is_biggest_node_hitherto == i * j - 1)
 		terminate(arr, stack, 0);
 }
 
@@ -80,17 +99,7 @@ t_stack	*arrange_stack(int argc, char **argv)
 	int			i;
 	t_stack		*stack;
 
-	arr = (char ***)malloc(sizeof(char **) * argc);
-	if (!arr)
-		terminate(0, 0, 1);
-	i = -1;
-	while (++i < argc - 1)
-	{
-		arr[i] = ft_split(argv[i + 1], ' ');
-		if (!arr[i])
-			terminate(arr, 0, 1);
-	}
-	arr[i] = 0;
+	arr = split_argv_based_whitespace(argc, argv);
 	stack = (t_stack *)malloc(sizeof(t_stack));
 	if (!stack)
 		terminate(arr, 0, 1);
