@@ -31,14 +31,12 @@ static char	***split_argv_based_whitespace(int argc, char **argv)
 	return (arr);
 }
 
-static int	check_dup(t_stack *stack, int item, char ***arr)
+static void	check_dup(t_stack *stack, int item, char ***arr)
 {
 	t_node		*stack_curr;
-	int			sign;
 
 	if (stack->a)
 	{
-		sign = 1;
 		stack_curr = stack->a->next;
 		while (1)
 		{
@@ -46,14 +44,10 @@ static int	check_dup(t_stack *stack, int item, char ***arr)
 				terminate(arr, stack, 1);
 			if (stack_curr->next == stack->a->next)
 				break ;
-			if (stack_curr->item > stack_curr->next->item)
-				sign = 0;
 			stack_curr = stack_curr->next;
 		}
-		if (sign == 1 && (stack_curr->item < item))
-			return (1);
 	}
-	return (0);
+	return ;
 }
 
 static void	create_node(t_stack *stack, int item, char ***arr)
@@ -85,12 +79,10 @@ static void	parse(char ***arr, t_stack *stack)
 		while (arr[i][++j])
 		{
 			item = ft_atoi_ps(arr[i][j], arr, stack);
-			is_biggest_node_hitherto += check_dup(stack, item, arr);
+			check_dup(stack, item, arr);
 			create_node(stack, item, arr);
 		}
 	}
-	if (is_biggest_node_hitherto == i * j - 1)
-		terminate(arr, stack, 0);
 }
 
 t_stack	*arrange_stack(int argc, char **argv)

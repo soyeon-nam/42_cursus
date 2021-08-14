@@ -12,9 +12,9 @@
 
 #include "../inc/push_swap.h"
 
-static int	is_acsend(t_node *stack, int cnt)
+int	is_ascend(t_node *stack, int cnt)
 {
-	while (cnt--)
+	while (--cnt)
 	{
 		if (stack->next->item > stack->next->next->item)
 			return (0);
@@ -74,7 +74,7 @@ void	a_to_b(t_stack *stack, int cnt)
 {
 	t_sort_info		info;
 
-	if (is_acsend(stack->a, cnt))
+	if (is_ascend(stack->a, cnt))
 		return ;
 	if (cnt <= 4)
 		return (conquer_a(stack, cnt));

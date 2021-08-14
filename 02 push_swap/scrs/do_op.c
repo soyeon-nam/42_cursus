@@ -12,7 +12,7 @@
 
 #include "../inc/push_swap.h"
 
-static bool	op_s(t_node *head)
+bool	op_s(t_node *head)
 {
 	int			tmp;
 
@@ -32,7 +32,7 @@ bool	op_r(t_node **head)
 	return (1);
 }
 
-static bool	op_rr(t_node **head)
+bool	op_rr(t_node **head)
 {
 	if (!*head)
 		return (0);
@@ -40,7 +40,7 @@ static bool	op_rr(t_node **head)
 	return (1);
 }
 
-static bool	op_p(t_node **stack1, t_node **stack2)
+bool	op_p(t_node **stack1, t_node **stack2)
 {
 	t_node		*node;
 

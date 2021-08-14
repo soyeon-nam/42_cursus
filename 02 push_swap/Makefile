@@ -11,10 +11,11 @@
 # **************************************************************************** #
 
 NAME		=	push_swap
-# NAME		=	a.out
+BNAME		=	checker
 
 CC			=	gcc
-CFLAGS		=	-Wall -Wextra -Werror 
+CFLAGS		=	-Wall -Wextra -Werror
+# CFLAGS		=	-g -fsanitize=address
 
 
 AR			=	ar
@@ -48,11 +49,26 @@ SRCS		=	./scrs/a_to_b.c\
 # OBJECTS
 OBJS		= $(SRCS:.c=.o)
 
-# # BONUS SOURCES
-# BSRCS	=	
+# BONUS SOURCES
+BSRCS		=	./bsrcs/main.c\
+				./bsrcs/do_op_checker.c\
+				./bsrcs/check_sorted.c\
+				./scrs/a_to_b.c\
+				./scrs/b_to_a.c\
+				./scrs/do_multiple_op.c\
+				./scrs/do_op_app.c\
+				./scrs/do_op.c\
+				./scrs/set_pivot.c\
+				./scrs/ft_atoi_ps.c\
+				./scrs/arrange_stack.c\
+				./scrs/quick_sort.c\
+				./scrs/sort_under_six.c\
+				./scrs/terminate.c\
+				./scrs/conquer_a.c\
+				./scrs/conquer_b.c
 
-# # BONUS OBJECTS
-# BOBJS	=	$(BSRCS:.c=.o)
+# BONUS OBJECTS
+BOBJS	=	$(BSRCS:.c=.o)
 
 # COLOR FLAGS
 FG_BLACK   = \e[30m
@@ -69,7 +85,7 @@ else
 	TARGET = $(NAME)
 endif
 
-all: $(LIB_NAME) $(NAME)
+all: $(LIB_NAME) $(TARGET)
 
 bonus :
 	@make FLAG_BONUS=1 all
@@ -82,13 +98,17 @@ $(NAME): $(SRCS) $(LIBS)
 	$(CC) $(CFLAGS) $^ -o $@
 	@printf "${FG_GREEN}Projcet make all succeeded!\n${NO_COLOR}"
 
+$(BNAME): $(BSRCS) $(LIBS)
+	$(CC) $(CFLAGS) $^ -o $@
+	@printf "${FG_GREEN}Projcet make bonus succeeded!\n${NO_COLOR}"
+
 clean :
 	make clean -C $(LIB_DIR)
-	$(RM) $(OBJS)
+	$(RM) $(OBJS) $(BNAME)
 
 fclean : clean
 	make fclean -C $(LIB_DIR)
-	$(RM) $(NAME)
+	$(RM) $(NAME) $(BNAME)
 
 re : fclean all
 

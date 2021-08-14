@@ -12,50 +12,7 @@
 
 #include "../inc/push_swap.h"
 
-static bool	op_s(t_node *head)
-{
-	int			tmp;
-
-	if (!head)
-		return (0);
-	tmp = head->next->item;
-	head->next->item = head->next->next->item;
-	head->next->next->item = tmp;
-	return (1);
-}
-
-bool	op_r(t_node **head)
-{
-	if (!*head)
-		return (0);
-	*head = (*head)->next;
-	return (1);
-}
-
-static bool	op_rr(t_node **head)
-{
-	if (!*head)
-		return (0);
-	*head = (*head)->prev;
-	return (1);
-}
-
-static bool	op_p(t_node **stack1, t_node **stack2)
-{
-	t_node		*node;
-
-	if (!*stack2)
-		return (0);
-	if (*stack2)
-	{
-		node = (*stack2)->next;
-		pop_node(stack2);
-		top_node(stack1, &node);
-	}
-	return (1);
-}
-
-void	do_op(char *str, t_stack *stack)
+void	do_op_checker(char *str, t_stack *stack)
 {
 	if (!ft_strcmp(str, "sa"))
 		op_s(stack->a);

@@ -56,6 +56,8 @@ static void	conquer_four_five(t_stack *stack, int cnt)
 
 void	sort_under_six(t_stack *stack, int cnt)
 {
+	if (is_ascend(stack->a, cnt))
+		return ;
 	if (cnt == 2)
 	{
 		if (stack->a->next->item > stack->a->item)

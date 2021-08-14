@@ -7,6 +7,7 @@
 # include <stdbool.h>
 # include <stdarg.h>
 # include "../libft/inc/libft.h"
+# include "../libft/inc/get_next_line.h"
 
 typedef struct s_node
 {
@@ -36,6 +37,10 @@ typedef struct s_rewind
 	int		rrb;
 }					t_rewind;
 
+/* ================================================================ */
+/*                       PUSH_SWAP_SRCS                             */
+/* ================================================================ */
+
 /* -------- push_swap.c */
 void	push_swap(t_stack *stack);
 
@@ -47,9 +52,11 @@ void	quick_sort(t_stack *stack);
 
 /* -------- sort_under_six.c */
 void	sort_under_six(t_stack *stack, int cnt);
+int		count_item(t_node *stack);
 
 /* -------- a_to_b.c */
 void	a_to_b(t_stack *stack, int cnt);
+int		is_ascend(t_node *stack, int cnt);
 
 /* -------- b_to_a.c */
 void	b_to_a(t_stack *stack, int cnt);
@@ -66,7 +73,10 @@ void	conquer_b(t_stack *stack, int cnt);
 
 /* -------- do_op.c */
 void	do_op(char *str, t_stack *stack);
+bool	op_p(t_node **stack1, t_node **stack2);
+bool	op_rr(t_node **head);
 bool	op_r(t_node **head);
+bool	op_s(t_node *head);
 
 /* -------- do_op_app.c */
 void	pop_node(t_node **stack);
@@ -83,6 +93,14 @@ void	**free_malloc_slpit(char **str);
 /* -------- ft_atoi_ps.c */
 int		ft_atoi_ps(const char *str, char ***arr, t_stack *stack);
 
+/* ================================================================ */
+/*                        CHECKER_SRCS                              */
+/* ================================================================ */
 
+/* -------- do_op_checker.c */
+void	do_op_checker(char *str, t_stack *stack);
+
+/* -------- check_sorted.c */
+void	check_sorted(t_stack *stack);
 
 #endif
