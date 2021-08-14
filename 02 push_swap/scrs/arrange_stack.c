@@ -49,7 +49,7 @@ static void	create_node(t_stack *stack, int item, char ***arr)
 	op_r(&(stack->a));
 }
 
-void	parse(char ***arr, t_stack *stack)
+static void	parse(char ***arr, t_stack *stack)
 {
 	int			i;
 	int			j;
@@ -72,4 +72,32 @@ void	parse(char ***arr, t_stack *stack)
 	}
 	if (is_sorted == i * j - 1)
 		terminate(arr, stack, 0);
+}
+
+t_stack	*arrange_stack(int argc, char **argv)
+{
+	char		***arr;
+	int			i;
+	t_stack		*stack;
+
+	arr = (char ***)malloc(sizeof(char **) * argc);
+	if (!arr)
+		terminate(0, 0, 1);
+	i = -1;
+	while (++i < argc - 1)
+	{
+		arr[i] = ft_split(argv[i + 1], ' ');
+		if (!arr[i])
+			terminate(arr, 0, 1);
+	}
+	arr[i] = 0;
+	stack = (t_stack *)malloc(sizeof(t_stack));
+	if (!stack)
+		terminate(arr, 0, 1);
+	parse(arr, stack);
+	i = -1;
+	while (arr[++i])
+		free_malloc_slpit(arr[i]);
+	free(arr);
+	return (stack);
 }

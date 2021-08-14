@@ -40,4 +40,5 @@ void	quick_sort(t_stack *stack)
 		sort_under_six(stack, cnt);
 	else if (cnt == 0)
 		terminate(0, stack, 1);
+	terminate(0, stack, 0);
 }

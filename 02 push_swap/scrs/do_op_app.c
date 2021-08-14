@@ -66,4 +66,3 @@ void	rewind_stack(t_stack *stack, int rra, int rrb)
 			do_op("rra", stack);
 	}
 }
-

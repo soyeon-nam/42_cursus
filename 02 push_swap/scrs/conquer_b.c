@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   conquer_b.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: snam <snam@student.42seoul.kr>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/08/12 00:29:46 by snam              #+#    #+#             */
+/*   Updated: 2021/08/12 00:29:48 by snam             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/push_swap.h"
 
 static void	conquer_b_three(t_stack *stack)
@@ -38,12 +50,13 @@ static void	conquer_b_four(t_stack *stack)
 			do_op("rb", stack);
 	}
 	do_multiple_op(stack, 2, "rrb", "rrb");
-	if ((stack->a->next->item > stack->a->next->next->item) && (stack->b->next->item < stack->b->next->next->item))
+	if ((stack->a->next->item > stack->a->next->next->item) \
+		&& (stack->b->next->item < stack->b->next->next->item))
 		do_op("ss", stack);
 	else if (stack->a->next->item > stack->a->next->next->item)
 		do_op("sa", stack);
 	else if (stack->b->next->item < stack->b->next->next->item)
- 		do_op("sb", stack);
+		do_op("sb", stack);
 	do_multiple_op(stack, 2, "pa", "pa");
 }
 

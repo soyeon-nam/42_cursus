@@ -27,7 +27,7 @@ static void	divide_a_56(t_stack *stack, int cnt)
 {
 	int		pivot;
 	int		i;
-	
+
 	pivot = find_pivot(stack->a, cnt, cnt - 3);
 	i = cnt;
 	while (i--)
@@ -53,11 +53,13 @@ static void	divide_a(t_stack *stack, int cnt, t_sort_info *info)
 	while (cnt--)
 	{
 		if (cnt == 1 && (stack->a->next->item > info->pivot2))
+		{
 			if (stack->a->next->next->item < info->pivot2)
 			{
 				do_multiple_op(stack, 2, "sa", "pb");
 				break ;
 			}
+		}
 		if ((stack->a->next->item > info->pivot2) && ++rra)
 			do_op("ra", stack);
 		else if ((stack->a->next->item > info->pivot1) && ++rrb)

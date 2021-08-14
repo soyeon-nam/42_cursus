@@ -6,7 +6,7 @@
 # include <stdlib.h>
 # include <stdbool.h>
 # include <stdarg.h>
-# include "../libft/libft.h"
+# include "../libft/inc/libft.h"
 
 typedef struct s_node
 {
@@ -37,10 +37,10 @@ typedef struct s_rewind
 }					t_rewind;
 
 /* -------- push_swap.c */
-void	push_swap(char ***arr);
+void	push_swap(t_stack *stack);
 
-/* -------- parse.c */
-void	parse(char ***arr, t_stack *stack);
+/* -------- arrange_stack.c */
+t_stack	*arrange_stack(int argc, char **argv);
 
 /* -------- quick_sort.c */
 void	quick_sort(t_stack *stack);
@@ -82,5 +82,7 @@ void	**free_malloc_slpit(char **str);
 
 /* -------- ft_atoi_ps.c */
 int		ft_atoi_ps(const char *str, char ***arr, t_stack *stack);
+
+
 
 #endif

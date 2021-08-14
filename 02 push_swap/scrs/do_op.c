@@ -79,4 +79,6 @@ void	do_op(char *str, t_stack *stack)
 		write(1, "rrb\n", 4);
 	else if (!ft_strcmp(str, "rrr") && op_rr(&(stack->a)) && op_rr(&(stack->b)))
 		write(1, "rrr\n", 4);
+	else
+		terminate(0, stack, 1);
 }

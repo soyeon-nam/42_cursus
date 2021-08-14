@@ -14,22 +14,11 @@
 
 int	main(int argc, char **argv)
 {
-	char		***arr;
-	int			i;
+	t_stack		*stack;
 
 	if (argc == 1)
-		terminate(0, 0, 0);
-	arr = (char ***)malloc(sizeof(char **) * argc);
-	if (!arr)
-		terminate(0, 0, 1);
-	i = -1;
-	while (++i < argc - 1)
-	{
-		arr[i] = ft_split(argv[i + 1], ' ');
-		if (!arr[i])
-			terminate(arr, 0, 1);
-	}
-	arr[i] = 0;
-	push_swap(arr);
+		return (0);
+	stack = arrange_stack(argc, argv);
+	quick_sort(stack);
 	return (0);
 }

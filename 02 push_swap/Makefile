@@ -11,19 +11,26 @@
 # **************************************************************************** #
 
 NAME		=	push_swap
+# NAME		=	a.out
 
 CC			=	gcc
-CFLAGS		=	CFLAGS = -Wall -Wextra -Werror 
+CFLAGS		=	-Wall -Wextra -Werror 
+
 
 AR			=	ar
 ARFLAGS		=	-rcs
 RM			=	rm -rf
 
+# LIBRARY ARCHIVE
 LIB_DIR		=	./libft/
 LIB_NAME	=	libft.a
 LIBS		=	$(addprefix $(LIB_DIR), $(LIB_NAME))
 
-SRCS 		=	./scrs/a_to_b.c\
+# HEADERS
+HEADERS_DIRECTORY = ./inc/
+
+# SOURCES
+SRCS		=	./scrs/a_to_b.c\
 				./scrs/b_to_a.c\
 				./scrs/do_multiple_op.c\
 				./scrs/do_op_app.c\
@@ -31,23 +38,49 @@ SRCS 		=	./scrs/a_to_b.c\
 				./scrs/set_pivot.c\
 				./scrs/ft_atoi_ps.c\
 				./scrs/main.c\
-				./scrs/parse.c\
-				./scrs/push_swap.c\
+				./scrs/arrange_stack.c\
 				./scrs/quick_sort.c\
 				./scrs/sort_under_six.c\
 				./scrs/terminate.c\
 				./scrs/conquer_a.c\
 				./scrs/conquer_b.c\
 
-OBJS 		=	$(SRCS:.c=.o)
+# OBJECTS
+OBJS		= $(SRCS:.c=.o)
+
+# # BONUS SOURCES
+# BSRCS	=	
+
+# # BONUS OBJECTS
+# BOBJS	=	$(BSRCS:.c=.o)
+
+# COLOR FLAGS
+FG_BLACK   = \e[30m
+FG_RED     = \e[31m
+FG_GREEN   = \e[32m
+FG_YELLOW  = \e[33m
+FG_LBLUE   = \e[94m
+FG_MAGENTA = \e[35m
+NO_COLOR   = \e[0m
+
+ifdef FLAG_BONUS
+	TARGET = $(BNAME)
+else
+	TARGET = $(NAME)
+endif
 
 all: $(LIB_NAME) $(NAME)
 
+bonus :
+	@make FLAG_BONUS=1 all
+
 $(LIB_NAME) :
-	make -C $(LIB_DIR)
+	@make -C $(LIB_DIR)
+	@printf "${FG_GREEN}Libft make all succeeded!\n${NO_COLOR}"
 
 $(NAME): $(SRCS) $(LIBS)
 	$(CC) $(CFLAGS) $^ -o $@
+	@printf "${FG_GREEN}Projcet make all succeeded!\n${NO_COLOR}"
 
 clean :
 	make clean -C $(LIB_DIR)
