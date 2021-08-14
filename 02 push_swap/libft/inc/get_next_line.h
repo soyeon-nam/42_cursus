@@ -6,7 +6,7 @@
 /*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 06:43:05 by snam              #+#    #+#             */
-/*   Updated: 2021/06/03 22:24:32 by snam             ###   ########.fr       */
+/*   Updated: 2021/06/03 14:31:22 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,22 @@
 # include <limits.h>
 # include <unistd.h>
 # include <stdlib.h>
+#include "libft.h"
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1
 # endif
 
-int		get_next_line(int fd, char **line);
-int		concat_new_buf(char **line, char **fd_backup, char **buf);
-int		concat_old_backup(char **fd_backup, char **line);
-int		read_file(char **line, char **fd_backup, int fd);
-char	*generate_ret_line(char **line, char **fd_backup);
+int				get_next_line(int fd, char **line);
+int				concat_new_buf(char **line, char **fd_backup, char **buf);
+char			*generate_ret_line(char **s1, char **s2);
+int				concat_old_backup(char **fd_backup, char **line, char *buf);
+int				read_file(char **line, char **fd_backup, char **buf, int fd);
 
-int		split_str(char **dst, char **src);
-int		sep_nl(char **dst, char **src, size_t size_src, size_t size_dst);
-void	ft_strlcat(char *dst, const char *src, size_t size);
-void	ft_strncpy(char *dst, const char *src, size_t size);
-size_t	ft_strlen(const char *s);
-
+int				split_str(char **dst, char **src);
+int				sep_nl(char **dst, char **src, \
+				size_t size_src, size_t size_dst);
+void			ft_strncpy(char *dst, const char *src, size_t size);
+// void			ft_strlcat(char *dst, const char *src, size_t size);
+// size_t			ft_strlen(const char *s);
 #endif

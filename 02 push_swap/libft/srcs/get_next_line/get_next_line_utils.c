@@ -6,66 +6,13 @@
 /*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 06:43:00 by snam              #+#    #+#             */
-/*   Updated: 2021/06/03 22:30:06 by snam             ###   ########.fr       */
+/*   Updated: 2021/06/03 14:37:29 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	split_str(char **dst, char **src)
-{
-	unsigned int	size_src;
-	unsigned int	size_dst;
-	char			*src_ptr;
-
-	src_ptr = *src;
-	while (*src_ptr && *src_ptr != '\n')
-		++src_ptr;
-	if (*src_ptr == '\n')
-	{
-		size_dst = src_ptr - *src;
-		size_src = ft_strlen(*src) - size_dst - 1;
-		if ((sep_nl(dst, src, size_dst, size_src) == -1))
-			return (-1);
-		return (1);
-	}
-	*dst = *src;
-	*src = 0;
-	return (0);
-}
-
-int	sep_nl(char **dst, char **src, size_t size_dst, size_t size_src)
-{
-	char	*temp;
-
-	*dst = (char *)malloc(size_dst + 1);
-	if (!*dst)
-		return (-1);
-	ft_strncpy(*dst, *src, size_dst + 1);
-	temp = *src;
-	*src = (char *)malloc(size_src + 1);
-	if (!*src)
-	{
-		free(*dst);
-		*dst = 0;
-		return (-1);
-	}
-	ft_strncpy(*src, &temp[size_dst + 1], size_src + 1);
-	free(temp);
-	return (1);
-}
-
-size_t	ft_strlen(const char *s)
-{
-	size_t	ret;
-
-	ret = 0;
-	while (s[ret])
-		++ret;
-	return (ret);
-}
-
-void	ft_strncpy(char *dst, const char *src, size_t size)
+void		ft_strncpy(char *dst, const char *src, size_t size)
 {
 	unsigned int	i;
 
@@ -79,19 +26,73 @@ void	ft_strncpy(char *dst, const char *src, size_t size)
 		dst[i] = 0;
 }
 
-void	ft_strlcat(char *dst, const char *src, size_t size)
+int			sep_nl(char **dst, char **src, size_t size_src, size_t size_dst)
 {
-	unsigned int	i;
-	unsigned int	dst_len;
+	char	*temp;
 
-	dst_len = ft_strlen(dst);
-	if (size <= dst_len)
-		return ;
-	i = 0;
-	while ((i < size - dst_len - 1) && src[i])
+	if (!(*dst = (char*)malloc(size_dst + 1)))
+		return (-1);
+	ft_strncpy(*dst, *src, size_dst + 1);
+	temp = *src;
+	if (!(*src = (char*)malloc(size_src + 1)))
 	{
-		dst[dst_len + i] = src[i];
-		++i;
+		free(*dst);
+		*dst = 0;
+		return (-1);
 	}
-	dst[dst_len + i] = '\0';
+	ft_strncpy(*src, &temp[size_dst + 1], size_src + 1);
+	free(temp);
+	return (1);
 }
+
+int			split_str(char **dst, char **src)
+{
+	unsigned int	size_src;
+	unsigned int	size_dst;
+	char			*src_ptr;
+
+	src_ptr = *src;
+	while (*src_ptr && *src_ptr != '\n')
+		++src_ptr;
+	if (*src_ptr == '\n')
+	{
+		size_dst = src_ptr - *src;
+		size_src = ft_strlen(*src) - size_dst - 1;
+		if ((sep_nl(dst, src, size_src, size_dst) == -1))
+			return (-1);
+		return (1);
+	}
+	*dst = *src;
+	*src = 0;
+	return (0);
+}
+
+// size_t		ft_strlen(const char *s)
+// {
+// 	size_t	ret;
+
+// 	ret = 0;
+// 	while (s[ret])
+// 		++ret;
+// 	return (ret);
+// }
+
+// size_t	ft_strlcat(char *dst, const char *src, size_t size)
+// {
+// 	unsigned int	i;
+// 	unsigned int	dst_len;
+// 	unsigned int	src_len;
+
+// 	src_len = ft_strlen(src);
+// 	dst_len = ft_strlen(dst);
+// 	if (size <= dst_len)
+// 		return (src_len + size);
+// 	i = 0;
+// 	while ((i < size - dst_len - 1) && src[i])
+// 	{
+// 		dst[dst_len + i] = src[i];
+// 		++i;
+// 	}
+// 	dst[dst_len + i] = '\0';
+// 	return (src_len + dst_len);
+// }
