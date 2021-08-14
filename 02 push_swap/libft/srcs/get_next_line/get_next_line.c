@@ -12,21 +12,23 @@
 
 #include "get_next_line.h"
 
-int			get_next_line(int fd, char **line)
+int	get_next_line(int fd, char **line)
 {
 	static char		*fd_backup[OPEN_MAX];
 	int				ret;
 
 	if ((read(fd, "", 0) == -1) || !line || BUFFER_SIZE <= 0)
 		return (-1);
-	if ((ret = concat_old_backup(&fd_backup[fd], line)))
+	ret = concat_old_backup(&fd_backup[fd], line);
+	if (ret)
 		return (ret);
-	if ((ret = read_file(line, fd_backup, fd)))
+	ret = read_file(line, fd_backup, fd);
+	if (ret)
 		return (ret);
 	return (0);
 }
 
-int			concat_old_backup(char **fd_backup, char **line)
+int	concat_old_backup(char **fd_backup, char **line)
 {
 	int				flag;
 
@@ -40,22 +42,25 @@ int			concat_old_backup(char **fd_backup, char **line)
 	}
 	else
 	{
-		if (!(*line = (char *)malloc(1)))
+		*line = (char *)malloc(1);
+		if (!*line)
 			return (-1);
 		**line = 0;
 	}
 	return (0);
 }
 
-int			read_file(char **line, char **fd_backup, int fd)
+int	read_file(char **line, char **fd_backup, int fd)
 {
 	char			*buf;
 	long			read_size;
 	int				ret;
 
-	if (!(buf = (char *)malloc(BUFFER_SIZE + 1)))
+	buf = (char *)malloc(BUFFER_SIZE + 1);
+	if (!buf)
 		return (-1);
-	while ((read_size = read(fd, buf, BUFFER_SIZE)) > 0)
+	read_size = read(fd, buf, BUFFER_SIZE);
+	while (read_size > 0)
 	{
 		buf[read_size] = 0;
 		ret = concat_new_buf(line, &fd_backup[fd], &buf);
@@ -66,20 +71,21 @@ int			read_file(char **line, char **fd_backup, int fd)
 			free(buf);
 			return (-1);
 		}
-		buf = (char*)malloc(read_size + 1);
+		buf = (char *)malloc(read_size + 1);
 	}
 	free(buf);
 	return (0);
 }
 
-int			concat_new_buf(char **line, char **fd_backup, char **buf)
+int	concat_new_buf(char **line, char **fd_backup, char **buf)
 {
-	int ret;
+	int		ret;
 
 	ret = split_str(fd_backup, buf);
 	if (ret == -1)
 		return (-1);
-	if (!(*line = generate_ret_line(line, fd_backup)))
+	*line = generate_ret_line(line, fd_backup);
+	if (!*line)
 		return (-1);
 	*fd_backup = *buf;
 	*buf = 0;
@@ -88,13 +94,15 @@ int			concat_new_buf(char **line, char **fd_backup, char **buf)
 	return (1);
 }
 
-char		*generate_ret_line(char **line, char **fd_backup)
+char	*generate_ret_line(char **line, char **fd_backup)
 {
 	char	*ret;
 
 	if (!*line || !*fd_backup)
 		return (0);
-	if (!(ret = (char *)malloc(sizeof(char) * (ft_strlen(*line) + ft_strlen(*fd_backup) + 1))))
+	ret = (char *)malloc(sizeof(char) * \
+							(ft_strlen(*line) + ft_strlen(*fd_backup) + 1));
+	if (!ret)
 		return (0);
 	ft_strncpy(ret, *line, ft_strlen(*line) + 1);
 	ft_strlcat(ret, *fd_backup, ft_strlen(*line) + ft_strlen(*fd_backup) + 1);

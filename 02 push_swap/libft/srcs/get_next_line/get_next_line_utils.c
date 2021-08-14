@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 
-int			split_str(char **dst, char **src)
+int	split_str(char **dst, char **src)
 {
 	unsigned int	size_src;
 	unsigned int	size_dst;
@@ -34,15 +34,17 @@ int			split_str(char **dst, char **src)
 	return (0);
 }
 
-int			sep_nl(char **dst, char **src, size_t size_dst, size_t size_src)
+int	sep_nl(char **dst, char **src, size_t size_dst, size_t size_src)
 {
 	char	*temp;
 
-	if (!(*dst = (char*)malloc(size_dst + 1)))
+	*dst = (char *)malloc(size_dst + 1);
+	if (!*dst)
 		return (-1);
 	ft_strncpy(*dst, *src, size_dst + 1);
 	temp = *src;
-	if (!(*src = (char*)malloc(size_src + 1)))
+	*src = (char *)malloc(size_src + 1);
+	if (!*src)
 	{
 		free(*dst);
 		*dst = 0;
@@ -53,7 +55,7 @@ int			sep_nl(char **dst, char **src, size_t size_dst, size_t size_src)
 	return (1);
 }
 
-size_t		ft_strlen(const char *s)
+size_t	ft_strlen(const char *s)
 {
 	size_t	ret;
 
@@ -63,7 +65,7 @@ size_t		ft_strlen(const char *s)
 	return (ret);
 }
 
-void		ft_strncpy(char *dst, const char *src, size_t size)
+void	ft_strncpy(char *dst, const char *src, size_t size)
 {
 	unsigned int	i;
 
@@ -77,7 +79,7 @@ void		ft_strncpy(char *dst, const char *src, size_t size)
 		dst[i] = 0;
 }
 
-void		ft_strlcat(char *dst, const char *src, size_t size)
+void	ft_strlcat(char *dst, const char *src, size_t size)
 {
 	unsigned int	i;
 	unsigned int	dst_len;
