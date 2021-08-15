@@ -38,18 +38,22 @@ static void	conquer_b_three(t_stack *stack)
 static void	conquer_b_four(t_stack *stack)
 {
 	int		pivot;
+	int		rewind;
 	int		i;
 
 	pivot = find_pivot(stack->b, 4, 2);
 	i = 0;
+	rewind = 0;
 	while (i++ < 4)
 	{
-		if (pivot < stack->b->next->item)
-			do_op("pa", stack);
-		else
+		if (pivot >= stack->b->next->item && ++rewind)
 			do_op("rb", stack);
+		else
+			do_op("pa", stack);
+		if (i - rewind >= 2)
+			break ;
 	}
-	do_multiple_op(stack, 2, "rrb", "rrb");
+	do_multiple_op(stack, rewind, "rrb", "rrb");
 	if ((stack->a->next->item > stack->a->next->next->item) \
 		&& (stack->b->next->item < stack->b->next->next->item))
 		do_op("ss", stack);
