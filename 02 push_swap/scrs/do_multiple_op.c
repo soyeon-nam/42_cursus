@@ -23,4 +23,5 @@ void	do_multiple_op(t_stack *stack, int num, ...)
 		op = va_arg(ap, char *);
 		do_op(op, stack);
 	}
+	va_end(ap);
 }

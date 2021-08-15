@@ -16,7 +16,7 @@ static char	***split_argv_based_whitespace(int argc, char **argv)
 {
 	char		***arr;
 	int			i;
-	
+
 	arr = (char ***)malloc(sizeof(char **) * argc);
 	if (!arr)
 		terminate(0, 0, 1);

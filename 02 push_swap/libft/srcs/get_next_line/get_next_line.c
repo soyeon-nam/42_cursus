@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 
-int			concat_old_backup(char **fd_backup, char **line, char *buf)
+int	concat_old_backup(char **fd_backup, char **line, char *buf)
 {
 	int				flag;
 
@@ -30,7 +30,8 @@ int			concat_old_backup(char **fd_backup, char **line, char *buf)
 	}
 	else
 	{
-		if (!(*line = (char *)malloc(1)))
+		*line = (char *)malloc(1);
+		if (!*line)
 		{
 			free(buf);
 			return (-1);
@@ -40,7 +41,7 @@ int			concat_old_backup(char **fd_backup, char **line, char *buf)
 	return (0);
 }
 
-char		*generate_ret_line(char **s1, char **s2)
+char	*generate_ret_line(char **s1, char **s2)
 {
 	char	*ret;
 
@@ -57,14 +58,15 @@ char		*generate_ret_line(char **s1, char **s2)
 	return (ret);
 }
 
-int			concat_new_buf(char **line, char **fd_backup, char **buf)
+int	concat_new_buf(char **line, char **fd_backup, char **buf)
 {
-	int flag_nl;
+	int		flag_nl;
 
 	flag_nl = split_str(fd_backup, buf);
 	if (flag_nl == -1)
 		return (-1);
-	if (!(*line = generate_ret_line(line, fd_backup)))
+	*line = generate_ret_line(line, fd_backup);
+	if (!*line)
 		return (-1);
 	*fd_backup = *buf;
 	*buf = 0;
@@ -73,12 +75,13 @@ int			concat_new_buf(char **line, char **fd_backup, char **buf)
 	return (1);
 }
 
-int			read_file(char **line, char **fd_backup, char **buf, int fd)
+int	read_file(char **line, char **fd_backup, char **buf, int fd)
 {
 	long			read_size;
 	int				ret;
 
-	while ((read_size = read(fd, *buf, BUFFER_SIZE)) > 0)
+	read_size = read(fd, *buf, BUFFER_SIZE);
+	while (read_size > 0)
 	{
 		(*buf)[read_size] = 0;
 		ret = concat_new_buf(line, &fd_backup[fd], buf);
@@ -89,12 +92,13 @@ int			read_file(char **line, char **fd_backup, char **buf, int fd)
 			free(*buf);
 			return (-1);
 		}
-		*buf = (char*)malloc(read_size + 1);
+		*buf = (char *)malloc(read_size + 1);
+		read_size = read(fd, *buf, BUFFER_SIZE);
 	}
 	return (0);
 }
 
-int			get_next_line(int fd, char **line)
+int	get_next_line(int fd, char **line)
 {
 	static char		*fd_backup[OPEN_MAX];
 	char			*buf;
@@ -102,11 +106,14 @@ int			get_next_line(int fd, char **line)
 
 	if ((read(fd, "", 0) == -1) || !line || BUFFER_SIZE <= 0)
 		return (-1);
-	if (!(buf = (char *)malloc(BUFFER_SIZE + 1)))
+	buf = (char *)malloc(BUFFER_SIZE + 1);
+	if (!buf)
 		return (-1);
-	if ((ret = concat_old_backup(&fd_backup[fd], line, buf)))
+	ret = concat_old_backup(&fd_backup[fd], line, buf);
+	if (ret)
 		return (ret);
-	if ((ret = read_file(line, fd_backup, &buf, fd)))
+	ret = read_file(line, fd_backup, &buf, fd);
+	if (ret)
 		return (ret);
 	free(buf);
 	return (0);

@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 
-void		ft_strncpy(char *dst, const char *src, size_t size)
+void	ft_strncpy(char *dst, const char *src, size_t size)
 {
 	unsigned int	i;
 
@@ -26,15 +26,17 @@ void		ft_strncpy(char *dst, const char *src, size_t size)
 		dst[i] = 0;
 }
 
-int			sep_nl(char **dst, char **src, size_t size_src, size_t size_dst)
+int	sep_nl(char **dst, char **src, size_t size_src, size_t size_dst)
 {
 	char	*temp;
 
-	if (!(*dst = (char*)malloc(size_dst + 1)))
+	*dst = (char *)malloc(size_dst + 1);
+	if (!*dst)
 		return (-1);
 	ft_strncpy(*dst, *src, size_dst + 1);
 	temp = *src;
-	if (!(*src = (char*)malloc(size_src + 1)))
+	*src = (char *)malloc(size_src + 1);
+	if (!*src)
 	{
 		free(*dst);
 		*dst = 0;
@@ -45,7 +47,7 @@ int			sep_nl(char **dst, char **src, size_t size_src, size_t size_dst)
 	return (1);
 }
 
-int			split_str(char **dst, char **src)
+int	split_str(char **dst, char **src)
 {
 	unsigned int	size_src;
 	unsigned int	size_dst;

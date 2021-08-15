@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_sorted.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: snam <snam@student.42seoul.kr>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/08/15 16:38:14 by snam              #+#    #+#             */
+/*   Updated: 2021/08/15 16:38:16 by snam             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/push_swap.h"
 
 void	check_sorted(t_stack *stack)
@@ -20,7 +32,7 @@ void	check_sorted(t_stack *stack)
 		terminate(0, stack, 1);
 	ret = 0;
 	if (cnt > 0)
-        ret = is_ascend(stack->a, cnt);
+		ret = is_ascend(stack->a, cnt);
 	if (ret)
 		write(1, "OK\n", 3);
 	else
