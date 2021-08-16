@@ -14,8 +14,9 @@ NAME		=	push_swap
 BNAME		=	checker
 
 CC			=	gcc
-CFLAGS		=	-Wall -Wextra -Werror
-# CFLAGS		=	-g -fsanitize=address
+# CFLAGS		=	-Wall -Wextra -Werror
+#CFLAGS		=	-g -fsanitize=address
+CFLAGS		=	-g
 
 
 AR			=	ar

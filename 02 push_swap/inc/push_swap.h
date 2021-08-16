@@ -68,7 +68,7 @@ int		count_item(t_node *stack);
 
 /* -------- a_to_b.c */
 void	a_to_b(t_stack *stack, int cnt);
-int		is_ascend(t_node *stack, int cnt);
+bool	is_ascend(t_node *stack, int cnt);
 
 /* -------- b_to_a.c */
 void	b_to_a(t_stack *stack, int cnt);

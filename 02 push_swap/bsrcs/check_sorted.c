@@ -12,14 +12,11 @@
 
 #include "../inc/push_swap.h"
 
-void	check_sorted(t_stack *stack)
+static bool	apply_input_op(t_stack *stack)
 {
 	char	*line;
 	int		gnl_ret;
-	int		cnt;
-	int		ret;
 
-	cnt = count_item(stack->a);
 	gnl_ret = get_next_line(STDIN_FILENO, &line);
 	while (gnl_ret > 0)
 	{
@@ -27,13 +24,28 @@ void	check_sorted(t_stack *stack)
 		free(line);
 		gnl_ret = get_next_line(STDIN_FILENO, &line);
 	}
+	if (*line || gnl_ret == -1)
+	{
+		free(line);
+		return (1);
+	}
 	free(line);
-	if (gnl_ret == -1)
+	return (0);
+}
+
+void	check_sorted(t_stack *stack)
+{
+	int		cnt;
+	bool	is_error;
+	bool	is_sorted;
+
+	cnt = count_item(stack->a);
+	if (!cnt)
 		terminate(0, stack, 1);
-	ret = 0;
-	if (cnt > 0)
-		ret = is_ascend(stack->a, cnt);
-	if (ret)
+	is_error = apply_input_op(stack);
+	if (is_error)
+		terminate(0, stack, 1);
+	if (is_ascend(stack->a, cnt))
 		write(1, "OK\n", 3);
 	else
 		write(1, "KO\n", 3);

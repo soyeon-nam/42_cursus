@@ -12,8 +12,10 @@
 
 #include "../inc/push_swap.h"
 
-int	is_ascend(t_node *stack, int cnt)
+bool	is_ascend(t_node *stack, int cnt)
 {
+	if (cnt == 1)
+		return (1);
 	while (--cnt)
 	{
 		if (stack->next->item > stack->next->next->item)
