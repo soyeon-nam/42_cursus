@@ -12,7 +12,7 @@
 
 #include "../inc/push_swap.h"
 
-static void	op_error(char *line, t_stack *stack)
+static inline void	op_error(char *line, t_stack *stack)
 {
 	free(line);
 	terminate(0, stack, 1);
