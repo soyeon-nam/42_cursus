@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   reset_tag.c                                        :+:      :+:    :+:   */
+/*   update_nbr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/16 10:50:04 by snam              #+#    #+#             */
-/*   Updated: 2021/06/16 10:50:05 by snam             ###   ########.fr       */
+/*   Created: 2021/06/16 10:50:49 by snam              #+#    #+#             */
+/*   Updated: 2021/08/19 04:34:05 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-extern t_ft			g_tag;
-
-void		reset_tag(void)
+void	update_width(char c, t_format_tag *tag)
 {
-	g_tag.flag_bar = 0;
-	g_tag.flag_zero = 0;
-	g_tag.width = 0;
-	g_tag.precision = -1;
-	g_tag.check_minus_width = 0;
+	tag->width *= 10;
+	tag->width += (c - '0');
+}
+
+void	update_precision(char c, t_format_tag *tag)
+{
+	tag->precision *= 10;
+	tag->precision += (c - '0');
 }

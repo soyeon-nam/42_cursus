@@ -6,28 +6,25 @@
 /*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 23:03:14 by snam              #+#    #+#             */
-/*   Updated: 2021/06/16 10:56:50 by snam             ###   ########.fr       */
+/*   Updated: 2021/08/19 04:33:47 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-extern t_ft			g_tag;
-extern int			g_ret_print;
+static void		set_print_numbers_s(int *size_width, int *size_precision,
+					int size_num, t_format_tag *tag);
+static void		print_s(char *str, int size_precision, t_format_tag *tag);
 
-static void		set_print_numbers_s(int *size_width, int *size_precision, int size_num);
-static void		print_s(char *str, int size_precision);
-
-void			create_s(va_list ap)
+//t_info로 고치기
+void	create_s(t_format_tag *tag)
 {
 	char	*str;
 	int		size_width;
 	int		size_precision;
-	// int		size_num;
 
-	str = va_arg(ap, char *);
-	// size_num = ft_strlen(str);
-	set_print_numbers_s(&size_width, &size_precision, ft_strlen(str)); //size_num
+	str = va_arg(tag->ap, char *);
+	set_print_numbers_s(&size_width, &size_precision, ft_strlen(str), tag);
 	if (!str)
 	{
 		if (size_precision >= 6 || size_precision < 0)
@@ -35,48 +32,47 @@ void			create_s(va_list ap)
 		else if (0 <= size_precision && size_precision < 6)
 			size_width -= size_precision;
 	}
-	if (g_tag.flag_bar == 0)
-		ft_put_affix(&size_width, ' ');
-	// size_num = size_precision;
-	print_s(str, size_precision);
-	if (g_tag.flag_bar > 0)
-		ft_put_affix(&size_width, ' ');
+	if (tag->flag_bar == 0)
+		ft_multiple_putchar(size_width, ' ', tag);
+	print_s(str, size_precision, tag);
+	if (tag->flag_bar > 0)
+		ft_multiple_putchar(size_width, ' ', tag);
 }
 
-static void		set_print_numbers_s(int *size_width,
-							int *size_precision, int size_num)
+static void	set_print_numbers_s(int *size_width, int *size_precision,
+	int size_num, t_format_tag *tag)
 {
-	*size_width = g_tag.width;
-	*size_precision = g_tag.precision;
-	if (g_tag.precision == 0)
+	*size_width = tag->width;
+	*size_precision = tag->precision;
+	if (tag->precision == 0)
 		return ;
-	else if (g_tag.precision <= size_num && g_tag.precision > 0)
+	else if (tag->precision <= size_num && tag->precision > 0)
 		*size_width -= *size_precision;
 	else
 		*size_width -= size_num;
 }
 
-static void		print_s(char *str, int size_precision)
+static void	print_s(char *str, int size_precision, t_format_tag *tag)
 {
 	if (str)
 	{
 		if (size_precision >= 0)
 			while (size_precision-- && *str)
-				ft_putchar(*str++);
+				ft_putchar(*str++, tag);
 		else
 			while (*str)
-				ft_putchar(*str++);
+				ft_putchar(*str++, tag);
 	}
 	else
 	{
 		if (size_precision >= 6 || size_precision < 0)
 		{
-			g_ret_print += 6;
+			tag->total_printed_letter_cnt += 6;
 			write(1, "(null)", 6);
 		}
 		else if (0 <= size_precision && size_precision < 6)
 		{
-			g_ret_print += size_precision;
+			tag->total_printed_letter_cnt += size_precision;
 			write(1, "(null)", size_precision);
 		}
 	}

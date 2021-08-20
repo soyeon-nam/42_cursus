@@ -3,51 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: snam <snam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/09 12:33:24 by snam              #+#    #+#             */
-/*   Updated: 2021/06/16 10:50:35 by snam             ###   ########.fr       */
+/*   Created: 2021/08/19 04:33:49 by snam              #+#    #+#             */
+/*   Updated: 2021/08/19 04:33:50 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-// t_ft		g_tag = {0, 0, 0, -1, 0};
-int			g_ret_print;
-
-int			ft_printf(const char *str, ...)
+int	ft_printf(const char *str, ...)
 {
 	int				state;
 	int				prev_state;
 	int				token;
-	va_list			ap;
+	t_format_tag	tag;
 
-	va_start(ap, str);
+	va_start(tag.ap, str);
+	reset_tag(&tag);
+	tag.total_printed_letter_cnt = 0;
 	state = 0;
-	g_ret_print = 0;
-	while (*str)
+	while (*str && state != 10)
 	{
 		prev_state = state;
-		token = get_token(prev_state, *str, ap);
-		state = get_state(state, token);
-		switch (state){
-		case 1:
-			ft_putchar(*str);
-			break;
-		case 8:
-			create_spec(*str, ap);
-			state = 0;
-			break;
-		case 10:
-			break;
-		case -1:
-			write(1, "\n>>>> ERROR : CANNOT PRINT\n", 27);
-			return (-1);
-		default:
-			break;
-		}
+		token = get_token(*str);
+		state = get_state(prev_state, token);
+		if (state == -1)
+			return (0);
+		process(&state, *str, &tag);
 		str++;
 	}
-	va_end(ap);
-	return (g_ret_print);
+	va_end(tag.ap);
+	return (tag.total_printed_letter_cnt);
+}
+
+void	reset_tag(t_format_tag *tag)
+{
+	tag->flag_bar = 0;
+	tag->flag_zero = 0;
+	tag->width = 0;
+	tag->precision = -1;
 }

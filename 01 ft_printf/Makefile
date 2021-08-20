@@ -10,34 +10,30 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libftprintf.a
-HEADER = ft_printf.h
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror
-AR = ar rc
-RM = rm -f
+NAME		=	libftprintf.a
+HEADER		=	ft_printf.h
+CC			=	gcc
+CFLAGS		=	-Wall -Wextra -Werror
+AR			=	ar rc
+RM			=	rm -f
 
-INC = ./inc
+INC			=	./inc
 
-SRCS_DIR	= ./src/
-SRCS_LST = ft_printf.c \
-			print_functions.c \
-			update_nbr.c \
-			state_machine.c \
-			process_tocken.c\
-			create_spec.c\
-			create_x.c \
-			create_u.c \
-			create_s.c \
-			create_di.c \
-			create_cppc.c \
-			set_print_numbers.c\
-			count_digit.c \
-			print_base.c\
-			reset_tag.c
-SRCS = $(addprefix $(SRCS_DIR), $(SRCS_LST))
+SRCS_DIR	=	./srcs/
+SRCS_LST 	=	ft_printf.c\
+				state_machine.c\
+				process.c\
+				create_cppc.c \
+				create_diux.c\
+				create_s.c\
+				set_print_info.c\
+				count_digit.c\
+				print_functions.c\
+				update_nbr.c
+				
+SRCS		=	$(addprefix $(SRCS_DIR), $(SRCS_LST))
 
-OBJS = $(SRCS:.c=.o)
+OBJS		=	$(SRCS:.c=.o)
 
 all: $(NAME)
 

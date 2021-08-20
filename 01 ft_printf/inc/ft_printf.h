@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: snam <snam@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: snam <snam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/09 12:33:28 by snam              #+#    #+#             */
-/*   Updated: 2021/06/16 11:03:08 by snam             ###   ########.fr       */
+/*   Created: 2021/08/19 01:49:29 by snam              #+#    #+#             */
+/*   Updated: 2021/08/19 01:49:31 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,55 +16,88 @@
 # include <unistd.h>
 # include <stdarg.h>
 
-typedef struct		s_format_tag
+typedef struct s_format_tag
 {
 	int				flag_bar;
 	int				flag_zero;
 	int				width;
 	int				precision;
-	int				check_minus_width;
-}					t_ft;
+	int				total_printed_letter_cnt;
+	va_list			ap;
+}					t_format_tag;
 
-int					ft_printf(const char *str, ...);
+typedef struct s_print_info
+{
+	int				width_len;
+	int				precision_len;
+	int				minus;
+}					t_print_info;
 
-void				process_bar(int state);
-void				process_zero(int state, char input);
-void				process_asterisk(int state, va_list ap);
-void				process_one_to_nine(int state, char input);
-void				process_dot(int state);
+/*
+** ========== ft_printf.c ==========
+*/
+int			ft_printf(const char *str, ...);
+void		reset_tag(t_format_tag *tag);
 
-int					get_token(int prev_state, char input, va_list ap);
-int					get_token_format_tag(int prev_state, char input, va_list ap);
-int					get_state(int state, int input);
+/*
+** ========== state_machine.c ==========
+*/
+int			get_token(char input);
+int			get_state(int prev_state, int token);
+void		process(int *state, char input, t_format_tag *tag);
 
-void				create_spec(char spec, va_list ap);
+/*
+** ========== process.c ==========
+*/
+void		process_2(char input, t_format_tag *tag);
+void		process_4(t_format_tag *tag);
+void		process_7(t_format_tag *tag);
+void		process_8(char spec, t_format_tag *tag);
 
-void				create_c(va_list ap);
-void				create_percent(void);
-void				create_p(va_list ap);
-void				create_di(va_list ap);
-void				create_s(va_list ap);
-void				create_u(va_list ap);
-void				create_x(char mode, va_list ap);
+/*
+** ========== create_cppc.c ==========
+*/
+void		create_c(t_format_tag *tag);
+void		create_percent(t_format_tag *tag);
+void		create_p(t_format_tag *tag);
 
-void				set_print_numbers_negative(int *size_width, int *size_precision, int size_num);
-void				set_print_numbers_positive(int *size_width, int *size_precision, int size_num);
+/*
+** ========== create_diux.c ==========
+*/
+void		create_di(t_format_tag *tag);
+void		create_u(t_format_tag *tag);
+void		create_x(char mode, t_format_tag *tag);
+/*
+** ========== create_s.c ==========
+*/
+void		create_s(t_format_tag *tag);
 
-int					count_digit(int num);
-int					count_digit_u(unsigned int num);
-int					count_digit_hex(size_t num);
-size_t				ft_strlen(const char *s);
+/*
+** ========== set_print_info.c ==========
+*/
+void		set_print_info(t_print_info *info, int size_num, t_format_tag *tag);
 
-void				print_base_upper(long nb);
-void				print_base_lower(long nb);
+/*
+** ========== count_digit.c ==========
+*/
+int			count_digit(int num);
+int			count_digit_u(unsigned int num);
+int			count_digit_hex(size_t num);
+size_t		ft_strlen(const char *s);
 
-void				ft_putnbr(long long nb);
-void				ft_putchar(char c);
-void				ft_put_affix(int *num, char c);
+/*
+** ========== count_digit.c ==========
+*/
+void		ft_putchar(char c, t_format_tag *tag);
+void		ft_multiple_putchar(int num, char c, t_format_tag *tag);
+void		ft_putnbr(long long nb, t_format_tag *tag);
+void		print_base_upper(long nb, t_format_tag *tag);
+void		print_base_lower(long nb, t_format_tag *tag);
 
-void				update_width(char c);
-void				update_precision(char c);
-
-void				reset_tag(void);
+/*
+** ========== update_nbr.c ==========
+*/
+void		update_width(char c, t_format_tag *tag);
+void		update_precision(char c, t_format_tag *tag);
 
 #endif
