@@ -16,35 +16,33 @@ t_info	info;
 
 static void	handler(int signo)
 {
-	if (!info.bit_arr)
+	if (signo == SIGUSR2)
+		info.bit_field.uc |= (1 << info.bit_ordinal_nb);
+	if (info.bit_ordinal_nb == 7)
 	{
-		info.bit_arr = (int *)malloc(sizeof(int) * 8);
-		if (!info.bit_arr)
-		{
-			ft_putchar_fd("ERROR\n", STDOUT_FILENO);
-			exit(0);
-		}
-	}
-	if (signo == SIGUSR1)
-		bit_arr[info.bit_index] = 0;
-	else
-		bit_arr[info.bit_index] = 1;
-	while (info.bit_index == 8)
-	{
-		// bitwise operation needed
+		if (info.bit_field.uc)
+			ft_putchar_fd(info.bit_field.uc, STDOUT_FILENO);
+		else
+			ft_putchar_fd('\n', STDOUT_FILENO);
+		info.bit_ordinal_nb = 0;
+		info.bit_field.uc = 0;
 		return ;
 	}
-	info.bit_index++;
+	++info.bit_ordinal_nb;
 }
 
 int	main(void)
 {
-	int		signal;
 	struct sigaction act;
 
-	act.__sigaction_u.__sa_handler = &handler;
-	sigaction(SIGUSR1, handler, 0);
-	sigaction(SIGUSR2, handler, 0);
+	act.sa_flags = 0;
+	act.sa_handler = handler;
+	// sigemptyset(&act.sa_mask);
+	sigaction(SIGUSR1, &act, 0);
+	sigaction(SIGUSR2, &act, 0);
+
+	// signal(SIGUSR1, handler);
+	// signal(SIGUSR2, handler);
 	ft_putstr_fd("Server PID : ", STDOUT_FILENO);
 	ft_putnbr_fd(getpid(), STDOUT_FILENO);
 	ft_putchar_fd('\n', STDOUT_FILENO);
@@ -52,3 +50,14 @@ int	main(void)
 		pause();
 	return (0);
 }
+
+
+
+
+		// int i = -1;
+		// int sig;
+		// while (++i < 8)
+		// {
+		// 	sig = info.bit_field.uc & (1 << i);
+		// 	printf("	|| %d\n", sig);
+		// }
