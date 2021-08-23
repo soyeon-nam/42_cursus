@@ -18,9 +18,9 @@ static void	conquer_a_three(t_stack *stack)
 	int		second;
 	int		third;
 
-	top = stack->a->next->item;
-	second = stack->a->next->next->item;
-	third = stack->a->next->next->next->item;
+	top = A_top->item;
+	second = A_top->next->item;
+	third = A_top->next->next->item;
 	if (top < third && third < second)
 		do_multiple_op(stack, 3, "ra", "sa", "rra");
 	else if (second < top && top < third)
@@ -35,28 +35,23 @@ static void	conquer_a_three(t_stack *stack)
 
 static void	conquer_a_four(t_stack *stack)
 {
-	t_node		**a;
-	t_node		**b;
-
-	a = &(stack->a->next);
-	b = &(stack->b->next);
-	if ((*a)->item > (*a)->next->item)
+	if (A_top->item > A_top->next->item)
 		do_op("sa", stack);
 	do_op("pb", stack);
-	if ((*a)->item > (*a)->next->item)
+	if (A_top->item > A_top->next->item)
 		do_op("sa", stack);
 	do_op("pb", stack);
-	if ((*a)->item > (*a)->next->item && (*b)->item < (*b)->next->item)
+	if (A_top->item > A_top->next->item && B_top->item < B_top->next->item)
 		do_op("ss", stack);
-	else if ((*a)->item > (*a)->next->item)
+	else if (A_top->item > A_top->next->item)
 		do_op("sa", stack);
-	else if ((*b)->item < (*b)->next->item)
+	else if (B_top->item < B_top->next->item)
 		do_op("sb", stack);
 	do_op("pa", stack);
-	if ((*a)->item > (*a)->next->item)
+	if (A_top->item > A_top->next->item)
 		do_op("sa", stack);
 	do_op("pa", stack);
-	if ((*a)->item > (*a)->next->item)
+	if (A_top->item > A_top->next->item)
 		do_op("sa", stack);
 }
 
@@ -67,6 +62,6 @@ void	conquer_a(t_stack *stack, int cnt)
 	else if (cnt == 3)
 		conquer_a_three(stack);
 	else if (cnt == 2)
-		if (stack->a->next->item > stack->a->next->next->item)
+		if (A_top->item > A_top->next->item)
 			do_op("sa", stack);
 }

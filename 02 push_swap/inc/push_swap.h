@@ -21,6 +21,9 @@
 # include "../libft/inc/libft.h"
 # include "../libft/inc/get_next_line.h"
 
+# define A_top stack->a->next
+# define B_top stack->b->next
+
 typedef struct s_node
 {
 	int				item;

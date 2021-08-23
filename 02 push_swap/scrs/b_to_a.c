@@ -32,7 +32,7 @@ static void	divide_b_56(t_stack *stack, int cnt)
 	i = cnt;
 	while (i--)
 	{
-		if (stack->b->next->item > pivot)
+		if (B_top->item > pivot)
 			do_op("pa", stack);
 		else
 			do_op("rb", stack);
@@ -49,14 +49,14 @@ static int	divide_b(t_stack *stack, int cnt, t_sort_info *info)
 	set_pivot(stack->b, info, cnt);
 	while (cnt--)
 	{
-		if (cnt == 1 && (stack->a->next->item <= info->pivot1))
+		if (cnt == 1 && (A_top->item <= info->pivot1))
 		{
 			do_multiple_op(stack, 2, "sb", "pa");
 			return (1);
 		}
-		if ((stack->b->next->item <= info->pivot1))
+		if ((B_top->item <= info->pivot1))
 			do_op("rb", stack);
-		else if ((stack->b->next->item <= info->pivot2))
+		else if ((B_top->item <= info->pivot2))
 			do_multiple_op(stack, 2, "pa", "ra");
 		else
 			do_op("pa", stack);

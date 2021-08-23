@@ -34,7 +34,7 @@ static void	divide_a_56(t_stack *stack, int cnt)
 	i = cnt;
 	while (i--)
 	{
-		if (stack->a->next->item <= pivot)
+		if (A_top->item <= pivot)
 			do_op("pb", stack);
 		else
 			do_op("ra", stack);
@@ -54,17 +54,17 @@ static void	divide_a(t_stack *stack, int cnt, t_sort_info *info)
 	set_pivot(stack->a, info, cnt);
 	while (cnt--)
 	{
-		if (cnt == 1 && (stack->a->next->item > info->pivot2))
+		if (cnt == 1 && (A_top->item > info->pivot2))
 		{
-			if (stack->a->next->next->item < info->pivot2)
+			if (A_top->next->item < info->pivot2)
 			{
 				do_multiple_op(stack, 2, "sa", "pb");
 				break ;
 			}
 		}
-		if ((stack->a->next->item > info->pivot2) && ++rra)
+		if ((A_top->item > info->pivot2) && ++rra)
 			do_op("ra", stack);
-		else if ((stack->a->next->item > info->pivot1) && ++rrb)
+		else if ((A_top->item > info->pivot1) && ++rrb)
 			do_multiple_op(stack, 2, "pb", "rb");
 		else
 			do_op("pb", stack);

@@ -18,9 +18,9 @@ static void	conquer_b_three(t_stack *stack)
 	int		second;
 	int		third;
 
-	top = stack->b->next->item;
-	second = stack->b->next->next->item;
-	third = stack->b->next->next->next->item;
+	top = B_top->item;
+	second = B_top->next->item;
+	third = B_top->next->next->item;
 	if (top < second && second < third)
 		do_multiple_op(stack, 6, "pa", "ra", "pa", "pa", "sa", "rra");
 	else if (top < third && third < second)
@@ -46,7 +46,7 @@ static void	conquer_b_four(t_stack *stack)
 	rewind = 0;
 	while (i++ < 4)
 	{
-		if (pivot >= stack->b->next->item && ++rewind)
+		if (pivot >= B_top->item && ++rewind)
 			do_op("rb", stack);
 		else
 			do_op("pa", stack);
@@ -54,12 +54,12 @@ static void	conquer_b_four(t_stack *stack)
 			break ;
 	}
 	do_multiple_op(stack, rewind, "rrb", "rrb");
-	if ((stack->a->next->item > stack->a->next->next->item) \
-		&& (stack->b->next->item < stack->b->next->next->item))
+	if ((A_top->item > A_top->next->item) \
+		&& (B_top->item < B_top->next->item))
 		do_op("ss", stack);
-	else if (stack->a->next->item > stack->a->next->next->item)
+	else if (A_top->item > A_top->next->item)
 		do_op("sa", stack);
-	else if (stack->b->next->item < stack->b->next->next->item)
+	else if (B_top->item < B_top->next->item)
 		do_op("sb", stack);
 	do_multiple_op(stack, 2, "pa", "pa");
 }
@@ -72,7 +72,7 @@ void	conquer_b(t_stack *stack, int cnt)
 		conquer_b_three(stack);
 	else if (cnt == 2)
 	{
-		if (stack->b->next->item < stack->b->next->next->item)
+		if (B_top->item < B_top->next->item)
 			do_op("sb", stack);
 		do_multiple_op(stack, 2, "pa", "pa");
 	}

@@ -37,12 +37,12 @@ static void	check_dup(t_stack *stack, int item, char ***arr)
 
 	if (stack->a)
 	{
-		stack_curr = stack->a->next;
+		stack_curr = A_top;
 		while (1)
 		{
 			if (stack_curr->item == item)
 				terminate(arr, stack, 1);
-			if (stack_curr->next == stack->a->next)
+			if (stack_curr->next == A_top)
 				break ;
 			stack_curr = stack_curr->next;
 		}

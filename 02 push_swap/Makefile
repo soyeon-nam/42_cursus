@@ -14,10 +14,7 @@ NAME		=	push_swap
 BNAME		=	checker
 
 CC			=	gcc
-# CFLAGS		=	-Wall -Wextra -Werror
-#CFLAGS		=	-g -fsanitize=address
-CFLAGS		=	-g
-
+CFLAGS		=	-Wall -Wextra -Werror
 
 AR			=	ar
 ARFLAGS		=	-rcs
@@ -105,7 +102,7 @@ $(BNAME): $(BSRCS) $(LIBS)
 
 clean :
 	make clean -C $(LIB_DIR)
-	$(RM) $(OBJS) $(BNAME)
+	$(RM) $(OBJS) $(BOBJS)
 
 fclean : clean
 	make fclean -C $(LIB_DIR)
