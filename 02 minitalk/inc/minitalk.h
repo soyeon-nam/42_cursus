@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #ifndef MINITALK_H
+# define MINITALK_H
 
 # include <unistd.h>
 # include <sys/types.h>
@@ -19,11 +20,11 @@
 # include "../libft/inc/libft.h"
 # include "../libft/inc/get_next_line.h"
 
+# include <stdio.h>
 
-#include <stdio.h>
-
-
-# define PID_MAX 99998
+# ifndef PID_MAX
+#  define PID_MAX 99998
+# endif
 
 struct s_bit_field
 {
@@ -39,14 +40,22 @@ struct s_bit_field
 
 union	u_bit_field
 {
-	struct s_bit_field	bf;
-	unsigned char		uc;
+	struct s_bit_field		bf;
+	unsigned char			uc;
 } ;
 
 typedef struct s_info
 {
 	int						bit_ordinal_nb;
 	union u_bit_field		bit_field;
-} t_info;
+}	t_info;
+
+typedef struct s_info_b
+{
+	int						oponent_pid;
+	int						bit_size;
+	int						bit_ordinal_nb;
+	union u_bit_field		*bit_field[4];
+}	t_info_b;
 
 #endif
