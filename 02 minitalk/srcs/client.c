@@ -23,8 +23,8 @@ static void	send_message(int server_pid, char *msg)
 		bit_index = 0;
 		while (bit_index < 8)
 		{
-			signal = *msg & (1 << bit_index);
-			usleep(50);
+			signal = 1 & (*msg >> bit_index);
+			usleep(20);
 			if (signal == 0)
 				kill(server_pid, SIGUSR1);
 			else
@@ -36,7 +36,7 @@ static void	send_message(int server_pid, char *msg)
 	i = 0;
 	while (i++ < 8)
 	{
-		usleep(50);
+		usleep(20);
 		kill(server_pid, SIGUSR1);
 	}
 }

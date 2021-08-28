@@ -36,13 +36,10 @@ int	main(void)
 	struct sigaction act;
 
 	act.sa_flags = 0;
+	// act.sa_mask doesn't have to initialize??
 	act.sa_handler = handler;
-	// sigemptyset(&act.sa_mask);
 	sigaction(SIGUSR1, &act, 0);
 	sigaction(SIGUSR2, &act, 0);
-
-	// signal(SIGUSR1, handler);
-	// signal(SIGUSR2, handler);
 	ft_putstr_fd("Server PID : ", STDOUT_FILENO);
 	ft_putnbr_fd(getpid(), STDOUT_FILENO);
 	ft_putchar_fd('\n', STDOUT_FILENO);
@@ -50,14 +47,3 @@ int	main(void)
 		pause();
 	return (0);
 }
-
-
-
-
-		// int i = -1;
-		// int sig;
-		// while (++i < 8)
-		// {
-		// 	sig = info.bit_field.uc & (1 << i);
-		// 	printf("	|| %d\n", sig);
-		// }
