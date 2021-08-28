@@ -20,12 +20,21 @@
 # include "../libft/inc/libft.h"
 # include "../libft/inc/get_next_line.h"
 
-# include <stdio.h>
-
 # ifndef PID_MAX
 #  define PID_MAX 99998
 # endif
 
+# ifndef BIT_FIELD
+#  define BIT_FIELD info.bit_field
+# endif
+
+# ifndef ERROR_BIT
+#  define ERROR_BIT 1
+# endif
+
+# ifndef NORMAL_BIT
+#  define NORMAL_BIT 0
+# endif
 struct s_bit_field
 {
 	bool	first	: 1;
@@ -38,24 +47,29 @@ struct s_bit_field
 	bool	end		: 1;
 };
 
-union	u_bit_field
+typedef union	u_bit_field
 {
 	struct s_bit_field		bf;
 	unsigned char			uc;
-} ;
+}	t_bit_field;
 
 typedef struct s_info
 {
 	int						bit_ordinal_nb;
-	union u_bit_field		bit_field;
+	t_bit_field				bit_field;
 }	t_info;
 
 typedef struct s_info_b
 {
-	int						oponent_pid;
-	int						bit_size;
-	int						bit_ordinal_nb;
-	union u_bit_field		*bit_field[4];
+	int				oponent_pid;
+	int				null;
+	int				bit_ordinal_nb;
+	t_bit_field		bit_field;
+	t_list			*msg;
 }	t_info_b;
+
+
+
+# include <stdio.h>
 
 #endif
