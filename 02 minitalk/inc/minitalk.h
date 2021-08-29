@@ -25,7 +25,7 @@
 # endif
 
 # ifndef BIT_FIELD
-#  define BIT_FIELD info.bit_field
+#  define BIT_FIELD info.bit_field.uc
 # endif
 
 # ifndef ERROR_BIT

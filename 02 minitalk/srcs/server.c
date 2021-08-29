@@ -17,15 +17,15 @@ t_info	info;
 static void	handler(int signo)
 {
 	if (signo == SIGUSR2)
-		info.bit_field.uc |= (1 << info.bit_ordinal_nb);
+		BIT_FIELD |= (1 << info.bit_ordinal_nb);
 	if (info.bit_ordinal_nb == 7)
 	{
-		if (info.bit_field.uc)
-			ft_putchar_fd(info.bit_field.uc, STDOUT_FILENO);
+		if (BIT_FIELD)
+			ft_putchar_fd(BIT_FIELD, STDOUT_FILENO);
 		else
 			ft_putchar_fd('\n', STDOUT_FILENO);
 		info.bit_ordinal_nb = 0;
-		info.bit_field.uc = 0;
+		BIT_FIELD = 0;
 		return ;
 	}
 	++info.bit_ordinal_nb;
@@ -35,8 +35,8 @@ int	main(void)
 {
 	struct sigaction act;
 
-	act.sa_flags = 0;
 	// act.sa_mask doesn't have to initialize??
+	act.sa_flags = 0;
 	act.sa_handler = handler;
 	sigaction(SIGUSR1, &act, 0);
 	sigaction(SIGUSR2, &act, 0);
