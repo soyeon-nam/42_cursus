@@ -16,6 +16,10 @@
 # include <unistd.h>
 # include <stdarg.h>
 
+#include <stdio.h>
+
+
+
 typedef struct s_format_tag
 {
 	int				flag_bar;
@@ -30,6 +34,7 @@ typedef struct s_print_info
 {
 	int				width_len;
 	int				precision_len;
+	int				arg_len;
 	int				minus;
 }					t_print_info;
 
