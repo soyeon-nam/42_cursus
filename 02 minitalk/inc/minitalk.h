@@ -6,7 +6,7 @@
 /*   By: snam <snam@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/22 21:09:08 by snam              #+#    #+#             */
-/*   Updated: 2021/08/22 21:09:09 by snam             ###   ########.fr       */
+/*   Updated: 2021/08/31 03:38:39 by snam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ typedef struct s_info_b
 {
 	int				oponent_pid;
 	int				null;
-	int				bit_ordinal_nb;
+	int				killed_cnt;
+	int				received_msg_bit_cnt;
 	t_bit_field		bit_field;
 	t_list			*msg;
 }	t_info_b;
