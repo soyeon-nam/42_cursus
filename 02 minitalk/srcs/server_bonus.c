@@ -12,165 +12,105 @@
 
 #include "minitalk.h"
 
-static t_info_b	info;
+static t_bonus	info;
 
-static void	init_info()
+static void	handshaking(int signo, int si_pid)
 {
-	t_list		*next_ptr;
-	char		*client_pid;
+	int		i;
 
-	info.oponent_pid = 0;
-	info.null = 0;
-	info.received_msg_bit_cnt = 0;
-	info.bit_field.uc = 0;
-	while (info.msg)
+	if (info.killed_cnt == 1 && signo == SIGUSR2)
+		info.opponent_pid = si_pid;
+	else if (info.opponent_pid != si_pid || signo != SIGUSR2)
 	{
-		next_ptr = info.msg->next;
-		free(info.msg->content);
-		free(info.msg);
-		info.msg = next_ptr;
+		info.opponent_pid = 0;
+		info.killed_cnt = 0;
+		info.bit_field.uc = 0;
 	}
-	info.msg = 0;
-	ft_putstr_fd("Please Enter Client PID : ", STDOUT_FILENO);
-	get_next_line(STDIN_FILENO, &client_pid);
-	ft_putchar_fd('\n', STDOUT_FILENO);
-	info.oponent_pid = ft_atoi(client_pid);
-	free(client_pid);
+	else if (info.killed_cnt == 8)
+	{
+		i = 8;
+		while (i--)
+		{
+			usleep(20);
+			kill(info.opponent_pid, SIGUSR2);
+		}
+	}
 }
 
-static void	print_msg()
+void	get_msg_bit_total()
 {
-	t_list		*last;
-	t_list		*curr;
+	static int	msg_bit_cnt;
 
-	curr = info.msg;
-	last = ft_lstlast(info.msg);
-	// ft_putstr_fd("received message: >>", STDOUT_FILENO);
-	while (curr)
+	msg_bit_cnt++;
+	if (msg_bit_cnt % 8)
 	{
-		write(1, (char *)(curr->content), 1);
-		curr = curr->next;
+		if (info.bit_field.uc)
+			msg_bit_cnt = (msg_bit_cnt * 10) + (info.bit_field.uc - '0');
+		else
+			info.msg_bit_total = msg_bit_cnt;
 	}
-	ft_putstr_fd("\n", STDOUT_FILENO);
-	init_info();
+	//error case when??
 }
 
-static void	check_error()
+static void	sigaction(int signo, siginfo_t *siginfo, void *context)
 {
-	static int		total_bit = 0;
-	static int		flag = 0;
+	static int	killed_cnt;
 
-	if (info.null == 1 && info.bit_field.uc == 0)
-		return ;
-	else if (info.null == 2 && info.bit_field.uc == 0 && flag == 0)
-	{	
-		flag = 1;
-		return ;
-	}
-	else if (info.null == 2 && flag == 1)
-	{
-		total_bit *= 10;
-		total_bit += (info.bit_field.uc - '0'); // - '0' 코드 추가!
-		return ;
-	}
-	else if (info.null == 3 && info.bit_field.uc == 0) 
-		return ;
-
-/*
-** 	line 84~87은 수정한 코드
-** 	info.null == 4 && info.bit_field.uc == 0 경우
-*/
-	// printf("total_bit: %d\n", total_bit);
-	// printf("info.bit_field.uc: %d\n", info.bit_field.uc);
-	// printf("info.bit_ordinal_nb: %d\n", info.received_msg_bit_cnt);
-	
-	if (total_bit == info.received_msg_bit_cnt)
-	{
-		// write(1, "\nequal\n", 8);
-		return ;
-	}
-
-/*
-** 	line 91~는 원래 코드
-** 	else if (info.null == 4 && info.bit_field.uc == 0)
-** 		if (total_bit == info.bit_field.uc)
-** 			return ;
-** 	init_info();
-**	ft_putstr_fd("*** ERROR : Invalid attempt was made. ***", \
-**				STDERR_FILENO);
-**	exit(0);
-*/
-}
-
-static char	*init_content(char c) // 함수 추가!
-{
-	char	*content;
-
-	content = (char *)malloc(sizeof(char) * 1);
-	// if (content == NULL)
-	// 	terminate();
-	*content = c;
-	return (content);
-}
-
-static void	handler(int signo)
-{
-	t_list			*new;
-	// static int		killed_cnt;
-
+	info.bit_field.uc <<= 1;
 	if (signo == SIGUSR2)
+		info.bit_field.uc |= 1;
+	info.killed_cnt++;
+	if (info.killed_cnt <= 8)
+		return (handshaking(signo, siginfo->si_pid));
+	if (!info.msg_bit_total)
 	{
-		info.bit_field.uc |= (1 << (info.killed_cnt % 8));
-		// write(1, "	[received 1]\n", 15);
+		// msg_bit_cnt++;
+		// if (msg_bit_cnt % 8)
+		// {
+		// 	if (info.bit_field.uc)
+		// 		msg_bit_cnt = (msg_bit_cnt * 10) + (info.bit_field.uc - '0');
+		// 	else
+		// 		info.msg_bit_total = msg_bit_cnt;
+		// }
 	}
 	else
-		// write(1, "	[received 0]\n", 15);
-	usleep(20);
-	kill(info.oponent_pid, signo);
-	// printf("killed_cnt: %d\n", info.killed_cnt);
-	info.killed_cnt++;
-	if (info.killed_cnt % 8 == 0) // 조건 추가!
 	{
-		if (info.bit_field.uc == 0)
-			++info.null;
-		// else
-		else if (!(1 <= info.null && info.null <= 4))
-		{
-			// new = ft_lstnew(&(info.bit_field.uc));
-			info.received_msg_bit_cnt += 8; // <- 옮긴위치
-			new = ft_lstnew(init_content(info.bit_field.uc)); // 함수 추가!
-			ft_lstadd_back(&info.msg, new);
-		}
-		// printf("info.null: %d\n", info.null);
-		if (1 <= info.null && info.null <= 4)
-			check_error(); // <- 이것만 잘 작동하면 된다!
-		if (info.null == 4)
-		{
-			info.killed_cnt = 0;
-			return (print_msg());
-		}
-		info.bit_field.uc = '\0'; // 코드 추가! // buffer init
+
 	}
-	// ++info.bit_ordinal_nb; // <- 원래위치
+	kill(info.opponent_pid, signo);
 }
 
-int	main(void)
-{
-	struct sigaction act;
 
-	act.sa_flags = 0;
-	act.sa_handler = handler;
+
+
+
+
+
+
+
+
+
+int	main(int ac, char *av)
+{
+	struct sigaction	act;
+
+	if (ac != 1)
+		return (1);
+	act.sa_flags = SA_SIGINFO;
+	act.sa_sigaction = sigaction;
 	sigaction(SIGUSR1, &act, 0);
 	sigaction(SIGUSR2, &act, 0);
-	ft_putstr_fd("Server PID : ", STDOUT_FILENO);
-	ft_putnbr_fd(getpid(), STDOUT_FILENO);
-	ft_putchar_fd('\n', STDOUT_FILENO);
-	init_info();
+	info.current_pid = getpid();
+
 	while (1)
 	{
-		if (info.killed_cnt == 0)
-			kill(info.oponent_pid, SIGUSR1);
-		pause();
+		if (info.msg_bit_total)
+		{
+			/* error handling : init, msg = 0, error message */
+			sleep(5);
+		}
+		else
+			pause();
 	}
 	return (0);
 }

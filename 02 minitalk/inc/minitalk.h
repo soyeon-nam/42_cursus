@@ -69,6 +69,14 @@ typedef struct s_info_b
 	t_list			*msg;
 }	t_info_b;
 
+typedef struct s_bonus
+{
+	int			opponent_pid;
+	int			current_pid;
+	int			msg_bit_total;
+	int			killed_cnt;
+	t_bit_field		bit_field;
+}	t_bonus;
 
 
 # include <stdio.h>
