@@ -5,9 +5,9 @@ BSERVER		=	server_bonus
 BCLIENT		=	client_bonus
 
 CC			=	gcc
-CFLAGS		=	-Wall -Wextra -Werror
+# CFLAGS		=	-Wall -Wextra -Werror -g -fsanitize=address
 # CFLAGS		=	-g -fsanitize=address
-# CFLAGS		=	-g
+CFLAGS		=	-g
 
 AR			=	ar
 ARFLAGS		=	-rcs
