@@ -12,8 +12,6 @@
 
 #include "ft_printf.h"
 
-#include <stdio.h>
-
 int	count_digit(int num)
 {
 	int		ret;

@@ -21,6 +21,5 @@ git clone https://github.com/charMstr/printf_lover_v2.git
 cd printf_lover_v2/
 ./printf_lover.sh
 cd ..
-rm -rf pft/ 42TESTERS-PRINTF/ 
-printf_lover_v2/
+rm -rf pft/ 42TESTERS-PRINTF/ printf_lover_v2/
 make fclean

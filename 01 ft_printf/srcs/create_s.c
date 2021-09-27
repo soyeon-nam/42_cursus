@@ -12,18 +12,18 @@
 
 #include "ft_printf.h"
 
-static void	set_print_numbers_s(t_print_info *info, char *str, t_format_tag *tag);
+static void	set_print_numbers_s(t_print_info *info, \
+								char *str, t_format_tag *tag);
 
 void	create_s(t_format_tag *tag)
 {	
-	char	*str;
+	char			*str;
 	t_print_info	info;
 
 	str = va_arg(tag->ap, char *);
 	set_print_numbers_s(&info, str, tag);
 	if (tag->flag_bar == 0)
 		ft_multiple_putchar(info.width_len, ' ', tag);
-
 	if (str)
 	{
 		while (info.arg_len--)
@@ -38,7 +38,8 @@ void	create_s(t_format_tag *tag)
 		ft_multiple_putchar(info.width_len, ' ', tag);
 }
 
-static void	set_print_numbers_s(t_print_info *info, char *str, t_format_tag *tag)
+static void	set_print_numbers_s(t_print_info *info, \
+							char *str, t_format_tag *tag)
 {
 	info->width_len = tag->width;
 	info->precision_len = tag->precision;
