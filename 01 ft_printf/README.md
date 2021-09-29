@@ -14,7 +14,7 @@
 
 # State Transition Table
 
-![state transition table](https://user-images.githubusercontent.com/76517649/135187980-0479e16e-d1a2-47dc-b04b-b0d27d1761d1.jpg)
+![state transition table](https://user-images.githubusercontent.com/76517649/135188885-59f51c19-4553-4615-a348-62fbd35c5992.jpg)
 
 <br/>
 
