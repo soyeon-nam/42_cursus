@@ -11,11 +11,15 @@
 | Subject | [PDF Link](https://github.com/soyeon-nam/42_cursus/blob/main/01%20ft_printf/en.subject.pdf) |
 
 <br/>
-#state transition table
+
+# State Transition Table
+
 ![state transition table](https://user-images.githubusercontent.com/76517649/135187980-0479e16e-d1a2-47dc-b04b-b0d27d1761d1.jpg)
 
 <br/>
-#state machine diagram
+
+# State Machine Diagram
+
 ![state machine diagram](https://user-images.githubusercontent.com/76517649/135187614-a8b2a423-b83a-4ef8-a1a5-787a5ece702c.png)
 
 <br/>
